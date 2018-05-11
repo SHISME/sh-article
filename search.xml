@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title><![CDATA[浏览器如何验证证书的]]></title>
+    <url>%2Fsh-article%2F2018%2F05%2F03%2Fhello-world%2F</url>
+    <content type="text"><![CDATA[基本概念CA首先CA是Certificate Authority的缩写，也叫“证书授权中心”。它是负责管理和签发证书的第三方机构，就好比例子里面的中介——C 公司。一般来说，CA必须是所有行业和所有公众都信任的、认可的。因此它必须具有足够的权威性。就好比A、B两公司都必须信任C公司，才会找 C 公司作为公章的中介。 CA 证书 顾名思义，就是CA颁发的证书。 浏览器中默认有得到认证的根证书，使用https的网站需要让浏览器信任自己的证书就需要去申请这些机构的证书 浏览如何验证证书的真伪呢？ 首先我们需要了解一下CA是如何给我们发证书的。 1.向CA申请证书 2.CA认证了你的信息之后同意给你颁布证书，生成证书信息，生成证书的指纹用于后面验证证书的真伪 3.使用私钥对指纹进行加密生成数字签名，常用的算法有RSA公钥体制 4.将证书颁发网站，生成的证书会指向给他颁发证书的CA 了解完CA证书的生成之后我们就可以看一下浏览器如何验证证书的了。 1.浏览器拿到证书之后会找到证书所对应的CA 2.浏览器取出CA中的公钥，使用公钥对证书的签名进行解密 3.将解密的结果与证书指纹做对比，如果对比一致则说明真书是真的 4.浏览器提取出证书中的公钥使用]]></content>
+      <categories>
+        <category>HTTPS</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[vue生命周期]]></title>
+    <url>%2Fsh-article%2F2018%2F03%2F26%2Fvue%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%2F</url>
+    <content type="text"><![CDATA[在 vue 的官方文档中，我们可以看到 vue 的整个生命。 vue 主要给我们提供了如下八个钩子：beforeCreate、created、beforeMount、mounted、beforeUpdate、updated、beforeDestory、destoryed 首先我们先粗略的了解一下，vue 初始化的时候会做哪些事情。 挂载生命周期钩子 解析 data 属性，将 data 属性转化为 Observer 解析模板，编译模板 挂载节点 各生命周期的含义beforeCreate在 beforeCreate 的时候，vue 只是将各生命周期注册的方法挂载到对应的钩子上，此时还未对 data 中的元素做初始化 created这个阶段主要完成了将data转化为Observer,此时还未对模板进行编译 beforeMount这个阶段主要做了两个事 检查vue配置，即new Vue{}里面的el项是否存在，有就继续检查template项。没有则等到手动绑定调用vm.$mount() 检查配置中的template项，如果没有template进行填充被绑定区域，则被绑定区域的el对象的outerHTML（即整个#app DOM对象，包括和标签）都作为被填充对象替换掉填充区域 此时模板还未进行编译。 mounted这个阶段完成了对模板的编译，并完成了元素的挂载。 beforeUpdate数据改变时，会进入这个钩子 updated组件更新之后，会进入这个钩子 beforeDestory组件销毁前调用 destoryed组件销毁后调用 父子组件的加载顺序vue 在编译模板的时候，最先读进去的是根元素，然后一层一层的递归进子模板。 编译完成之后，在从子组件开始一层一层向外挂载。 总的来说就是，从创建到编译，是从父到子，从编译到挂载，是由子到父。 $nextTick在 vue 中，数据更新的时候并不会立刻去更新视图，而是会先将数据放入队列中异步的去更新视图。通过 $nextTick 我们就可以在视图更新之后再去调用方法了。]]></content>
+      <categories>
+        <category>vue</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[js 数组元素与数组长度]]></title>
+    <url>%2Fsh-article%2F2018%2F03%2F23%2F%E6%95%B0%E7%BB%84%E7%9B%B8%E5%85%B3%2F</url>
+    <content type="text"><![CDATA[创建数组在 js 中我们可以用如下的方法创建数组 12345var arr1 = [1,2]var arr2 = new Array(3) // [empty*3]var arr3 = new Array(1,2) // [1,2] 第一种是我们常用的一种创建数组的方法 第二种则会生成一个length为3的数组对象，我们访问 arr2[0] 返回的是 undefined 这里我们需要注意一点的是，arr2 不会初始化 arr2[0],arr2[1],arr[2],这句话是什么意思呢，看看下面这个例子你就明白了。 12345678910var arr = new Array(3)var arr2 = [undefined,undefined,undefined]console.log(0 in arr); // falseconsole.log(0 in arr2); // true// 和 new Arry(3) 效果是一样的，注意这里是四个逗号var arr3 = [,,,,] 修改数组通常我们在修改数组的时候都是这样子修改 12345var arr = [];arr[0] = 1;arr.push(2);console.log(arr);[1,2] 我们还可以这样操作 12345var arr = [1,2,3];arr[10] = 10;console.log(arr);// [1, 2, 3, empty × 7, 10] 这里会导致和new Array(10)的结果有点类似 12console.log(3 in arr); // false arr[10] = 10 虽然会让数组的长度增加，但实际上却未真正的增加了数组的元素。 数组的方法1234567891011121314var arr = [1,3]// 输出 0，1for (let key in arr.keys())&#123; console.log(key);&#125;var arr = new Array(3)// 啥都没输出for (let key in arr.keys())&#123; console.log(key);&#125; 12345var arr = [1,2,3,undefined,,]console.log(arr.filter(function(value)&#123; return true&#125;));// [1,2,3,undefined]]]></content>
+      <categories>
+        <category>JS</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[弹性布局]]></title>
+    <url>%2Fsh-article%2F2018%2F03%2F21%2F%E5%BC%B9%E6%80%A7%E5%B8%83%E5%B1%80%2F</url>
+    <content type="text"><![CDATA[布局的方案有很多，目前最常见的要数 Flex 布局了 Flex 布局写弹性布局的基本步骤如下 指定 flex 容器首先我们要指定一个元素为 flex 容器 12345.box &#123; display:flex; display:-webkit-flex;/* Safari */&#125; 设置 flex 布局之后，子元素的 float、clear、vertical-align 都将失效 设置容器的属性主要有如下六个属性 flex-direction flex-wrap flex-flow justify-content align-items align-content flex-direction1234row（默认值）：水平方向排列，从左边开始排列。row-reverse：水平方向排列，从右开始排列。column：垂直方向排列，从上往下排。column-reverse：垂直方向排列，从上往下排。 flex-wrap123nowrap（默认值）:不换行wrap：换行，第一行在最上面wrap-reverse：换行，第一行在最下面 flex-flow就是前flex-direction 和 flex-wrap的简写 1flex-flow:flex-direction flex-wrap; justify-content定义水平对齐方式对齐方式 123456flex-start（默认值）：左对齐flex-end：右对齐center： 居中space-between：两端对齐，子元素之间的间隔都相等。space-around：每个子元素两侧的间隔相等。所以，子元素之间的间隔比子元素与边框的间隔大一倍。 align-items12345flex-start：上对齐。flex-end：下对齐。center：居中对齐。baseline: 子元素的第一行文字的基线对齐。stretch（默认值）：如果子元素未设置高度或设为auto，将占满整个容器的高度。 居中对齐实现在面试中我们经常会被问道如何实现一个居中对齐，有了上面的知识，我们就可以很容易的实现一个居中对齐。 12345678910111213141516&lt;style&gt; .box &#123; display: flex; align-items:center; justify-content: center; height: 100%; &#125; .center&#123; width: 200px; height: 200px; background-color: red; &#125;&lt;/style&gt;&lt;div class="box"&gt; &lt;div class="center"&gt;&lt;/div&gt;&lt;/div&gt; 设置子元素的属性order排列的时候，order的值越小，排列越靠前，默认为 0 1order:1; flex-grow此属性主要用于当空间未被占满的时候。 默认为0，此时空间未被占满子元素会被放大。 如果设置了值，比如说123456.children1&#123; flex-grow:1;&#125;.children2&#123; flex-grow:2;&#125; 那么 children2占据 剩余空间 比children1多一倍 flex-shrink主要用于当空间不足的时候。 默认为1，即如果空间不足，改子元素将缩小 如果设置了此值 123456.children1&#123; flex-shrink:1;&#125;.children2&#123; flex-shrink:0;&#125; 此时，如果空间不足，chilrend2 不会被缩小，children1 都会被等比例缩小 align-self可以单独设置子元素的对齐方式，会覆盖掉父有元素的align-items，取值同 align-items]]></content>
+      <categories>
+        <category>CSS</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[js事件代理]]></title>
+    <url>%2Fsh-article%2F2018%2F03%2F20%2F%E4%BA%8B%E4%BB%B6%E4%BB%A3%E7%90%86%2F</url>
+    <content type="text"><![CDATA[前端面试中，事件代理也是我们经常会遇到的一个问题，下面我们来聊一下事件代理的原理。 原理比如说我们想个一个列表中的每一项绑定一个点击事件，如果我们一个一个去给每一项绑定事件，则会导致多次操纵dom，效率也比较低，如果添加一个新的选项的话，还得再给这个选项绑定事件。 事件代理，其实就是将事件绑定在父元素上，然后通过父元素的点击事件来判断点击的是不是子元素 12345678910111213141516&lt;ul id=&quot;test&quot;&gt; &lt;li&gt;1&lt;/li&gt; &lt;li&gt;2&lt;/li&gt; &lt;li&gt;3&lt;/li&gt; &lt;li&gt;4&lt;/li&gt;&lt;/ul&gt;&lt;script&gt; var ul = document.getElementById(&apos;test&apos;) ul.addEventListener(&apos;click&apos;, function (event) &#123; var target = event.target if (target.tagName.toUpperCase() === &apos;LI&apos;) &#123; console.log(target.innerText) &#125; &#125;)&lt;/script&gt; 我们通过绑定父元素的点击事件，通过获取 event.target 可以知道当前点击的元素，在 IE 6-8中不支持该属性，有一个 srcElement 等价于这里 target currentTarget如果我们打印出 event 可以看到里面有一个 currentTarget 属性，并且这个属性为 null，那么这个属性有什么用呢。 这里我们可以这样试一下 1234567891011121314&lt;ul id="test"&gt; &lt;li&gt;1&lt;/li&gt; &lt;li&gt;2&lt;/li&gt; &lt;li&gt;3&lt;/li&gt; &lt;li&gt;4&lt;/li&gt;&lt;/ul&gt;&lt;script&gt; var ul = document.getElementById('test') ul.addEventListener('click', function (event) &#123; console.log(event) console.log(event.currentTarget) &#125;)&lt;/script&gt; 可以发现event.currentTarget打印出来的是 ul这个节点。看 mdn 的文档可知道，这个属性是指向当前事件被绑定的元素上 在js中console.log(obj)打印对象的时候，是对对象的一个引用，如果对象的属性后面被改变了，打印出来的对象也是会发生改变的，所以造成了前面打印 event 的时候发现他的currentTarget为null]]></content>
+      <categories>
+        <category>JS</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[http 304原理]]></title>
+    <url>%2Fsh-article%2F2018%2F03%2F20%2F%E5%8E%9F%E7%90%86%2F</url>
+    <content type="text"><![CDATA[http 常见的状态码有很多，200，302，303，304，403，500等，其中要数304在面试中最常被问到。初学者碰到304，可能只是知道他是用于缓存，却并不知道其中的原理。下面我们来了解一下304整个的运行机制。 缓存运行机制首先我们先思考一个问题，浏览器如何判断一个资源是否需要缓存？ 可能你已经知道了，就是用请求头来控制的。 通知缓存在 http1.1 中我们通过请求头中的 Cache-Control 来告诉浏览器缓存机制。 作为响应头其中可选的值有： 字段 作用 public 表示任何情况下都得缓存该资源 Private=[=”field-name”] 表明返回报文中全部或部分仅开放给某些用户作缓存（服务器指定的，如代理服务器等），其他用户则不能缓存这些数据 no-cache 不直接使用缓存，要向服务器发起新鲜度校验 no-store 所有内容不会被缓存 no-transform 告知客户端缓存文件时不得对实体数据做任何改变 only-if-cached 告知代理服务器，如果客户端需要的数据，代理服务器有，代理服务器不用想原服务器发送请求 must-revalidate 资源一定是向员服务器去验证请求，若请求失败会返回504 proxy-revalidate 与must-revalidate类似 max-age=delta-seconds 告知客户端在 delta-seconds 内资源是新鲜的，不用向服务器发起请求 s-maxage=delta-seconds 和max-age一样，但仅应用于共享缓存（如代理） cache-extension 自定义拓展值 其中常用的主要是 max-age。 1Cache-Control: max-age=100 这个请求头的意思是告诉浏览器该资源在100秒内都是新鲜的，如果未过期，则不用向服务器发送请求，直接读取缓存，在 chrome 下我们可以看到表现为 200 from cache，若过期了，则会重新像服务器发起请求。 缓存验证现在我们已经知道了如何通知浏览器做缓存了，但是这里还有一个问题，缓存到期了，浏览器重新请求资源，但是如果资源在这段时间并没有发生修改，又重新把资源发送了一遍，如果资源又比较大，这就造成很大的宽带和时间的浪费。 304 就是用来告诉浏览器，资源还没更新过，我就不传过去了，你直接用缓存就可以了。 接着问题又来了，如何验证资源是否被修改过呢。 http 1.1 新增了几个首部字段来解决这个问题。 Last-Modified服务器将资源返回给浏览器的时候，会将资源的最后修改时间加在请求头上返回给浏览器。 1Last-Modified: Thu, 01 Jan 1970 00:00:00 GMT 浏览器接收之后，会在下一次的请求把信息附带上，到服务器去做检查，若与服务器的修改时间一直，则说明资源没有被修改过，直接返回304即可。 浏览器会通过if-modified-since将信息发送给服务器1if-modified-since: Sun, 18 Mar 2018 13:01:31 GMT Last-Modified 也可能会出现一个问题，如果服务器上，一个资源被修改了，但是实质上内容根本没有发生变化，也会重新发送整个资源给浏览器。 ETag为了解决上面这个问题，Http1.1还加入了ETag这个首部。服务器通过某种算法，给资源计算出一个唯一的表示符，并在响应头上返回给浏览器。 浏览器会在下一次请求的时候，通过If-None-Match将信息发送给服务器 1If-None-Match: &quot;sdfsfedc8-2132&quot; 如果匹配上了则直接返回304即可，没匹配上则需要重新发送资源。 需要注意的是，如果这两个字段被同时使用了，需要他们两个同时验证通过才会返回304，如果其中一个没验证通过，都会重新发送资源]]></content>
+      <categories>
+        <category>http</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[js 作用域与闭包]]></title>
+    <url>%2Fsh-article%2F2018%2F03%2F19%2Fjs-%E4%BD%9C%E7%94%A8%E5%9F%9F%E4%B8%8E%E9%97%AD%E5%8C%85%2F</url>
+    <content type="text"><![CDATA[在 let 和 const 出现之前，js 是没有会计作用域的， 在我们使用 var 定义变量的时候，是有可能会导致变量提升的。 比如 12345for (var i=0;i&lt;2;i++) &#123; console.log(i)&#125;console.log(i);// 2 这段代码最后会输出2，这是因为var 导致了变量 i 的提升，在有了 let之后我们用let就不会有这个问题。 12345for (let i=0;i&lt;2;i++) &#123; console.log(i)&#125;console.log(i);// error i is not defined 作用域链我们先看看这段代码 123456789101112var a = 1;function test()&#123; console.log(a) var b = 2; function inner()&#123; console.log(b) &#125; inner();&#125;test();console.log(b) 上面这段代码会依次输出，1，2，error b is not defined， 在js中函数是有自己的作用域的，函数内部定义的变量，外部是无法直接访问到的，只有函数内部才能够直接访问。 函数内部在调用 inner() ，在访问 b 这个变量的时候，会先看自己的作用域中是否有这个变量，发现没有，然后再查找 test 的作用域，发现了这个变量，然后就输出这个变量。 这里外部无法访问到test中的b，所以在函数执行完之后，b会被销毁掉。 闭包我们先来看一下代码 1234567891011121314function countResult()&#123; var count = 0; return function () &#123; count ++; console.log(cout) &#125;&#125;var tmp = countResult();var tmp2 = countResult();tmp(); // 1tmp2(); // 1tmp(); // 2 这里虽然我们无法直接访问到 countResult 中的变量count，但是我们通过返回的函数可以间接的访问到count，tmp保持着对count的引用，所以tmp 中的count不会被销毁，我们再新生成一个tmp2，可以发现，tmp和tmp2之间的作用域是不同的，他们都有自己单独的局部作用域。 闭包的作用主要有两点： 隔离作用域 使局部变量能够常驻内存 同样闭包带来的问题也非常明显： 闭包会使得函数中的变量都被保存到内存中，导致内存消耗很大。在使用闭包的时候，退出函数之前，我们需要将一些不使用的局部变量全部删除。 js 的垃圾回收机制引用计数法应有计数通过计算变量的引用数来回收垃圾，如果一个值的引用数为0则将其回收 引用计数法会存在一个问题。 12345678function test()&#123; var a = &#123;&#125;; var b= &#123;&#125;; a.b=b; b.a=a;&#125;test(); test 中的 a和b互相引用了对方，但是这里执行完之后本该销毁这两个变量，如果使用引用计数法的话，就不会销毁这两个变量而导致内存泄露。 标记清除法标记清除法是通过根节点向下访问，如果能访问到的都不会被清除，在浏览器中根节点就 window, 这样就避免了循环引用导致的内存泄露问题。]]></content>
+      <categories>
+        <category>JS</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[[].slice.call(arguments) 转数组的原理]]></title>
+    <url>%2Fsh-article%2F2018%2F03%2F16%2Fprototype-slice%2F</url>
+    <content type="text"><![CDATA[12345function test()&#123; console.log([].slice.call(arguments))&#125;test(1,2,3,4) // [1,2,3,4] 我们经常可以看到一些文档或者比人的源码之中用这种方式把arguments转化为数组,但是为什么可以这样子操作呢，现在我们可以看一下Array.prototype.slice 他的实现原理是怎样的。 slice 的原理12345678910111213141516171819202122232425262728293031323334Array.prototype.slice = function(begin, end) &#123; end = (typeof end !== 'undefined') ? end : this.length; var i, cloned = [], size, len = this.length; var start = begin || 0; start = (start &gt;= 0) ? start : Math.max(0, len + start); var upTo = (typeof end == 'number') ? Math.min(end, len) : len; if (end &lt; 0) &#123; upTo = len + end; &#125; size = upTo - start; if (size &gt; 0) &#123; cloned = new Array(size); if (this.charAt) &#123; for (i = 0; i &lt; size; i++) &#123; cloned[i] = this.charAt(start + i); &#125; &#125; else &#123; for (i = 0; i &lt; size; i++) &#123; cloned[i] = this[start + i]; &#125; &#125; &#125; return cloned; &#125;; 我们可以到 slice 其实是在用 this 访问对象的属性，通过call将arguments绑定到this上，以此可以遍历出 arguments 的全部参数。 通过 slice 的底层原理我们也可以看出，如果我们传一个字符串进去，会把字符串转化为数组 1[].slice.call(&apos;12345&apos;); // [1,2,3,4,5] ES6的新方法ES6 给 Array 新加了一个方法，我们也可以通过他把 arguments 转化为数组。 12345678Array.from(&#123;length:2,0:1,1,2&#125;) // [1,2]function test()&#123; console.log(Array.from(arguments))&#125;test(1,2,3);// [1,2,3] 相比于 slice，from 更强大一点，from 还可以将带有遍历器属性[Symbol.iterator]的对象转化为数组 例如我们可以这样操作 12345678var test = &#123;&#125;test[Symbol.iterator] = function *()&#123; yield 1; yield 2; yield 3;&#125;Array.from(test);// [1,2,3]]]></content>
+      <categories>
+        <category>JS</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[快速理解 js 模块规范]]></title>
+    <url>%2Fsh-article%2F2018%2F03%2F13%2F%E5%BF%AB%E9%80%9F%E7%90%86%E8%A7%A3-js-%E6%A8%A1%E5%9D%97%E8%A7%84%E8%8C%83%2F</url>
+    <content type="text"><![CDATA[随着前端的日益壮大，前端模块化的编程成为了一个非常重要的东西，这可以更好的帮我们构造工程化的前端项目。 说道前端模块规范，我们耳熟能详的就这三种 CommonJS, AMD, CMD CommonJS首先说一下CommonJS, node.js 的模块系统就是参照 CommonJS 规范实现的。在CommonJS 中有一个全局性的方法require(path),我们通过方法加载需要的模块。 具体的用法如下： 声明模块： 123456// test.jsexports.test = function()&#123; console.log('test')&#125; 引用模块： 12var test = require('test'); CommonJS 规范中，require() 用来引入外部模块，exports ·对象用于导出当前模块的方法或变量，作为唯一的到出口，module 对象就代表模块本身。 CommonJS 主要用在了服务端，因为服务端加载，读取模块都是在本地加载，如果浏览器中使用，比方说上面的代码，网盘，我们在加载 test 模块的时候必须等待他加载完才能继续执行后面的代码，这在服务端没什么问题，但在浏览器中，我们需要把模块下载下来，才能去执行后面的代码，在等待的过程中，浏览器处于“假死”的状态。 为了能够异步的加载模块，于是 AMD 规范就诞生了。 AMD最常用的RequireJS就是实现了AMD规范。 require.js加载的模块，采用AMD规范。也就是说，模块必须按照AMD的规定来写。 如果这个模块还依赖其他模块，那么define()函数的第一个参数，必须是一个数组，指明该模块的依赖性。 12345define(['dep1','dep2'],function(dep1,dep2)&#123; &#125;) 加载模块，与 CommonJS 不同的是需要在require中填入回调函数，第一个参数指明需要加载的模块 12345 require(['jquery', 'underscore', 'backbone'], function ($, _, Backbone)&#123; // some code here &#125;); CMD玉伯写的 seajs 就是遵循CMD规范写的 123define(function(require,exports,module)&#123; &#125;) 他与 AMD 存在着一定的区别。 比方说我们需要在运行代码的时候先后加载两个模块： AMD 12345678require(['block1','block2'],function(block1,block2)&#123; block1.start(); block1.end(); block2.start(); block2.end();&#125;) AMD 虽然实现了异步加载，但是在开始的时候就把所有依赖写出来，可能不太符合我们平时书写的一个逻辑顺序，是否能够像 commonJS那样用的时候require，而且还是支持异步加载后再执行呢。 CMD 就是支持的 CMD 123456789101112define(function(require, exports, module)&#123; var block1 = require('block1'); block1.start(); block1.end(); var block2 = require('block2'); block2.start(); block2.end(); &#125;) CMD 只有当代码执行到 require的时候才会去异步的加载模块，不会像AMD一开始就把需要的模块都加载好才开始执行。 AMD依赖前置，js可以方便知道依赖模块是谁，立即加载；而CMD就近依赖，需要使用把模块变为字符串解析一遍才知道依赖了那些模块，这也是很多人诟病CMD的一点，牺牲性能来带来开发的便利性，实际上解析模块用的时间短到可以忽略。 总结个人认为，在实际的开发中，大多还是用 AMD 规范的，使用 AMD 规范你能够更清楚的看到 模块之间的依赖关系，能够更符合程序员的思维方式。博主暂时也还没有用过 CMD 规范。 ES6 中的 import webpack 也是将其转化为 AMD 规范的。]]></content>
+      <categories>
+        <category>JS</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[发布订阅模式]]></title>
+    <url>%2Fsh-article%2F2018%2F03%2F11%2F%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85%E6%A8%A1%E5%BC%8F%2F</url>
+    <content type="text"><![CDATA[目前非常流行的 vue 的底层，其实用的就是发布订阅模式。要学习vue的原理的话，很有必要先学习一下这个设计模式。 发布订阅模式在观察者模式中一般有两个对象发布者和订阅者，订阅者从发布者那里订阅消息，发布者发布消息通知所有订阅消息的对象。当订阅者订阅发布者的时候，发布者会把订阅者添加到自己的订阅者列表中。 代码实现12345678910111213141516171819202122232425262728293031323334353637383940414243function Publisher()&#123; this.observers = [];&#125;/**发布者添加订阅对象**/Publisher.prototype.add = function(observer)&#123; this.observers.push(observer);&#125;/**发布者通知订阅者**/Publisher.prototype.notify = function(context)&#123; this.observers.forEach((observer)=&gt;&#123; observer.update(context) &#125;);&#125;function Observer()&#123; &#125;Observer.prototype.update=function(context)&#123; console.log(context)&#125;/** 订阅发布者**/Observer.prototype.subscribe=function(publisher)&#123; publisher.add(this)&#125;var publisher = new Publisher();var observer = new Observer();observer.subscribe(publisher);publisher.notify('事件发布');]]></content>
+      <categories>
+        <category>JS</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[快速理解js继承原理]]></title>
+    <url>%2Fsh-article%2F2018%2F03%2F10%2F%E5%BF%AB%E9%80%9F%E7%90%86%E8%A7%A3js%E7%BB%A7%E6%89%BF%E5%8E%9F%E7%90%86%2F</url>
+    <content type="text"><![CDATA[JS继承原理js 的继承是通过原型链来实现的 什么是原型链呢？首先说一下 prototype 属性，在js中所有的方法都会有一个prototype属性,这个属性就是方法的原型对象 比方说： 12345678910function Animal()&#123; &#125;Animal.prototype.run=function()&#123; console.log(&apos;run&apos;)&#125;var cat = new Animal() 当我们声明 Animal 这个方法的时候， js引擎会赋予Animal一个原型对象，打印出来可以看到 12345678910console.log(Animal.prototype)/**&#123; constructor:这个指向 Animal这个方法, __proto__:这个指向Object.prototype&#125;**/ 在我们构造实例的时候,cat的__proto__ 会指向 Animal 的 prototype, js引擎 在访问对象的属性的时候会先查看当前对象是否这个属性，如果没有则会查看改对象的 __proto__ 是否有这个属性，访问会沿着原型链访问下去直到找到属性或者 __proto__为null为止。 如何实现继承这里只讲通用的一种继承的写法 这是父类：1234567function Animal(name)&#123; this.name = name;&#125;Animal.prototype.run=function()&#123; console.log(this.name + &apos; is run&apos;)&#125; 子类的写法： 123456789101112131415function Cat(name)&#123; // 这里通过调用父类并把this绑定到父类上 Animal.call(this,name)&#125;(()=&gt;&#123; // 这里其实本质要做的就是让Cat.prototype.__proto__=Animal.prototype // Cat.prototype =Object.create(Animal.prototype) 相当于做了如下的工作 // var a = &#123;&#125;;a.__proto__=Animal.prototype; // Cat.prototype = a; Cat.prototype = Object.create(Animal.prototype) Cat.prototype.constructor = Cat&#125;)() ES6 的写法：12345678910111213141516Class Animal&#123; constructor(name)&#123; this.name=name &#125; run()&#123; console.log(this.name + &apos; is run&apos;) &#125;&#125;Class Cat extends&#123; constructor(name)&#123; // ES6要求子类构造函数中必须要调用这个方法，这个方式是用来调用父类的constructor的 super(name) &#125;&#125; 其实es6的写法本质上上面的语法糖，使用之后代码对代码的可读性有了明显的提高，但是我们还是需要知道JS继承的原理是怎样的。]]></content>
+      <categories>
+        <category>JS</category>
+      </categories>
+  </entry>
+</search>
