@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[mac前端开发环境]]></title>
+    <url>%2Fsh-article%2F2018%2F06%2F14%2Fmac%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%2F</url>
+    <content type="text"><![CDATA[最近正在从 windows 转向 mac，不得不说mac做开发确实省心不少。这里记录下相关环境的搭建与配置。 gitgit 可以有两种方式去安装，可以从 github上下载然后自己编译安装，由于这个过程比较麻烦，所以我还是选择了另一种方式，直接在app store中安装xCode，安装好之后就会自动的帮你安装好git了。 Homebrewmac 下的包管理工具，很多东西可以通过他来进行安装。他的安装方式也很简单，只需复制一条简单的命令行就可以了。 1ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot; item2item是mac上一框非常好用的终端，基本上也是必备的。直接去官网下载就可以了 https://iterm2.com/。具体的一些相关配置可以参考这偏文档 https://segmentfault.com/a/1190000010518195 谷歌浏览器插件 Rememberry 翻译非常好用，可以帮助你复习巩固单词，看英文文档的时候也更方便快捷 Tampermonkey 里面有很多有趣的脚本可以用，比如百度云盘可以免安装客户端直接下载 Vimium 强烈推荐这个，里面有视频教程，基本看一遍就会了，让你可以完全脱离鼠标，用键盘控制浏览器，非常好用 Insight.io for Github 让你能够方便快捷的看github仓库的目录结构，甚至能够像ide一样搜索残酷，强烈推荐使用 postman 调接口非常好用的一个插件，不过现在已经脱离谷歌浏览器成为了一个桌面程序了 JSON-handle 可以非常方便快捷的格式化json数据 webstormwebstorm 是一款非常好用的前端ide，虽然本身的功能已经十分强大了，但是还是有非常多的强大的插件可以用。这里简单列举几个我常用的插件： .ignore 支持 .gitignore 的语法规则，并提供自动将文件加入 .gitignore 的功能 Key PromoterX Key Promoter的升级版，使用鼠标点击的时候会提醒你键盘的快捷键是什么，帮助你更好的使用键盘进行工作 ideaVim 可以让你在 webstorm 中使用vim AceJump 帮助你快速跳转代码，和谷歌浏览器中的vimuim功能类似 ,非常好用的一个插件，强力推荐，默认快捷键是 ctrl+; 三个键，由于mac上按+号不是很方便个人建议改成command; Material Theme UI 一个很好看的主题 Rainbow Brackets 更好看的括号颜色 activate-power-mode 装逼神器，和atom上的敲代码酷炫效果类似，一个比较鸡肋的功能 CodeGlance 可以在右边看到代码的整体缩略图，也强力推荐使用 eslint 如果项目中需要用到eslint的话，比较建议装上 以上是比较通用的一些插件，还有vue,react,angular的一些插件，就看个人需求具体的去安装了。 dash一款非常好用的api文档查看工具，不过是收费的。 以上是我觉得开发当中比较好用的一些东西，仅供参考，如果有更好的工具欢迎分享~]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[浏览器如何验证证书的]]></title>
     <url>%2Fsh-article%2F2018%2F05%2F03%2Fhello-world%2F</url>
     <content type="text"><![CDATA[基本概念CA首先CA是Certificate Authority的缩写，也叫“证书授权中心”。它是负责管理和签发证书的第三方机构，就好比例子里面的中介——C 公司。一般来说，CA必须是所有行业和所有公众都信任的、认可的。因此它必须具有足够的权威性。就好比A、B两公司都必须信任C公司，才会找 C 公司作为公章的中介。 CA 证书 顾名思义，就是CA颁发的证书。 浏览器中默认有得到认证的根证书，使用https的网站需要让浏览器信任自己的证书就需要去申请这些机构的证书 浏览如何验证证书的真伪呢？ 首先我们需要了解一下CA是如何给我们发证书的。 1.向CA申请证书 2.CA认证了你的信息之后同意给你颁布证书，生成证书信息，生成证书的指纹用于后面验证证书的真伪 3.使用私钥对指纹进行加密生成数字签名，常用的算法有RSA公钥体制 4.将证书颁发网站，生成的证书会指向给他颁发证书的CA 了解完CA证书的生成之后我们就可以看一下浏览器如何验证证书的了。 1.浏览器拿到证书之后会找到证书所对应的CA 2.浏览器取出CA中的公钥，使用公钥对证书的签名进行解密 3.将解密的结果与证书指纹做对比，如果对比一致则说明真书是真的 4.浏览器提取出证书中的公钥使用]]></content>
