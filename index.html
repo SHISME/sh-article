@@ -276,6 +276,373 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/sh-article/2018/06/30/RxJs 学习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="$SH">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/sh-article/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SZU_SH">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/sh-article/2018/06/30/RxJs 学习/" itemprop="url">RxJs 学习</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-30T18:43:59+08:00">
+                2018-06-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/sh-article/categories/JS/" itemprop="url" rel="index">
+                    <span itemprop="name">JS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/sh-article/2018/06/30/RxJs 学习/" class="leancloud_visitors" data-flag-title="RxJs 学习">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="RxJs"><a href="#RxJs" class="headerlink" title="RxJs"></a>RxJs</h2><p>最近在研究一下 RxJs ，这是一个非常强大的用于响应式编程的库，学习难度也比较高，想要学习的人最好要对发布订阅模式和函数式编程比较熟悉，这样学习起来就会更加的快捷顺畅。</p>
+<p>函数式编程的教程网上有很多，推荐大家可以看这个 <a href="https://github.com/llh911001/mostly-adequate-guide-chinese" target="_blank" rel="noopener">https://github.com/llh911001/mostly-adequate-guide-chinese</a>, 英语能力比较强的人可以去看一下英文原版的教程。</p>
+<p>在有了对函数式编程和发布订阅模式的了解之后，学习 RxJs 才会比较的容易。因为这里面充斥着大量的概念。</p>
+<h2 id="用途"><a href="#用途" class="headerlink" title="用途"></a>用途</h2><p>要学习一个东西的时候，我最好带着目的去学习，所以首先我得明白我们为什么要花这么大的功夫去学习和使用这个库。</p>
+<ul>
+<li>处理比较复杂的异步逻辑的时候，它的一套规范，能让你很容易的写出高可维护，高拓展性的代码</li>
+<li>函数式编程，这是一个非常棒的编程思想，在开发大型应用到的时候能够加强代码的可维护性。</li>
+<li>处理多并发异步操作的时候，能够更加简单明了</li>
+</ul>
+<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>学习 RxJS 我们先要了解清楚其中的几个基本概念。</p>
+<h3 id="Observable-（被观察者"><a href="#Observable-（被观察者" class="headerlink" title="Observable （被观察者)"></a>Observable （被观察者)</h3><p>这是 RxJS 最核心的部分，一个可被订阅的对象。</p>
+<h3 id="Observer-（观察者）"><a href="#Observer-（观察者）" class="headerlink" title="Observer （观察者）"></a>Observer （观察者）</h3><p>这个单词和 Observable 非常的相似，用于订阅Observable，RxJs 也提供了他的实现接口</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">interface Observer&lt;T&gt; &#123;</span><br><span class="line">  closed?: boolean;</span><br><span class="line">  next: <span class="function">(<span class="params">value: T</span>) =&gt;</span> <span class="keyword">void</span>;</span><br><span class="line">  error: <span class="function">(<span class="params">err: any</span>) =&gt;</span> <span class="keyword">void</span>;</span><br><span class="line">  complete: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">void</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>closed：会在Observer 取消订阅的时候调用</li>
+<li>next：是用来接收Observable发出来的消息</li>
+<li>error：用来接收Observable发出的error</li>
+<li>complete：当 Observable 执行complete的时候会调用</li>
+</ul>
+<h3 id="Subscription-（订阅）"><a href="#Subscription-（订阅）" class="headerlink" title="Subscription （订阅）"></a>Subscription （订阅）</h3><p>当 Observable 添加订阅的时候会返回一个 Subscription，主要用来取消订阅的</p>
+<h3 id="Operators-（操作符）"><a href="#Operators-（操作符）" class="headerlink" title="Operators （操作符）"></a>Operators （操作符）</h3><p>操作符，使用函数式编程风格的纯函数，我们可以放心大胆的使用它而不用去担心对外部环境的影响</p>
+<h3 id="Subject-（主体）"><a href="#Subject-（主体）" class="headerlink" title="Subject （主体）"></a>Subject （主体）</h3><p>可以看做是一个特殊的 Observable，能够同时将信息推送给多个Observer，而Observable一个subscribe只会发送给一个Observer。</p>
+<h3 id="Schedulers-（调度器）"><a href="#Schedulers-（调度器）" class="headerlink" title="Schedulers （调度器）"></a>Schedulers （调度器）</h3><p>调度器控制着何时启动 subscription 和何时发送通知，可以用来实现异步的通知。</p>
+<h2 id="一些用法"><a href="#一些用法" class="headerlink" title="一些用法"></a>一些用法</h2><h3 id="简单用法"><a href="#简单用法" class="headerlink" title="简单用法"></a>简单用法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建Observables</span></span><br><span class="line"><span class="keyword">var</span> observable = Rx.Observable.create(<span class="function"><span class="keyword">function</span> <span class="title">subscribe</span>(<span class="params">observer</span>) </span>&#123;</span><br><span class="line">    observer.next(‘any value’)</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建Observer</span></span><br><span class="line">vat observer = &#123;</span><br><span class="line">    next:<span class="function">(<span class="params">val</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(val);</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加订阅</span></span><br><span class="line"><span class="keyword">var</span> subscription = observable.subscribe(observer); <span class="comment">// 输出any value</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 取消订阅</span></span><br><span class="line">subscription.unsubscribe();</span><br></pre></td></tr></table></figure>
+<h3 id="Subject-订阅"><a href="#Subject-订阅" class="headerlink" title="Subject 订阅"></a>Subject 订阅</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 新建主体</span></span><br><span class="line"><span class="keyword">var</span> subject = <span class="keyword">new</span> Rx.Subjecgt();</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> observerA = &#123;</span><br><span class="line">    next:<span class="function">(<span class="params">val</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'this is ObserverA'</span>, val);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> ObserverB = &#123;</span><br><span class="line">    next:<span class="function">(<span class="params">val</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'this is ObserverB'</span>, val);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">subject.subscribe(ObserverA);</span><br><span class="line">subject.subscribe(ObserverB);</span><br><span class="line"></span><br><span class="line">subject.next(<span class="number">1</span>);</span><br><span class="line"><span class="comment">// 输出</span></span><br><span class="line"><span class="comment">// this is ObserverA 1</span></span><br><span class="line"><span class="comment">// this is ObserverB 1</span></span><br></pre></td></tr></table></figure>
+<h3 id="多播的-Observables"><a href="#多播的-Observables" class="headerlink" title="多播的 Observables"></a>多播的 Observables</h3><p>Observable 只能给一个 Observer 发送消息，而多播的 Observables 可以给多个 Observer发送消息</p>
+<blockquote>
+<p>Observables 底层本质上是用 Subject 让多个 Observer 观察到同一个 Observable 执行</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> source = Rx.observable.from([<span class="number">1</span>,<span class="number">2</span>]);</span><br><span class="line"><span class="keyword">var</span> subject = <span class="keyword">new</span> Rx.Subject();</span><br><span class="line"><span class="keyword">var</span> multicasted = source.multicast(subject);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 本质上是在 subject.subscribe();</span></span><br><span class="line">multicasted.subscribe(<span class="function">(<span class="params">val</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Observer A'</span>, val);</span><br><span class="line">&#125;);</span><br><span class="line">multicasted.subscribe(<span class="function">(<span class="params">val</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Observer B'</span>, val);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 本质上是 source.subscribe(subject);</span></span><br><span class="line">multicasted.connect();</span><br></pre></td></tr></table></figure>
+<h3 id="refCount-引用计数"><a href="#refCount-引用计数" class="headerlink" title="refCount 引用计数"></a>refCount 引用计数</h3><p>有时候我们想要当第一个订阅者添加的时候自动的去 connect，在最后一个订阅者取消订阅的时候，取消连接。</p>
+<p>我们可以使用 ConnectableObservable 的 refCount() 方法来生成Observable，这个Observable 在有第一个订阅者的时候自动的进行connect，然后在最后一个订阅者取消订阅的时候停止。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> source = Rx.Observable.interval(<span class="number">500</span>); <span class="comment">// 此方法会在给定的时间间隔发出连续的数字</span></span><br><span class="line"><span class="keyword">var</span> subject = <span class="keyword">new</span> Rx.Subject();</span><br><span class="line"><span class="keyword">var</span> refCounted = source.multicast(subject).refCount();</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> subscriptionA = refCounted.subscribe(&#123;</span><br><span class="line">    next:<span class="function">(<span class="params">val</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'OberverA:'</span>,val);</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;);</span><br><span class="line"><span class="keyword">var</span> subscriptionB = refCounted.subscribe(&#123;</span><br><span class="line">    next:<span class="function">(<span class="params">val</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'OberverB:'</span>,val);</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;);</span><br><span class="line">setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    subscriptionA.unsubscribe();</span><br><span class="line">&#125;, <span class="number">600</span>);</span><br><span class="line"></span><br><span class="line">setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 此时 共享的Observable 将会停止，因此refCounted后面不会再有订阅者</span></span><br><span class="line">    subscriptionB.unsubscribe();</span><br><span class="line">&#125;, <span class="number">1200</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="BehaviourSubject"><a href="#BehaviourSubject" class="headerlink" title="BehaviourSubject"></a>BehaviourSubject</h3><p>BehaviourSubject 是 Subject 的一个变体，他会将当前值传给新新订阅的订阅者。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> subject = <span class="keyword">new</span> Rx.BehaviourSubject(<span class="number">0</span>); <span class="comment">// 给与一个初始值</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> observer = &#123;</span><br><span class="line">    next:<span class="function">(<span class="params">val</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(val)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">subject.subscribe(observer);<span class="comment">// 输出 0</span></span><br></pre></td></tr></table></figure>
+<h3 id="ReplySubject"><a href="#ReplySubject" class="headerlink" title="ReplySubject"></a>ReplySubject</h3><p>ReplySubject 可以缓存值，你可以指定缓存多少个值发送给新的订阅者，也可以缓存多少时间内的值发送给新的订阅者</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> subject = <span class="keyword">new</span> Rx.ReplySubject(<span class="number">2</span>);<span class="comment">// 缓存2个值</span></span><br><span class="line"></span><br><span class="line">subject.next(<span class="number">0</span>);</span><br><span class="line">subject.next(<span class="number">1</span>);</span><br><span class="line">subject.next(<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">subject.subscribe(&#123;</span><br><span class="line">    next:<span class="function">(<span class="params">val</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(val)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 输出1，2</span></span><br></pre></td></tr></table></figure>
+<h3 id="AsyncSubject"><a href="#AsyncSubject" class="headerlink" title="AsyncSubject"></a>AsyncSubject</h3><p>只有当 Observable 执行 complete 的时候，AsyncSubject 才会将最后一个值发送给订阅者</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">var subject = new Rx.AsyncSubject();</span><br><span class="line"></span><br><span class="line">subject.subscribe(&#123;</span><br><span class="line">    next:(val) =&gt; &#123;</span><br><span class="line">        console.log(val);</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">subject.next(1);</span><br><span class="line">subject.next(2);</span><br><span class="line">subject.next(3);</span><br><span class="line"></span><br><span class="line">subject.complete(); // 这时候才会输出3</span><br></pre></td></tr></table></figure>
+<h2 id="Operators-操作符"><a href="#Operators-操作符" class="headerlink" title="Operators 操作符"></a>Operators 操作符</h2><p>RxJs 提供了很多的操作符，他们都是基于函数式编程的思想实现的。在使用操作符的时候，他们并不会修改原先的 Observable，而是返回一个新的 Observable，这是一个无副作用的操作，大大提高了我们程序的可维护性。</p>
+<p>根据原理，我们也可以自己定义一个操作符函数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> myOperator = <span class="function"><span class="keyword">function</span> (<span class="params">observable</span>) </span>&#123;</span><br><span class="line">   <span class="comment">// 这里我们只是返回一个新的 Observable ，这个Observable 会让输入的值都加1</span></span><br><span class="line">   <span class="keyword">return</span> Rx.Observable.create(<span class="function"><span class="keyword">function</span> <span class="title">subscribe</span>(<span class="params">observer</span>)</span>&#123;</span><br><span class="line">        observable.subscribe(&#123;</span><br><span class="line">            next:<span class="function">(<span class="params">v</span>) =&gt;</span> observer.next(v + <span class="number">1</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">   &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> source = Rx.Observable.from([<span class="number">1</span>,<span class="number">2</span>]);</span><br><span class="line"><span class="keyword">var</span> observable = myOperator(source);</span><br><span class="line"></span><br><span class="line">observable.subscripe(<span class="function">(<span class="params">val</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(val);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 输出2，3</span></span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/sh-article/2018/06/24/深入浅出react笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="$SH">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/sh-article/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SZU_SH">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/sh-article/2018/06/24/深入浅出react笔记/" itemprop="url">深入浅出react笔记</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-24T17:19:51+08:00">
+                2018-06-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/sh-article/2018/06/24/深入浅出react笔记/" class="leancloud_visitors" data-flag-title="深入浅出react笔记">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="react-的生命周期"><a href="#react-的生命周期" class="headerlink" title="react 的生命周期"></a>react 的生命周期</h2><p>react 的生命周期，可能经过三个过程：</p>
+<ul>
+<li>装载 mount</li>
+<li>更新 update</li>
+<li>卸载 unmount</li>
+</ul>
+<h3 id="装载-mount"><a href="#装载-mount" class="headerlink" title="装载 mount"></a>装载 mount</h3><p>当组件第一次被装载的时候，react 会依次调用如下函数</p>
+<ul>
+<li>constructor</li>
+<li>getInitialState：一般不会用到，state 一般在constructor 中进行初始化</li>
+<li>getDefaultProps</li>
+<li>componentWillMount</li>
+<li>render</li>
+<li>componentDidMount</li>
+</ul>
+<h4 id="constructor-NaN"><a href="#constructor-NaN" class="headerlink" title="constructor"></a>constructor</h4><p>constructor 阶段的主要作用是：</p>
+<ul>
+<li>初始化 state</li>
+<li>给类的方法bind this</li>
+</ul>
+<h4 id="getDefaultProps"><a href="#getDefaultProps" class="headerlink" title="getDefaultProps"></a>getDefaultProps</h4><p>在es6 中我们需要这样来给props赋默认值</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Sceen</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">component</span></span>&#123;</span><br><span class="line">    private <span class="keyword">static</span> defaultProps = &#123;&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="render"><a href="#render" class="headerlink" title="render"></a>render</h4><p>在生命周期中只有render是必须实现的函数，它只是返回一个 jsx 描述的结构，最终由react来进行渲染。如果返回null 或者 undefined ，就等于告诉react不用进行渲染</p>
+<h4 id="componentWillMount-和-componentDidMount"><a href="#componentWillMount-和-componentDidMount" class="headerlink" title="componentWillMount 和 componentDidMount"></a>componentWillMount 和 componentDidMount</h4><p>一般来说componentWillMount用的比较少，componentDidMount 用的比较多一点</p>
+<blockquote>
+<p>需要注意的是：componentDidMount 是发生在组件已经挂载到 dom 上触发的</p>
+</blockquote>
+<h3 id="更新-update"><a href="#更新-update" class="headerlink" title="更新 update"></a>更新 update</h3><p>更新的生命周期主要有以下几个：</p>
+<ul>
+<li>componentWillReceiveProps</li>
+<li>shouldUpdateComponent</li>
+<li>componentWillUpdate</li>
+<li>render</li>
+<li>componentDidUpdate</li>
+</ul>
+<h4 id="componentWillReceiveProps"><a href="#componentWillReceiveProps" class="headerlink" title="componentWillReceiveProps"></a>componentWillReceiveProps</h4><p>这里需要注意的几点是：</p>
+<ul>
+<li>当父组件的render 被调用的时候，子组件的 componentWillReceiveProps 也会被触发，不管子组件的props是否发生了更新</li>
+<li>在组件中setState并不会触发这一生命周期</li>
+</ul>
+<h4 id="shouldUpdateComponent"><a href="#shouldUpdateComponent" class="headerlink" title="shouldUpdateComponent"></a>shouldUpdateComponent</h4><p>这是组件中最重要的一个生命周期了，它决定了组件是否需要重新渲染。<br>需要注意的是，setState并不会立即修改组件的state，在这一周期的时候组件的state还是原来的。</p>
+<h4 id="componentWillUpdate-和-componentDidUpdate"><a href="#componentWillUpdate-和-componentDidUpdate" class="headerlink" title="componentWillUpdate 和 componentDidUpdate"></a>componentWillUpdate 和 componentDidUpdate</h4><p>会在render的一前一后进行触发，componentDidUpdate 和 componentDidMount一样也是在dom重新渲染之后触发的。</p>
+<h3 id="卸载-unmount"><a href="#卸载-unmount" class="headerlink" title="卸载 unmount"></a>卸载 unmount</h3><p>在销毁组件之前，会触发，componentWillUnmount，这个钩子适合用来处理一些清除性的工作。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/sh-article/2018/06/14/mac前端开发环境/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1686,352 +2053,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/sh-article/2018/03/16/prototype-slice/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="$SH">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/sh-article/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SZU_SH">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/sh-article/2018/03/16/prototype-slice/" itemprop="url">[].slice.call(arguments) 转数组的原理</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-16T20:20:33+08:00">
-                2018-03-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/sh-article/categories/JS/" itemprop="url" rel="index">
-                    <span itemprop="name">JS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/sh-article/2018/03/16/prototype-slice/" class="leancloud_visitors" data-flag-title="[].slice.call(arguments) 转数组的原理">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log([].slice.call(<span class="built_in">arguments</span>))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>) <span class="comment">// [1,2,3,4]</span></span><br></pre></td></tr></table></figure>
-<p>我们经常可以看到一些文档或者比人的源码之中用这种方式把<code>arguments</code>转化为数组,但是为什么可以这样子操作呢，现在我们可以看一下<code>Array.prototype.slice</code> 他的实现原理是怎样的。</p>
-<h3 id="slice-的原理"><a href="#slice-的原理" class="headerlink" title="slice 的原理"></a>slice 的原理</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">Array</span>.prototype.slice = <span class="function"><span class="keyword">function</span>(<span class="params">begin, end</span>) </span>&#123;</span><br><span class="line">      end = (<span class="keyword">typeof</span> end !== <span class="string">'undefined'</span>) ? end : <span class="keyword">this</span>.length;</span><br><span class="line">    </span><br><span class="line">      <span class="keyword">var</span> i, </span><br><span class="line">        cloned = [],</span><br><span class="line">        size, </span><br><span class="line">        len = <span class="keyword">this</span>.length;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">var</span> start = begin || <span class="number">0</span>;</span><br><span class="line">      start = (start &gt;= <span class="number">0</span>) ? start : <span class="built_in">Math</span>.max(<span class="number">0</span>, len + start);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">var</span> upTo = (<span class="keyword">typeof</span> end == <span class="string">'number'</span>) ? <span class="built_in">Math</span>.min(end, len) : len;</span><br><span class="line">      <span class="keyword">if</span> (end &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        upTo = len + end;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      size = upTo - start;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (size &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        cloned = <span class="keyword">new</span> <span class="built_in">Array</span>(size);</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.charAt) &#123;</span><br><span class="line">          <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; size; i++) &#123;</span><br><span class="line">            cloned[i] = <span class="keyword">this</span>.charAt(start + i);</span><br><span class="line">          &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; size; i++) &#123;</span><br><span class="line">            cloned[i] = <span class="keyword">this</span>[start + i];</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> cloned;</span><br><span class="line">    &#125;;</span><br></pre></td></tr></table></figure>
-<p>我们可以到 <code>slice</code> 其实是在用 <code>this</code> 访问对象的属性，通过<code>call</code>将<code>arguments</code>绑定到<code>this</code>上，以此可以遍历出 <code>arguments</code> 的全部参数。</p>
-<p>通过 <code>slice</code> 的底层原理我们也可以看出，如果我们传一个字符串进去，会把字符串转化为数组</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[].slice.call(&apos;12345&apos;); // [1,2,3,4,5]</span><br></pre></td></tr></table></figure>
-<h3 id="ES6的新方法"><a href="#ES6的新方法" class="headerlink" title="ES6的新方法"></a>ES6的新方法</h3><p>ES6 给 <code>Array</code> 新加了一个方法，我们也可以通过他把 arguments 转化为数组。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">Array</span>.from(&#123;<span class="attr">length</span>:<span class="number">2</span>,<span class="number">0</span>:<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>&#125;) <span class="comment">// [1,2]</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">Array</span>.from(<span class="built_in">arguments</span>))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>);<span class="comment">// [1,2,3]</span></span><br></pre></td></tr></table></figure>
-<p>相比于 <code>slice</code>，<code>from</code> 更强大一点，<code>from</code> 还可以将带有遍历器属性<code>[Symbol.iterator]</code>的对象转化为数组</p>
-<p>例如我们可以这样操作</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> test = &#123;&#125;</span><br><span class="line">test[<span class="built_in">Symbol</span>.iterator] = <span class="function"><span class="keyword">function</span> *(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">yield</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">yield</span> <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">yield</span> <span class="number">3</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">Array</span>.from(test);<span class="comment">// [1,2,3]</span></span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/sh-article/2018/03/13/快速理解-js-模块规范/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="$SH">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/sh-article/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SZU_SH">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/sh-article/2018/03/13/快速理解-js-模块规范/" itemprop="url">快速理解 js 模块规范</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-13T21:37:05+08:00">
-                2018-03-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/sh-article/categories/JS/" itemprop="url" rel="index">
-                    <span itemprop="name">JS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/sh-article/2018/03/13/快速理解-js-模块规范/" class="leancloud_visitors" data-flag-title="快速理解 js 模块规范">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>随着前端的日益壮大，前端模块化的编程成为了一个非常重要的东西，这可以更好的帮我们构造工程化的前端项目。</p>
-<p>说道前端模块规范，我们耳熟能详的就这三种 <code>CommonJS</code>, <code>AMD</code>, <code>CMD</code></p>
-<h3 id="CommonJS"><a href="#CommonJS" class="headerlink" title="CommonJS"></a>CommonJS</h3><p>首先说一下<code>CommonJS</code>,  node.js 的模块系统就是参照 <code>CommonJS</code> 规范实现的。在<code>CommonJS</code> 中有一个全局性的方法<code>require(path)</code>,我们通过方法加载需要的模块。</p>
-<p>具体的用法如下：</p>
-<p>声明模块：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// test.js</span></span><br><span class="line"></span><br><span class="line">exports.test = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'test'</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>引用模块：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> test = <span class="built_in">require</span>(<span class="string">'test'</span>);</span><br></pre></td></tr></table></figure>
-<p><code>CommonJS</code> 规范中，<code>require()</code> 用来引入外部模块，<code>exports</code> ·对象用于导出当前模块的方法或变量，作为唯一的到出口，<code>module</code> 对象就代表模块本身。</p>
-<p><code>CommonJS</code> 主要用在了服务端，因为服务端加载，读取模块都是在本地加载，如果浏览器中使用，比方说上面的代码，网盘，我们在加载 test 模块的时候必须等待他加载完才能继续执行后面的代码，这在服务端没什么问题，但在浏览器中，我们需要把模块下载下来，才能去执行后面的代码，在等待的过程中，浏览器处于“假死”的状态。</p>
-<p>为了能够异步的加载模块，于是 AMD 规范就诞生了。</p>
-<h3 id="AMD"><a href="#AMD" class="headerlink" title="AMD"></a>AMD</h3><p>最常用的RequireJS就是实现了AMD规范。</p>
-<p>require.js加载的模块，采用AMD规范。也就是说，模块必须按照AMD的规定来写。</p>
-<p>如果这个模块还依赖其他模块，那么define()函数的第一个参数，必须是一个数组，指明该模块的依赖性。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">define([<span class="string">'dep1'</span>,<span class="string">'dep2'</span>],<span class="function"><span class="keyword">function</span>(<span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">dep1,dep2</span></span></span><br><span class="line"><span class="function"><span class="params"></span>)</span>&#123;</span><br><span class="line">    </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>加载模块，与 CommonJS 不同的是需要在require中填入回调函数，第一个参数指明需要加载的模块</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">　<span class="built_in">require</span>([<span class="string">'jquery'</span>, <span class="string">'underscore'</span>, <span class="string">'backbone'</span>], <span class="function"><span class="keyword">function</span> (<span class="params">$, _, Backbone</span>)</span>&#123;</span><br><span class="line"></span><br><span class="line">　　　　<span class="comment">// some code here</span></span><br><span class="line"></span><br><span class="line">　　&#125;);</span><br></pre></td></tr></table></figure>
-<h3 id="CMD"><a href="#CMD" class="headerlink" title="CMD"></a>CMD</h3><p>玉伯写的 seajs 就是遵循CMD规范写的</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">define(<span class="function"><span class="keyword">function</span>(<span class="params">require,exports,module</span>)</span>&#123;</span><br><span class="line">    </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>他与 AMD 存在着一定的区别。</p>
-<p>比方说我们需要在运行代码的时候先后加载两个模块：</p>
-<p><strong>AMD</strong></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">require</span>([<span class="string">'block1'</span>,<span class="string">'block2'</span>],<span class="function"><span class="keyword">function</span>(<span class="params">block1,block2</span>)</span>&#123;</span><br><span class="line">    block1.start();</span><br><span class="line">    block1.end();</span><br><span class="line">    </span><br><span class="line">    block2.start();</span><br><span class="line">    block2.end();</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>AMD 虽然实现了异步加载，但是在开始的时候就把所有依赖写出来，可能不太符合我们平时书写的一个逻辑顺序，是否能够像 commonJS那样用的时候require，而且还是支持异步加载后再执行呢。</p>
-<p>CMD 就是支持的</p>
-<p><strong>CMD</strong></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">define(<span class="function"><span class="keyword">function</span>(<span class="params">require, exports, module</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> block1 = <span class="built_in">require</span>(<span class="string">'block1'</span>);</span><br><span class="line">    </span><br><span class="line">    block1.start();</span><br><span class="line">    block1.end();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> block2 = <span class="built_in">require</span>(<span class="string">'block2'</span>);</span><br><span class="line">    block2.start();</span><br><span class="line">    block2.end();</span><br><span class="line">    </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>CMD 只有当代码执行到 <code>require</code>的时候才会去异步的加载模块，不会像AMD一开始就把需要的模块都加载好才开始执行。</p>
-<p>AMD依赖前置，js可以方便知道依赖模块是谁，立即加载；而CMD就近依赖，需要使用把模块变为字符串解析一遍才知道依赖了那些模块，这也是很多人诟病CMD的一点，牺牲性能来带来开发的便利性，实际上解析模块用的时间短到可以忽略。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>个人认为，在实际的开发中，大多还是用 AMD 规范的，使用 AMD 规范你能够更清楚的看到 模块之间的依赖关系，能够更符合程序员的思维方式。博主暂时也还没有用过 CMD 规范。</p>
-<p>ES6 中的 <code>import</code> webpack 也是将其转化为 AMD 规范的。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2082,7 +2103,7 @@
               
                 <a href="/sh-article/archives/">
               
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
