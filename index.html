@@ -392,13 +392,13 @@
 <p>具体的配置我们可以去 MDN 上查看 <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Content-Security-Policy__by_cnvoid/default-src" target="_blank" rel="noopener">https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Content-Security-Policy__by_cnvoid/default-src</a></p>
 <p>相关知识可以看看阮老师的这篇文章 <a href="http://www.ruanyifeng.com/blog/2016/09/csp.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2016/09/csp.html</a></p>
 <h2 id="CSRF"><a href="#CSRF" class="headerlink" title="CSRF"></a>CSRF</h2><p>csrf 也叫跨站请求伪造。攻击方式就是第三方的网站可以在用户不知情的情况下发送请求到被攻击的网站上。比方说网站A，我们有一个网站B会偷偷帮用户发请求到A，发送的时候浏览器会自动的挟带上A的cookie，而A又是对cookie做验证，这就导致了 csrf 攻击</p>
-<h2 id="防御方式-1"><a href="#防御方式-1" class="headerlink" title="防御方式"></a>防御方式</h2><h3 id="设置-cookie-的-sameSite"><a href="#设置-cookie-的-sameSite" class="headerlink" title="设置 cookie 的 sameSite"></a>设置 <code>cookie</code> 的 <code>sameSite</code></h3><p><code>sameSite</code> 可以禁止来自第三方网站的请求携带 cookie，他有两个值</p>
+<h3 id="防御方式-1"><a href="#防御方式-1" class="headerlink" title="防御方式"></a>防御方式</h3><h4 id="设置-cookie-的-sameSite"><a href="#设置-cookie-的-sameSite" class="headerlink" title="设置 cookie 的 sameSite"></a>设置 <code>cookie</code> 的 <code>sameSite</code></h4><p><code>sameSite</code> 可以禁止来自第三方网站的请求携带 cookie，他有两个值</p>
 <ul>
 <li><code>Strict</code> 禁止一切请求携带 cookie</li>
 <li><code>Lax</code> 允许一部分请求携带 cookie，比方说链接</li>
 </ul>
 <p>不过目前这还是一个试验箱的属性，只有部分浏览器支持这个值。</p>
-<h3 id="增加验证"><a href="#增加验证" class="headerlink" title="增加验证"></a>增加验证</h3><p>验证的方式有很多，可以有如下几种</p>
+<h4 id="增加验证"><a href="#增加验证" class="headerlink" title="增加验证"></a>增加验证</h4><p>验证的方式有很多，可以有如下几种</p>
 <ul>
 <li>验证码，不过验证码可能会带来比较不好的用户体验</li>
 <li>token，在表单或者请求头中增加一个token做验证</li>
