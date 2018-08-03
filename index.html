@@ -385,6 +385,7 @@
 <h3 id="常见的-xss-攻击方式。"><a href="#常见的-xss-攻击方式。" class="headerlink" title="常见的 xss 攻击方式。"></a>常见的 xss 攻击方式。</h3><h4 id="通过-url-注入"><a href="#通过-url-注入" class="headerlink" title="通过 url 注入"></a>通过 url 注入</h4><p>比方说A网站有个内容是通过url中的参数来显示的，并且没有对其做任何的xss防范，那么攻击者就可以通过url将攻击脚本注入到网页中，然后将带有攻击脚本的url进行特殊处理，然后将处理后的url发给第三者完成攻击</p>
 <h4 id="通过一些表单输入做注入"><a href="#通过一些表单输入做注入" class="headerlink" title="通过一些表单输入做注入"></a>通过一些表单输入做注入</h4><p>最常见得就是富文本评论，因为需要保持html的原样，所以就很容易被人注入攻击脚本，当其他用户访问了被注入攻击脚本的页面的时候就会被攻击。</p>
 <h3 id="防御方式"><a href="#防御方式" class="headerlink" title="防御方式"></a>防御方式</h3><p>对xss的防御思路，主要有两种，可以看我们具体的需求来决定使用哪一种。</p>
+<h4 id="http-only"><a href="#http-only" class="headerlink" title="http-only"></a>http-only</h4><p>这个东西主要针对的是cookie，在 xss 注入的时候可能会有js盗取cookie，我们可以将 cookie 设置为http-only,这样 js 就会无法操作cookie，不过这也仅仅防范了这一种可能性，还是无法防御其他手段的 xss 攻击</p>
 <h4 id="设置黑名单"><a href="#设置黑名单" class="headerlink" title="设置黑名单"></a>设置黑名单</h4><p>通过设置黑名单，将一些特殊的字段进行删除或者转译来达到防御的手段，比方说 <code>&lt;script&gt;</code>，黑名单的实现比较简单，但是 xss 攻击的花样非常的多，我们很难知道所有的攻击手段，很有可能会造成攻击漏洞。</p>
 <h4 id="设置白名单"><a href="#设置白名单" class="headerlink" title="设置白名单"></a>设置白名单</h4><p>白名单的思路也很简单，我们根据我们的需求设置允许使用的标签和属性，然后把不在白名单中的标签或者属性都去掉，在实现上会比黑名单复杂一点，需要把进行防御的内容转为树状结构进行遍历然后处理掉白名单以为的标签和属性。</p>
 <h4 id="CSP-Content-Security-Policy"><a href="#CSP-Content-Security-Policy" class="headerlink" title="CSP (Content Security Policy)"></a>CSP (Content Security Policy)</h4><p>内容安全策略，用于指定哪些内容可以被执行。通过设置 <code>Content-Security-Policy</code> 响应头我们可以设置哪些内容是可以执行的。</p>
