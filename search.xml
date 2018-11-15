@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[typescript函数重载]]></title>
+    <url>%2Fsh-article%2F2018%2F11%2F15%2Ftypescript%E5%87%BD%E6%95%B0%E5%A4%9A%E6%80%81%2F</url>
+    <content type="text"><![CDATA[在使用ts中我们经常会需定义函数的接口，例如 123456789101112interface GetParam &#123;(key:string):string;&#125;const getParam:GetParam = function(key) &#123; const config = &#123; config1:'config1', config2:'config2', &#125;; return config[key];&#125; 但有时候我们需要我们的方法，根据我们传入的参数，来返回不同的类型,例如我们可以这样子 1234567891011121314151617181920interface GetParam &#123; (key:string|string[]):string|string[];&#125;const getParam:GetParam = function(key) &#123; const config = &#123; config1:'config1', config2:'config2', &#125;; if (typeof key === 'string') &#123; return config[key]; &#125; else &#123; const result:string[] = []; key.forEach((item) =&gt; &#123; result.push(config[item]); &#125;); return result; &#125;&#125; 这样写会存在一个问题，就是我们在使用这个方法的时候，我们是明确知道传入字符串的时候返回的是字符串，传入数组的时候返回的是数组。但是这样写接口我们调用的时候ide并不能准确的帮我们识别类型。我们可能需要这样去调用方法才能让ide做类型推断。 12const config1 = getParam('config1') as string; 为了应对这种情况，我们可以使用ts 的函数重载，虽然这不是正真意义上的重载，但是能够帮助ide更好的去做类型推断。 我们只需要把接口改成这样就可以了 1234567891011121314151617181920212223interface GetParam &#123; (key:string):string; (keys:string[]):string[];&#125;const getParam:GetParam = function(key:string|string[]) &#123; const config = &#123; config1:&apos;config1&apos;, config2:&apos;config2&apos;, &#125;; if (typeof key === &apos;string&apos;) &#123; return config[key]; &#125; else &#123; const result:string[] = []; key.forEach((item) =&gt; &#123; result.push(config[item]); &#125;); return result; &#125;&#125;const config1 = getParam(&apos;config1&apos;); 这样当我们传入参数为字符串的时候，ide就能自动的帮我们推断出返回的值是字符串。]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[react-native 一个link的坑]]></title>
     <url>%2Fsh-article%2F2018%2F09%2F20%2Freact-native%E7%9A%84%E5%9D%91%2F</url>
-    <content type="text"><![CDATA[最近准备开发一个 react-native 的组件，需要通过 yarn link 的方式进行开发，但是在编译的时候就会要么识别不到这个包，要么识别包里面的依赖 查了很久资料才发现这个问题的所在 https://github.com/facebook/metro/issues/1 ,symlinks 在 react-native 是无法正常运行的 后来终于找到了解决方案 首先我们先安装1yarn global add wml 然后用 wml 将我们的组件库链过来1wml add ~/my-package ~/main-project/node_modules/my-package 在在我们的 main-project 下执行12wml start]]></content>
+    <content type="text"><![CDATA[最近准备开发一个 react-native 的组件，需要通过 yarn link 的方式进行开发，但是在编译的时候就会要么识别不到这个包，要么识别包里面的依赖 查了很久资料才发现这个问题的所在 https://github.com/facebook/metro/issues/1 ,symlinks 在 react-native 是无法正常运行的 后来终于找到了解决方案 https://www.bram.us/2018/03/10/working-with-symlinked-packages-in-react-native/ 首先我们先安装1yarn global add wml 然后用 wml 将我们的组件库链过来1wml add ~/my-package ~/main-project/node_modules/my-package 在在我们的 main-project 下执行12wml start]]></content>
   </entry>
   <entry>
     <title><![CDATA[rxjs常用操作符列表]]></title>

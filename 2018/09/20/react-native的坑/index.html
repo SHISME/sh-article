@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="最近准备开发一个 react-native 的组件，需要通过 yarn link 的方式进行开发，但是在编译的时候就会要么识别不到这个包，要么识别包里面的依赖 查了很久资料才发现这个问题的所在 https://github.com/facebook/metro/issues/1 ,symlinks 在 react-native 是无法正常运行的 后来终于找到了解决方案 首先我们先安装1yarn g">
+<meta name="description" content="最近准备开发一个 react-native 的组件，需要通过 yarn link 的方式进行开发，但是在编译的时候就会要么识别不到这个包，要么识别包里面的依赖 查了很久资料才发现这个问题的所在 https://github.com/facebook/metro/issues/1 ,symlinks 在 react-native 是无法正常运行的 后来终于找到了解决方案 https://www.br">
 <meta property="og:type" content="article">
 <meta property="og:title" content="react-native 一个link的坑">
 <meta property="og:url" content="http://yoursite.com/2018/09/20/react-native的坑/index.html">
 <meta property="og:site_name" content="SZU_SH">
-<meta property="og:description" content="最近准备开发一个 react-native 的组件，需要通过 yarn link 的方式进行开发，但是在编译的时候就会要么识别不到这个包，要么识别包里面的依赖 查了很久资料才发现这个问题的所在 https://github.com/facebook/metro/issues/1 ,symlinks 在 react-native 是无法正常运行的 后来终于找到了解决方案 首先我们先安装1yarn g">
+<meta property="og:description" content="最近准备开发一个 react-native 的组件，需要通过 yarn link 的方式进行开发，但是在编译的时候就会要么识别不到这个包，要么识别包里面的依赖 查了很久资料才发现这个问题的所在 https://github.com/facebook/metro/issues/1 ,symlinks 在 react-native 是无法正常运行的 后来终于找到了解决方案 https://www.br">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-20T13:39:00.982Z">
+<meta property="og:updated_time" content="2018-09-20T13:39:38.615Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="react-native 一个link的坑">
-<meta name="twitter:description" content="最近准备开发一个 react-native 的组件，需要通过 yarn link 的方式进行开发，但是在编译的时候就会要么识别不到这个包，要么识别包里面的依赖 查了很久资料才发现这个问题的所在 https://github.com/facebook/metro/issues/1 ,symlinks 在 react-native 是无法正常运行的 后来终于找到了解决方案 首先我们先安装1yarn g">
+<meta name="twitter:description" content="最近准备开发一个 react-native 的组件，需要通过 yarn link 的方式进行开发，但是在编译的时候就会要么识别不到这个包，要么识别包里面的依赖 查了很久资料才发现这个问题的所在 https://github.com/facebook/metro/issues/1 ,symlinks 在 react-native 是无法正常运行的 后来终于找到了解决方案 https://www.br">
 
 
 
@@ -356,7 +356,7 @@
       
         <p>最近准备开发一个 react-native 的组件，需要通过 <code>yarn link</code> 的方式进行开发，但是在编译的时候就会要么识别不到这个包，要么识别包里面的依赖</p>
 <p>查了很久资料才发现这个问题的所在 <a href="https://github.com/facebook/metro/issues/1" target="_blank" rel="noopener">https://github.com/facebook/metro/issues/1</a> ,symlinks 在 react-native 是无法正常运行的</p>
-<p>后来终于找到了解决方案</p>
+<p>后来终于找到了解决方案 <a href="https://www.bram.us/2018/03/10/working-with-symlinked-packages-in-react-native/" target="_blank" rel="noopener">https://www.bram.us/2018/03/10/working-with-symlinked-packages-in-react-native/</a></p>
 <h3 id="首先我们先安装"><a href="#首先我们先安装" class="headerlink" title="首先我们先安装"></a>首先我们先安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn global add wml</span><br></pre></td></tr></table></figure>
 <h3 id="然后用-wml-将我们的组件库链过来"><a href="#然后用-wml-将我们的组件库链过来" class="headerlink" title="然后用 wml 将我们的组件库链过来"></a>然后用 wml 将我们的组件库链过来</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wml add ~/my-package ~/main-project/node_modules/my-package</span><br></pre></td></tr></table></figure>
 <h3 id="在在我们的-main-project-下执行"><a href="#在在我们的-main-project-下执行" class="headerlink" title="在在我们的 main-project 下执行"></a>在在我们的 main-project 下执行</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">wml start</span><br></pre></td></tr></table></figure>
@@ -392,6 +392,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/sh-article/2018/11/15/typescript函数多态/" rel="prev" title="typescript函数重载">
+                typescript函数重载 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -473,7 +477,7 @@
               
                 <a href="/sh-article/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">20</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
