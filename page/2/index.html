@@ -276,6 +276,165 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/sh-article/2018/05/03/hello-world/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="$SH">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/17661313?s=460&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SZU_SH">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/sh-article/2018/05/03/hello-world/" itemprop="url">浏览器如何验证证书的</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-03T21:56:37+08:00">
+                2018-05-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/sh-article/categories/HTTPS/" itemprop="url" rel="index">
+                    <span itemprop="name">HTTPS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/sh-article/2018/05/03/hello-world/" class="leancloud_visitors" data-flag-title="浏览器如何验证证书的">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><h3 id="CA"><a href="#CA" class="headerlink" title="CA"></a>CA</h3><p>首先CA是Certificate Authority的缩写，也叫“证书授权中心”。<br>它是负责管理和签发证书的第三方机构，就好比例子里面的中介——C 公司。<br>一般来说，CA必须是所有行业和所有公众都信任的、认可的。因此它必须具有足够的权威性。就好比A、B两公司都必须信任C公司，才会找 C 公司作为公章的中介。</p>
+<h3 id="CA-证书"><a href="#CA-证书" class="headerlink" title="CA 证书"></a>CA 证书</h3><p> 顾名思义，就是CA颁发的证书。</p>
+<p> 浏览器中默认有得到认证的根证书，使用https的网站需要让浏览器信任自己的证书就需要去申请这些机构的证书</p>
+<h2 id="浏览如何验证证书的真伪呢？"><a href="#浏览如何验证证书的真伪呢？" class="headerlink" title="浏览如何验证证书的真伪呢？"></a>浏览如何验证证书的真伪呢？</h2><p> 首先我们需要了解一下CA是如何给我们发证书的。</p>
+<p> 1.向CA申请证书<br> 2.CA认证了你的信息之后同意给你颁布证书，生成证书信息，生成证书的指纹用于后面验证证书的真伪<br> 3.使用私钥对指纹进行加密生成数字签名，常用的算法有RSA公钥体制<br> 4.将证书颁发网站，生成的证书会指向给他颁发证书的CA</p>
+<p> 了解完CA证书的生成之后我们就可以看一下浏览器如何验证证书的了。</p>
+<p> 1.浏览器拿到证书之后会找到证书所对应的CA<br> 2.浏览器取出CA中的公钥，使用公钥对证书的签名进行解密<br> 3.将解密的结果与证书指纹做对比，如果对比一致则说明真书是真的<br> 4.浏览器提取出证书中的公钥使用</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/sh-article/2018/03/26/vue生命周期/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1870,176 +2029,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/sh-article/2018/03/10/快速理解js继承原理/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="$SH">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/17661313?s=460&v=4">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SZU_SH">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/sh-article/2018/03/10/快速理解js继承原理/" itemprop="url">快速理解js继承原理</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-10T17:57:04+08:00">
-                2018-03-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/sh-article/categories/JS/" itemprop="url" rel="index">
-                    <span itemprop="name">JS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/sh-article/2018/03/10/快速理解js继承原理/" class="leancloud_visitors" data-flag-title="快速理解js继承原理">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="JS继承原理"><a href="#JS继承原理" class="headerlink" title="JS继承原理"></a>JS继承原理</h2><p>js 的继承是通过原型链来实现的</p>
-<h3 id="什么是原型链呢？"><a href="#什么是原型链呢？" class="headerlink" title="什么是原型链呢？"></a>什么是原型链呢？</h3><p>首先说一下 <code>prototype</code> 属性，在js中所有的方法都会有一个<code>prototype</code>属性,这个属性就是方法的原型对象</p>
-<p>比方说：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">function Animal()&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Animal.prototype.run=function()&#123;</span><br><span class="line">    console.log(&apos;run&apos;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var cat = new Animal()</span><br></pre></td></tr></table></figure>
-<p>当我们声明 Animal 这个方法的时候， js引擎会赋予Animal一个原型对象，打印出来可以看到</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">console.log(Animal.prototype)</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    constructor:这个指向 Animal这个方法,</span><br><span class="line">    __proto__:这个指向Object.prototype</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">**/</span><br></pre></td></tr></table></figure>
-<p>在我们构造实例的时候,cat的<code>__proto__</code> 会指向 Animal 的 <code>prototype</code>, js引擎 在访问对象的属性的时候会先查看当前对象是否这个属性，如果没有则会查看改对象的 <code>__proto__</code> 是否有这个属性，访问会沿着原型链访问下去直到找到属性或者 <code>__proto__</code>为null为止。</p>
-<h3 id="如何实现继承"><a href="#如何实现继承" class="headerlink" title="如何实现继承"></a>如何实现继承</h3><p>这里只讲通用的一种继承的写法</p>
-<p>这是父类：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function Animal(name)&#123;</span><br><span class="line">    this.name = name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Animal.prototype.run=function()&#123;</span><br><span class="line">    console.log(this.name + &apos; is run&apos;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>子类的写法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function Cat(name)&#123;</span><br><span class="line"></span><br><span class="line">    // 这里通过调用父类并把this绑定到父类上</span><br><span class="line">    Animal.call(this,name)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">(()=&gt;&#123;</span><br><span class="line">    // 这里其实本质要做的就是让Cat.prototype.__proto__=Animal.prototype</span><br><span class="line">    // Cat.prototype =Object.create(Animal.prototype) 相当于做了如下的工作</span><br><span class="line">    // var a = &#123;&#125;;a.__proto__=Animal.prototype;</span><br><span class="line">    // Cat.prototype = a;</span><br><span class="line"></span><br><span class="line">    Cat.prototype = Object.create(Animal.prototype)</span><br><span class="line">    Cat.prototype.constructor = Cat</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
-<h3 id="ES6-的写法："><a href="#ES6-的写法：" class="headerlink" title="ES6 的写法："></a>ES6 的写法：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Class Animal&#123;</span><br><span class="line">    constructor(name)&#123;</span><br><span class="line">        this.name=name</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    run()&#123;</span><br><span class="line">        console.log(this.name + &apos; is run&apos;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Class Cat extends Animal&#123;</span><br><span class="line">    constructor(name)&#123;</span><br><span class="line">        // ES6要求子类构造函数中必须要调用这个方法，这个方式是用来调用父类的constructor的</span><br><span class="line">        super(name)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>其实es6的写法本质上上面的语法糖，使用之后代码对代码的可读性有了明显的提高，但是我们还是需要知道JS继承的原理是怎样的。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/sh-article/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/sh-article/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/sh-article/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/sh-article/">1</a><span class="page-number current">2</span><a class="page-number" href="/sh-article/page/3/">3</a><a class="extend next" rel="next" href="/sh-article/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2089,7 +2083,7 @@
               
                 <a href="/sh-article/archives/">
               
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
