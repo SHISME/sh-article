@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="最近正在从 windows 转向 mac，不得不说mac做开发确实省心不少。这里记录下相关环境的搭建与配置。 gitgit 可以有两种方式去安装，可以从 github上下载然后自己编译安装，由于这个过程比较麻烦，所以我还是选择了另一种方式，直接在app store中安装xCode，安装好之后就会自动的帮你安装好git了。 Homebrewmac 下的包管理工具，很多东西可以通过他来进行安装。他的安">
+<meta name="description" content="随着前端工程越来越复杂化，简单的设计模式已经无法满足我们急剧扩张的功能需求。在后端的开发中我们经常会听到IOC容器，而前端中却很少看到使用。学习 IOC 容器，其实本质上就是在学习依赖倒置这一设计原则。 依赖倒置首先我们先来了解一下什么是依赖倒置，比方说我们要开发一辆车子,我们先设计轮子，然后设计底盘，然后设计车身，然后设计车子，这时, 底盘依赖轮子，车身依赖底盘，车子依赖车身，我们看看伪代码 1">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mac前端开发环境">
-<meta property="og:url" content="http://yoursite.com/2018/06/14/mac前端开发环境/index.html">
+<meta property="og:title" content="前端的 IOC 容器">
+<meta property="og:url" content="http://yoursite.com/2019/01/17/js-ioc-容器/index.html">
 <meta property="og:site_name" content="SZU_SH">
-<meta property="og:description" content="最近正在从 windows 转向 mac，不得不说mac做开发确实省心不少。这里记录下相关环境的搭建与配置。 gitgit 可以有两种方式去安装，可以从 github上下载然后自己编译安装，由于这个过程比较麻烦，所以我还是选择了另一种方式，直接在app store中安装xCode，安装好之后就会自动的帮你安装好git了。 Homebrewmac 下的包管理工具，很多东西可以通过他来进行安装。他的安">
+<meta property="og:description" content="随着前端工程越来越复杂化，简单的设计模式已经无法满足我们急剧扩张的功能需求。在后端的开发中我们经常会听到IOC容器，而前端中却很少看到使用。学习 IOC 容器，其实本质上就是在学习依赖倒置这一设计原则。 依赖倒置首先我们先来了解一下什么是依赖倒置，比方说我们要开发一辆车子,我们先设计轮子，然后设计底盘，然后设计车身，然后设计车子，这时, 底盘依赖轮子，车身依赖底盘，车子依赖车身，我们看看伪代码 1">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-24T03:32:21.627Z">
+<meta property="og:updated_time" content="2019-01-17T15:19:29.521Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mac前端开发环境">
-<meta name="twitter:description" content="最近正在从 windows 转向 mac，不得不说mac做开发确实省心不少。这里记录下相关环境的搭建与配置。 gitgit 可以有两种方式去安装，可以从 github上下载然后自己编译安装，由于这个过程比较麻烦，所以我还是选择了另一种方式，直接在app store中安装xCode，安装好之后就会自动的帮你安装好git了。 Homebrewmac 下的包管理工具，很多东西可以通过他来进行安装。他的安">
+<meta name="twitter:title" content="前端的 IOC 容器">
+<meta name="twitter:description" content="随着前端工程越来越复杂化，简单的设计模式已经无法满足我们急剧扩张的功能需求。在后端的开发中我们经常会听到IOC容器，而前端中却很少看到使用。学习 IOC 容器，其实本质上就是在学习依赖倒置这一设计原则。 依赖倒置首先我们先来了解一下什么是依赖倒置，比方说我们要开发一辆车子,我们先设计轮子，然后设计底盘，然后设计车身，然后设计车子，这时, 底盘依赖轮子，车身依赖底盘，车子依赖车身，我们看看伪代码 1">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/06/14/mac前端开发环境/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/01/17/js-ioc-容器/"/>
 
 
 
 
 
-  <title>mac前端开发环境 | SZU_SH</title>
+  <title>前端的 IOC 容器 | SZU_SH</title>
   
 
 
@@ -276,7 +276,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/sh-article/2018/06/14/mac前端开发环境/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/sh-article/2019/01/17/js-ioc-容器/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="$SH">
@@ -293,7 +293,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">mac前端开发环境</h1>
+          <h1 class="post-title" itemprop="name headline">前端的 IOC 容器</h1>
         
 
         <div class="post-meta">
@@ -305,8 +305,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-14T23:32:17+08:00">
-                2018-06-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-17T22:22:46+08:00">
+                2019-01-17
               </time>
             
 
@@ -323,7 +323,7 @@
 
           
           
-             <span id="/sh-article/2018/06/14/mac前端开发环境/" class="leancloud_visitors" data-flag-title="mac前端开发环境">
+             <span id="/sh-article/2019/01/17/js-ioc-容器/" class="leancloud_visitors" data-flag-title="前端的 IOC 容器">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -354,34 +354,20 @@
       
 
       
-        <p>最近正在从 windows 转向 mac，不得不说mac做开发确实省心不少。这里记录下相关环境的搭建与配置。</p>
-<h2 id="git"><a href="#git" class="headerlink" title="git"></a>git</h2><p>git 可以有两种方式去安装，可以从 github上下载然后自己编译安装，由于这个过程比较麻烦，所以我还是选择了另一种方式，直接在app store中安装xCode，安装好之后就会自动的帮你安装好git了。</p>
-<h2 id="Homebrew"><a href="#Homebrew" class="headerlink" title="Homebrew"></a>Homebrew</h2><p>mac 下的包管理工具，很多东西可以通过他来进行安装。他的安装方式也很简单，只需复制一条简单的命令行就可以了。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</span><br></pre></td></tr></table></figure>
-<h2 id="item2"><a href="#item2" class="headerlink" title="item2"></a>item2</h2><p>item是mac上一框非常好用的终端，基本上也是必备的。直接去官网下载就可以了 <a href="https://iterm2.com/" target="_blank" rel="noopener">https://iterm2.com/</a>。<br>具体的一些相关配置可以参考这偏文档 <a href="https://segmentfault.com/a/1190000010518195" target="_blank" rel="noopener">https://segmentfault.com/a/1190000010518195</a></p>
-<h2 id="谷歌浏览器插件"><a href="#谷歌浏览器插件" class="headerlink" title="谷歌浏览器插件"></a>谷歌浏览器插件</h2><ul>
-<li>Rememberry 翻译非常好用，可以帮助你复习巩固单词，看英文文档的时候也更方便快捷</li>
-<li>Tampermonkey 里面有很多有趣的脚本可以用，比如百度云盘可以免安装客户端直接下载</li>
-<li>Vimium 强烈推荐这个，里面有视频教程，基本看一遍就会了，让你可以完全脱离鼠标，用键盘控制浏览器，非常好用</li>
-<li>Insight.io for Github 让你能够方便快捷的看github仓库的目录结构，甚至能够像ide一样搜索残酷，强烈推荐使用</li>
-<li>postman 调接口非常好用的一个插件，不过现在已经脱离谷歌浏览器成为了一个桌面程序了</li>
-<li>JSON-handle 可以非常方便快捷的格式化json数据</li>
-</ul>
-<h2 id="webstorm"><a href="#webstorm" class="headerlink" title="webstorm"></a>webstorm</h2><p>webstorm 是一款非常好用的前端ide，虽然本身的功能已经十分强大了，但是还是有非常多的强大的插件可以用。这里简单列举几个我常用的插件：</p>
-<ul>
-<li>.ignore    支持 .gitignore 的语法规则，并提供自动将文件加入 .gitignore 的功能</li>
-<li>Key PromoterX  Key Promoter的升级版，使用鼠标点击的时候会提醒你键盘的快捷键是什么，帮助你更好的使用键盘进行工作</li>
-<li>ideaVim 可以让你在 webstorm 中使用vim</li>
-<li>AceJump 帮助你快速跳转代码，和谷歌浏览器中的vimuim功能类似 ,非常好用的一个插件，强力推荐，默认快捷键是 ctrl+; 三个键，由于mac上按+号不是很方便个人建议改成command;</li>
-<li>Material Theme UI     一个很好看的主题</li>
-<li>Rainbow Brackets    更好看的括号颜色</li>
-<li>activate-power-mode 装逼神器，和atom上的敲代码酷炫效果类似，一个比较鸡肋的功能</li>
-<li>CodeGlance 可以在右边看到代码的整体缩略图，也强力推荐使用</li>
-<li>eslint 如果项目中需要用到eslint的话，比较建议装上</li>
-</ul>
-<p>以上是比较通用的一些插件，还有vue,react,angular的一些插件，就看个人需求具体的去安装了。</p>
-<h2 id="dash"><a href="#dash" class="headerlink" title="dash"></a>dash</h2><p>一款非常好用的api文档查看工具，不过是收费的。</p>
-<p>以上是我觉得开发当中比较好用的一些东西，仅供参考，如果有更好的工具欢迎分享~</p>
+        <p>随着前端工程越来越复杂化，简单的设计模式已经无法满足我们急剧扩张的功能需求。<br>在后端的开发中我们经常会听到IOC容器，而前端中却很少看到使用。学习 IOC 容器，其实本质上就是在学习依赖倒置这一设计原则。</p>
+<h2 id="依赖倒置"><a href="#依赖倒置" class="headerlink" title="依赖倒置"></a>依赖倒置</h2><p>首先我们先来了解一下什么是依赖倒置，比方说我们要开发一辆车子,我们先设计轮子，然后设计底盘，然后设计车身，然后设计车子，<br>这时, 底盘依赖轮子，车身依赖底盘，车子依赖车身，我们看看伪代码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> 轮子 </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>() &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> 底盘 </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>() &#123;</span><br><span class="line">        <span class="keyword">this</span>.轮子 = <span class="keyword">new</span> 轮子();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> 车身 </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>() &#123;</span><br><span class="line">        <span class="keyword">this</span>.底盘 = <span class="keyword">new</span> 底盘();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> 车子 </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>() &#123;</span><br><span class="line">        <span class="keyword">this</span>.车身 = <span class="keyword">new</span> 车身();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这时我们突然需要实例车子的时候能够修改车子轮子的大小，代码就会变成</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> 轮子 </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(size) &#123;</span><br><span class="line">        <span class="keyword">this</span>.size = size;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> 底盘 </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(size) &#123;</span><br><span class="line">        <span class="keyword">this</span>.轮子 = <span class="keyword">new</span> 轮子(size);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> 车身 </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(size) &#123;</span><br><span class="line">        <span class="keyword">this</span>.底盘 = <span class="keyword">new</span> 底盘(size);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> 车子 </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(size) &#123;</span><br><span class="line">        <span class="keyword">this</span>.车身 = <span class="keyword">new</span> 车身(size);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样代码牵一发而动全身，对我来说代码的可维护性就非常差了</p>
+<p>如何解决这个问题呢，我们反过来设计，先设计车子在设计车身，底盘，轮子。<br>这样依赖就倒转过来了，车身依赖与车子，底盘依赖与车身，轮子依赖与底盘，下面看看伪代码</p>
+<p>这里我们通过依赖注入的方式来实现依赖倒置。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> 轮子 </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(size) &#123;</span><br><span class="line">        <span class="keyword">this</span>.size = size;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> 底盘 </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(instance:轮子) &#123;</span><br><span class="line">        <span class="keyword">this</span>.轮子 = instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> 车身 </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(instance:底盘) &#123;</span><br><span class="line">        <span class="keyword">this</span>.底盘 = instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> 车子 </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(instance:车身) &#123;</span><br><span class="line">        <span class="keyword">this</span>.车身 = instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样当我们需要修改轮子的时候就不用再去修改底盘，车身，车子了，我们只需要单独修改轮子就可以了<br>但是这样还有一个问题，就是我们构建车子实例的时候回非常麻烦,我们需要先构建轮子，底盘，车身，才能构建好车子，实际开发中这样重复的工作量也是非常大的</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> my_轮子 = <span class="keyword">new</span> 轮子(<span class="number">2</span>);</span><br><span class="line"><span class="keyword">const</span> my_底盘 = <span class="keyword">new</span> 底盘(my_轮子);</span><br><span class="line"><span class="keyword">const</span> my_车身 = <span class="keyword">new</span> 车身(my_底盘);</span><br><span class="line"><span class="keyword">const</span> my_车子 = <span class="keyword">new</span> 车子(my_车身);</span><br></pre></td></tr></table></figure>
+<h2 id="IOC-容器就可以帮我们解决这样一个问题"><a href="#IOC-容器就可以帮我们解决这样一个问题" class="headerlink" title="IOC 容器就可以帮我们解决这样一个问题"></a>IOC 容器就可以帮我们解决这样一个问题</h2><p>IOC 通过配置，和注入的方式可以帮助我们完成上面这一个过程，我们只需要告诉 IOC 容器我们需要的类他就会根据配置自动帮我们完成依赖注入这一步。<br>我们大概可以像这样子去获取车子实例 <code>const my_车子 = ioc_container.get(车子)</code></p>
+<p>这里有个实现的非常好的js的ioc容器 <a href="https://github.com/inversify/InversifyJS" target="_blank" rel="noopener">InversifyJS</a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 第一步： 先申明接口和类型</span></span><br><span class="line"></span><br><span class="line">interface wheel &#123;</span><br><span class="line">    private size:number;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">interface chassis &#123;</span><br><span class="line">    private 轮子:wheel;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">interface body &#123;</span><br><span class="line">    private 底盘:chassis;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">interface car &#123;</span><br><span class="line">    private 车身:body;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> TYPES = &#123;</span><br><span class="line">    wheel:<span class="built_in">Symbol</span>.for(<span class="string">'wheel'</span>),</span><br><span class="line">    chassis:<span class="built_in">Symbol</span>.for(<span class="string">'chassis'</span>),</span><br><span class="line">    body:<span class="built_in">Symbol</span>.for(<span class="string">'body'</span>),</span><br><span class="line">    car:<span class="built_in">Symbol</span>.for(<span class="string">'car'</span>),</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 第二步：申明依赖关系</span></span><br><span class="line"><span class="keyword">import</span> &#123; injectable, inject &#125; <span class="keyword">from</span> <span class="string">"inversify"</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">"reflect-metadata"</span>;</span><br><span class="line"></span><br><span class="line">@injectable()</span><br><span class="line"><span class="class"><span class="keyword">class</span> 轮子 <span class="title">implements</span> <span class="title">wheel</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(size) &#123;</span><br><span class="line">        <span class="keyword">this</span>.size = size;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@injectable()</span><br><span class="line"><span class="class"><span class="keyword">class</span> 底盘 <span class="title">implements</span> <span class="title">chassis</span></span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(@inject(TYPES.wheel)instance:wheel) &#123;</span><br><span class="line">        <span class="keyword">this</span>.轮子 = instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@injectable()</span><br><span class="line"><span class="class"><span class="keyword">class</span> 车身 <span class="title">implements</span> <span class="title">body</span></span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(@inject(TYPES.chassis)instance:chassis) &#123;</span><br><span class="line">        <span class="keyword">this</span>.底盘 = instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@injectable()</span><br><span class="line"><span class="class"><span class="keyword">class</span> 车子 <span class="title">implements</span> <span class="title">car</span></span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(@inject(TYPES.body)instance:body) &#123;</span><br><span class="line">        <span class="keyword">this</span>.车身 = instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 或者可以这样写</span></span><br><span class="line">@injectable()</span><br><span class="line"><span class="class"><span class="keyword">class</span> 车子 <span class="title">implements</span> <span class="title">car</span></span>&#123;</span><br><span class="line">    @inject(TYPES.body) private 车身: body;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 第三步：创建容器的配置</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123; Container &#125; <span class="keyword">from</span> <span class="string">"inversify"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> myContainer = <span class="keyword">new</span> Container();</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -406,8 +392,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/sh-article/2018/05/03/hello-world/" rel="next" title="浏览器如何验证证书的">
-                <i class="fa fa-chevron-left"></i> 浏览器如何验证证书的
+              <a href="/sh-article/2018/12/10/cookie丢失问题解决方法/" rel="next" title="iframe 跨域访问session cookie丢失问题解决方法">
+                <i class="fa fa-chevron-left"></i> iframe 跨域访问session cookie丢失问题解决方法
               </a>
             
           </div>
@@ -415,10 +401,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/sh-article/2018/06/24/深入浅出react笔记/" rel="prev" title="深入浅出react笔记">
-                深入浅出react笔记 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -560,7 +542,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#git"><span class="nav-number">1.</span> <span class="nav-text">git</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Homebrew"><span class="nav-number">2.</span> <span class="nav-text">Homebrew</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#item2"><span class="nav-number">3.</span> <span class="nav-text">item2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#谷歌浏览器插件"><span class="nav-number">4.</span> <span class="nav-text">谷歌浏览器插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#webstorm"><span class="nav-number">5.</span> <span class="nav-text">webstorm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dash"><span class="nav-number">6.</span> <span class="nav-text">dash</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#依赖倒置"><span class="nav-number">1.</span> <span class="nav-text">依赖倒置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IOC-容器就可以帮我们解决这样一个问题"><span class="nav-number">2.</span> <span class="nav-text">IOC 容器就可以帮我们解决这样一个问题</span></a></li></ol></div>
             
 
           </div>
