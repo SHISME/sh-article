@@ -276,6 +276,172 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/sh-article/2019/02/07/二进制/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="$SH">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/17661313?s=460&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SZU_SH">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/sh-article/2019/02/07/二进制/" itemprop="url">二进制的一些妙用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-07T17:27:27+08:00">
+                2019-02-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/sh-article/2019/02/07/二进制/" class="leancloud_visitors" data-flag-title="二进制的一些妙用">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>有一个笑话，世界上有10种人，一种是看得懂二进制的，一种是看不懂的。<br>如果你看懂了这个笑话，这篇文章就是适合你读的了</p>
+<h1 id="Single-Number"><a href="#Single-Number" class="headerlink" title="Single Number"></a>Single Number</h1><p>leetcode 上有一道这样的题，<a href="https://leetcode.com/problems/single-number/" target="_blank" rel="noopener">Single Number</a>，题目是要你要找到数组中唯一只存在一个的数字，其他数字都出现两次。这道题目非常的简单，我们可以用 hash 表来记录所有数字的次数，然后找到次数为1的那个数字。如果用二进制来解决这道题效率会快很多。</p>
+<h2 id="二进制的解法"><a href="#二进制的解法" class="headerlink" title="二进制的解法"></a>二进制的解法</h2><p>二进制中有一个操作符叫做位异或，他的作用是两个位数字相同则为0，不同则为1，即 1^1=0，0^0=0，1^0=1，0^1=1；</p>
+<p>通过这个运算符的特点我们可以知道，任何一个数对自己位异或操作，得到的结果都是 00000000，00000000对任意数字位异或得到的都是那个数字。并且 A ^ B ^ C = C ^ B ^A，这个操作符是满足交换律的。下面看一下 js 的简单解法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; nums</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> singleNumber = <span class="function"><span class="keyword">function</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> nums.reduce(<span class="function">(<span class="params">res, cur</span>) =&gt;</span> res ^ cur);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h1 id="毒药问题"><a href="#毒药问题" class="headerlink" title="毒药问题"></a>毒药问题</h1><p>有 8 个一模一样的瓶子，其中有 7 瓶是普通的水，有一瓶是毒药。任何喝下毒药的生物都会在一星期之后死亡。现在，你只有 3 只小白鼠和一星期的时间，如何检验出哪个瓶子里有毒药？</p>
+<h2 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h2><p>我们用二进制给每瓶水进行编号，编号分别为，000,001,010,011,100,101,110,111,分别对应1-8的瓶子，然后让第一只老鼠喝第一位为1的，第二只老鼠喝第二位为1的，第三只老鼠喝第三位为1的，假设第四瓶水有毒，即011有毒</p>
+<ul>
+<li>第一只老鼠喝了 100，101，110，111，结果：没死，记作0</li>
+<li>第二只老鼠喝了 010，011，110，111，结果：死了，记作1</li>
+<li>第三只老鼠喝了 001，011，101，111，结果：死了，记作1</li>
+</ul>
+<p>根据死亡结果，刚好是第四瓶水011，这只是一个巧合吗，恐怕不是的，我们可以用数学的思维来证明一下这个问题</p>
+<h2 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h2><p>每只老鼠喝了毒药只会出现两种情况死或者不死，一只老鼠可以验证两瓶药有没毒，即2^1,两只老鼠可以验证2^2瓶药，三只老鼠可以验证2^3瓶药，那么要怎么去验药呢</p>
+<ul>
+<li>我们让每只老鼠喝某一位为1的的所有药，如果那只老鼠死了则说明毒药的某一位编号为1，比方说第一只老鼠喝了所有第一位为1的毒药死了，则说明毒药的第一位编号为1，如果没死，则说明毒药的那一位编号为0</li>
+<li>这里如果三只老鼠都没死，则说明毒药的三位编号都为0，刚好是三只老鼠都每没喝的第一瓶。</li>
+</ul>
+<h2 id="拓展问题"><a href="#拓展问题" class="headerlink" title="拓展问题"></a>拓展问题</h2><p>有 1000 个一模一样的瓶子，其中有 999 瓶是普通的水，有一瓶是毒药。任何喝下毒药的生物都会在一星期之后死亡。现在，你只有 10 只小白鼠和一星期的时间，如何检验出哪个瓶子里有毒药？</p>
+<p>根据上面的问题，我们能够知道 2 ^ 10 = 1024 &gt; 1000,也是通过对每个瓶子进行二进制编号即可检验出哪个瓶子有毒。</p>
+<h3 id="问题升级"><a href="#问题升级" class="headerlink" title="问题升级"></a>问题升级</h3><p>现在，有意思的问题来了：如果你有两个星期的时间，为了从 1000 个瓶子中找出毒药，你最少需要几只老鼠？注意，在第一轮实验中死掉的老鼠，就无法继续参与第二次实验了。</p>
+<h3 id="拓展问题思路"><a href="#拓展问题思路" class="headerlink" title="拓展问题思路"></a>拓展问题思路</h3><p>我们要达到的目的是用尽可能少的老鼠，在两周之内找到结果，所以我们必须要进行两轮的实验，那么每只老鼠可能就会出现三种情况，第一轮死掉，第二轮死掉，第二轮活着，上面一题老鼠会出现两种情况用的是二进制，那么这一题很明显我们需要用到三进制。3 ^ 6 = 729, 3 ^ 7 = 2187, 很明我们至少是需要7只老鼠。</p>
+<h3 id="如何喂药"><a href="#如何喂药" class="headerlink" title="如何喂药"></a>如何喂药</h3><ul>
+<li>还是和前面一样，第一轮的时候，我们让每只老鼠喝某一位为编号为2的药，如果某只老鼠死了，则说明毒药的那一位编号为2，如果老鼠全死了，我们连第二轮都不用了，直接可以确定毒药的编号为2222222。</li>
+<li>第二轮如果还剩多少只老鼠，则说明毒药有多少位的编号为0或者1，我们剩k只老鼠，k位二进制数需要确认，因为那几位数已经排除了是2的可能性。则由回到了上一题，我们继续用上一轮的喂法即可。</li>
+</ul>
+<h2 id="称重问题"><a href="#称重问题" class="headerlink" title="称重问题"></a>称重问题</h2><p>27个小球。其中一个比其他小球都要重一点。给你一个天平，最多称3次，找出这个特殊的小球。</p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>这题也是需要用到三进制的思路来解决的，我们每次称可能出现三种状态左边重，右边重，一样重，3 ^ 3 刚好27，所以我们是可以在3次内找到这个小球。</p>
+<h3 id="如何称"><a href="#如何称" class="headerlink" title="如何称"></a>如何称</h3><p>先给每个球编号000,001,002,010,…,222</p>
+<ul>
+<li>第一次称第一位为2的和第一位为1的所有小球，他们同样都是9个，哪边重则说明，较重的小球的第1为几，如果一样重则说名第一位为0</li>
+<li>第二次称第二位为2的和第一位为1的所有要求，他们也同样都是9个，哪边重则说明，较重的小球的第2位为几，如果一样重则说名第二位为0</li>
+<li>第三次称第三位为2的和第一位为1的所有要求，他们也同样都是9个，哪边重则说明，较重的小球的第3位为几，如果一样重则说名第三位为0</li>
+</ul>
+<p>经过三次称重我们就可以找到较重的哪一个小球了。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>面对这种问题，其实解决思路都大通小异，都是需要找到问题关键状态，通过关键状态的数量我们可以知道需要用到多少进制来解决问题。然后根据题目制定方案，来确定每一位的状态码最终得到结果。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/sh-article/2019/01/26/js-hash-表/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1983,182 +2149,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/sh-article/2018/07/28/about-es6-module/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="$SH">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/17661313?s=460&v=4">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SZU_SH">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/sh-article/2018/07/28/about-es6-module/" itemprop="url">谈谈es6的模块化</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-28T17:39:51+08:00">
-                2018-07-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/sh-article/categories/JS/" itemprop="url" rel="index">
-                    <span itemprop="name">JS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/sh-article/2018/07/28/about-es6-module/" class="leancloud_visitors" data-flag-title="谈谈es6的模块化">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>如今模块化的编程方式，已经成为了每个前端程序员必须掌握的一门技术，es6 也带了 <code>import</code> 和 <code>export</code> 两个新语法，搞清楚他们的作用和用法也是我们所必须要学习的。</p>
-<h2 id="需要注意的一些概念"><a href="#需要注意的一些概念" class="headerlink" title="需要注意的一些概念"></a>需要注意的一些概念</h2><ul>
-<li>首先，es6 的模块是基于文件的模块，在浏览器端还不支持 <code>import</code> 和 <code>export</code> 语法，我们开发过程使用，也是需要通过打包工具将其编译为 es5 的语法才能使用。</li>
-<li>es6 的模块是单利的，也就是说，模块只有一个实例，每次我们 <code>import</code> 的时候，其实都是同一个对象。如果需要有多个模块实例的话，则需要通过 <code>export</code> 一个工厂方法来实现</li>
-</ul>
-<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><p>es6 模块主要就是两个新的关键字 <code>import</code> 和 <code>export</code></p>
-<h3 id="named-export-命名导出"><a href="#named-export-命名导出" class="headerlink" title="named export (命名导出)"></a>named export (命名导出)</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> awesome = <span class="string">'awesome'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> name = <span class="string">'test'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> &#123;</span><br><span class="line">  test,</span><br><span class="line">  awesome</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>在模块内作用域都是局部的，只要没有 <code>export</code> 出去，外面就无法访问到。</p>
-<p>我们也可以在导出的时候给成员重命名 <code>export { test as try }</code>。</p>
-<h3 id="模块是单例的"><a href="#模块是单例的" class="headerlink" title="模块是单例的"></a>模块是单例的</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">// test.js</span><br><span class="line">let name = &apos;test&apos;;</span><br><span class="line">export &#123;name&#125;;</span><br><span class="line"></span><br><span class="line">// index.js</span><br><span class="line">import &#123; name &#125; from &apos;./test&apos;;</span><br><span class="line">name = &apos;index change it&apos;;</span><br><span class="line"></span><br><span class="line">// getname.js</span><br><span class="line">import &#123; name &#125; from &apos;./test&apos;;</span><br><span class="line">console.log(name); // index change it</span><br></pre></td></tr></table></figure>
-<p>当我们在 index.js 修改了从 test.js import 进来的 name，之后我们再在 getname.js 中 import 它，这时候我们就会发现这个值就被修改了。</p>
-<p>这是因为在 import 的时候，我们本质上可以看做是引了一个对变量的指针。虽然有这个特性，但是我们应该避免使用这个特性，<br>因为这会增大我们程序的复杂度，会使得程序变得难以维护，追踪变量在哪里被修改是非常麻烦的。</p>
-<h3 id="export-default-默认导出"><a href="#export-default-默认导出" class="headerlink" title="export default (默认导出)"></a>export default (默认导出)</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// test.js</span></span><br><span class="line"><span class="keyword">const</span> name = <span class="string">'test'</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> name;</span><br></pre></td></tr></table></figure>
-<p>当文件中有默认导出的时候我们可以通过下面几种方式得到这个值</p>
-<ul>
-<li><p><code>import name from &#39;./test&#39;</code> 这个 name 也可以叫其他名字比方说<code>import test from &#39;./test&#39;</code> 这里 name 和 test 其实指的是同一个东西</p>
-</li>
-<li><p><code>import { default as name } from &#39;./test</code> 这里的 default 不能省略</p>
-</li>
-</ul>
-<h3 id="namespace-import-命名空间引入"><a href="#namespace-import-命名空间引入" class="headerlink" title="namespace import (命名空间引入)"></a>namespace import (命名空间引入)</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> test <span class="keyword">from</span> <span class="string">'./test'</span></span><br><span class="line"><span class="built_in">console</span>.log(test.name);</span><br></pre></td></tr></table></figure>
-<p>es6 的设计理念是让我们按需引用，不过还是看具体的需要，如果引入的模块比较小的话，<br>我们还是可以通过使用命名空间引入的方式来进行引用。</p>
-<h3 id="import-立执行的函数"><a href="#import-立执行的函数" class="headerlink" title="import 立执行的函数"></a>import 立执行的函数</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">'rxjs/operators/add'</span>;</span><br></pre></td></tr></table></figure>
-<p>有时候我们会看到一些类似于上面的用法，这些一般加载的是一些立执行的函数，一般我们也要避免使用这种，因为他会导致你的代码变得难以理解，后来的 rxjs6 也修改了这种用法</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2213,7 +2203,7 @@
               
                 <a href="/sh-article/archives/">
               
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
