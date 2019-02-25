@@ -276,6 +276,250 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/sh-article/2019/02/25/leetcode-518/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="$SH">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/17661313?s=460&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SZU_SH">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/sh-article/2019/02/25/leetcode-518/" itemprop="url">LeetCode 518 Coin Change 2 硬币问题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-25T23:09:51+08:00">
+                2019-02-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/sh-article/2019/02/25/leetcode-518/" class="leancloud_visitors" data-flag-title="LeetCode 518 Coin Change 2 硬币问题">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>题目链接：<a href="https://leetcode.com/problems/coin-change-2/" target="_blank" rel="noopener">518. Coin Change 2</a></p>
+<p>我的源码：<a href="https://github.com/SHISME/LeetCode/blob/master/src/518/index.js" target="_blank" rel="noopener">源码</a></p>
+<p>最近看到这道题，但是看网大部分教程感觉思路都写的不是特别的详细。分享一下个人的解题思路。</p>
+<h4 id="题目："><a href="#题目：" class="headerlink" title="题目："></a>题目：</h4><p>给定不同面额的硬币和一个总金额。写出函数来计算可以凑成总金额的硬币组合数。假设每一种面额的硬币有无限个。</p>
+<h5 id="示例-1"><a href="#示例-1" class="headerlink" title="示例 1:"></a>示例 1:</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">输入: amount = 5, coins = [1, 2, 5]</span><br><span class="line">输出: 4</span><br><span class="line">解释: 有四种方式可以凑成总金额:</span><br><span class="line">5=5</span><br><span class="line">5=2+2+1</span><br><span class="line">5=2+1+1+1</span><br><span class="line">5=1+1+1+1+1</span><br></pre></td></tr></table></figure>
+<p>一开始，我想到的是用动态规划的思路去解决这道题，假设dp[n] 为凑成 n 的组合数，最后发现思维上无法找到动态方程。参考了，别人的解决方案发现需要用两个变量来解决这个问题。</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>设dp[i][j] 为用前 i 种硬币达到总金额 j 的硬币组合数。对于dp[i][j],我们可能会出现两种情况达到效果，第一种是我们没有使用第i种硬币达到j元的组合数，第二种是使用了第i种硬币达到j的组合数。</p>
+<ul>
+<li>没用使用第i种硬币的组合数: dp[i - 1][j]</li>
+<li>使用了第i种硬币的组合数:dp[i][j - conin[i]], j &gt;= conin[i]</li>
+</ul>
+<p>得到动态方程: dp[i][j] = dp[i-1][j] + j &gt;= coin[i] ? dp[i][j - coin[i]] : 0</p>
+<h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><p>其实我们并不需要记录所有的状态，我们只需要记录每增加一枚硬币带来的改变。<br>以 amount = 5，coins = [1,2,5] 为例。我们可以用 dp[n] 记录当前使用硬币对应钱组合数。显然dp[0] = 1是一直成立的。</p>
+<p>当我们什么硬币都不使用的时候</p>
+<table>
+<thead>
+<tr>
+<th>n</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dp[n]</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>使用硬币 1，只用 n &gt;= 1 会受到影响</p>
+<table>
+<thead>
+<tr>
+<th>n</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dp[n]</td>
+<td>1</td>
+<td><code>1</code></td>
+<td><code>1</code></td>
+<td><code>1</code></td>
+<td><code>1</code></td>
+<td><code>1</code></td>
+</tr>
+</tbody>
+</table>
+<p>加上使用硬币 2，只用 n &gt;= 2 会受到影响</p>
+<table>
+<thead>
+<tr>
+<th>n</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dp[n]</td>
+<td>1</td>
+<td>1</td>
+<td><code>2</code></td>
+<td><code>2</code></td>
+<td><code>3</code></td>
+<td><code>3</code></td>
+</tr>
+</tbody>
+</table>
+<p>加上使用硬币 5，只用 n &gt;= 5 会受到影响</p>
+<table>
+<thead>
+<tr>
+<th>n</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dp[n]</td>
+<td>1</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>3</td>
+<td><code>4</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="如何求dp-n"><a href="#如何求dp-n" class="headerlink" title="如何求dp[n]"></a>如何求dp[n]</h3><p> 假设我们要求加上使用第j种币时的dp[n], 当前的dp[n]可以看做是不使用第j种币得到 n 的组合数。根据前面的公式我们可以知道，我们只需要加上使用第j种币时的组合数即可，即加上dp[n - coin[j]];代码也非常精炼。</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * @param &#123;number&#125; amount</span></span><br><span class="line"><span class="comment"> * @param &#123;number[]&#125; coins</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> change = <span class="function"><span class="keyword">function</span>(<span class="params">amount, coins</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> dp = <span class="built_in">Array</span>.from(&#123;<span class="attr">length</span>:amount + <span class="number">1</span>&#125;).map(<span class="function"><span class="params">()</span> =&gt;</span> <span class="number">0</span>);</span><br><span class="line">    dp[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; coins.length; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> j = coins[i]; j &lt;= amount; j++) &#123;</span><br><span class="line">            dp[j] += dp[j - coins[i]];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[amount];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/sh-article/2019/02/07/二进制/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1972,183 +2216,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/sh-article/2018/08/01/xss和csrf攻击/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="$SH">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/17661313?s=460&v=4">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SZU_SH">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/sh-article/2018/08/01/xss和csrf攻击/" itemprop="url">Web 安全之 xss和csrf攻击</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-01T21:08:03+08:00">
-                2018-08-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/sh-article/categories/Web安全/" itemprop="url" rel="index">
-                    <span itemprop="name">Web安全</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/sh-article/2018/08/01/xss和csrf攻击/" class="leancloud_visitors" data-flag-title="Web 安全之 xss和csrf攻击">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>xss 和 csrf 可以说是最常见的攻击手段，面试也很大概率会问到这两个东西，下面我们可以了解一下他们是什么。</p>
-<h2 id="xss"><a href="#xss" class="headerlink" title="xss"></a>xss</h2><p>xss 也叫跨站脚本攻击。是一种非常常见的攻击手段，我们可以把它看做是一个html注入攻击。和我们长听到的sql注入非常的类似。</p>
-<h3 id="常见的-xss-攻击方式。"><a href="#常见的-xss-攻击方式。" class="headerlink" title="常见的 xss 攻击方式。"></a>常见的 xss 攻击方式。</h3><h4 id="通过-url-注入"><a href="#通过-url-注入" class="headerlink" title="通过 url 注入"></a>通过 url 注入</h4><p>比方说A网站有个内容是通过url中的参数来显示的，并且没有对其做任何的xss防范，那么攻击者就可以通过url将攻击脚本注入到网页中，然后将带有攻击脚本的url进行特殊处理，然后将处理后的url发给第三者完成攻击</p>
-<h4 id="通过一些表单输入做注入"><a href="#通过一些表单输入做注入" class="headerlink" title="通过一些表单输入做注入"></a>通过一些表单输入做注入</h4><p>最常见得就是富文本评论，因为需要保持html的原样，所以就很容易被人注入攻击脚本，当其他用户访问了被注入攻击脚本的页面的时候就会被攻击。</p>
-<h3 id="防御方式"><a href="#防御方式" class="headerlink" title="防御方式"></a>防御方式</h3><p>对xss的防御思路，主要有两种，可以看我们具体的需求来决定使用哪一种。</p>
-<h4 id="http-only"><a href="#http-only" class="headerlink" title="http-only"></a>http-only</h4><p>这个东西主要针对的是cookie，在 xss 注入的时候可能会有js盗取cookie，我们可以将 cookie 设置为http-only,这样 js 就会无法操作cookie，不过这也仅仅防范了这一种可能性，还是无法防御其他手段的 xss 攻击</p>
-<h4 id="设置黑名单"><a href="#设置黑名单" class="headerlink" title="设置黑名单"></a>设置黑名单</h4><p>通过设置黑名单，将一些特殊的字段进行删除或者转译来达到防御的手段，比方说 <code>&lt;script&gt;</code>，黑名单的实现比较简单，但是 xss 攻击的花样非常的多，我们很难知道所有的攻击手段，很有可能会造成攻击漏洞。</p>
-<h4 id="设置白名单"><a href="#设置白名单" class="headerlink" title="设置白名单"></a>设置白名单</h4><p>白名单的思路也很简单，我们根据我们的需求设置允许使用的标签和属性，然后把不在白名单中的标签或者属性都去掉，在实现上会比黑名单复杂一点，需要把进行防御的内容转为树状结构进行遍历然后处理掉白名单以为的标签和属性。</p>
-<h4 id="CSP-Content-Security-Policy"><a href="#CSP-Content-Security-Policy" class="headerlink" title="CSP (Content Security Policy)"></a>CSP (Content Security Policy)</h4><p>内容安全策略，用于指定哪些内容可以被执行。通过设置 <code>Content-Security-Policy</code> 响应头我们可以设置哪些内容是可以执行的。</p>
-<p>csp 本质上也是一个白名单，我们通过配置告诉浏览器哪些内容是可以安全执行的。</p>
-<p>具体的配置我们可以去 MDN 上查看 <a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Content-Security-Policy__by_cnvoid/default-src" target="_blank" rel="noopener">https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers/Content-Security-Policy__by_cnvoid/default-src</a></p>
-<p>相关知识可以看看阮老师的这篇文章 <a href="http://www.ruanyifeng.com/blog/2016/09/csp.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2016/09/csp.html</a></p>
-<h2 id="CSRF"><a href="#CSRF" class="headerlink" title="CSRF"></a>CSRF</h2><p>csrf 也叫跨站请求伪造。攻击方式就是第三方的网站可以在用户不知情的情况下发送请求到被攻击的网站上。比方说网站A，我们有一个网站B会偷偷帮用户发请求到A，发送的时候浏览器会自动的挟带上A的cookie，而A又是对cookie做验证，这就导致了 csrf 攻击</p>
-<h3 id="防御方式-1"><a href="#防御方式-1" class="headerlink" title="防御方式"></a>防御方式</h3><h4 id="设置-cookie-的-sameSite"><a href="#设置-cookie-的-sameSite" class="headerlink" title="设置 cookie 的 sameSite"></a>设置 <code>cookie</code> 的 <code>sameSite</code></h4><p><code>sameSite</code> 可以禁止来自第三方网站的请求携带 cookie，他有两个值</p>
-<ul>
-<li><code>Strict</code> 禁止一切请求携带 cookie</li>
-<li><code>Lax</code> 允许一部分请求携带 cookie，比方说链接</li>
-</ul>
-<p>不过目前这还是一个试验箱的属性，只有部分浏览器支持这个值。</p>
-<h4 id="增加验证"><a href="#增加验证" class="headerlink" title="增加验证"></a>增加验证</h4><p>验证的方式有很多，可以有如下几种</p>
-<ul>
-<li>验证码，不过验证码可能会带来比较不好的用户体验</li>
-<li>token，在表单或者请求头中增加一个token做验证</li>
-<li>referer验证，referer需要在后端进行，这个单词其实拼写错误的，原本应该是referrer，我们可以通过referer来判断请求是否来源于当前网站，如果不是则判定为非法请求</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2203,7 +2270,7 @@
               
                 <a href="/sh-article/archives/">
               
-                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-count">27</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
