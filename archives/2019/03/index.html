@@ -79,17 +79,16 @@
 
 
 
-<meta name="description" content="12345function test()&amp;#123;    console.log([].slice.call(arguments))&amp;#125;test(1,2,3,4) // [1,2,3,4] 我们经常可以看到一些文档或者比人的源码之中用这种方式把arguments转化为数组,但是为什么可以这样子操作呢，现在我们可以看一下Array.prototype.slice 他的实现原理是怎样的。 s">
-<meta property="og:type" content="article">
-<meta property="og:title" content="[].slice.call(arguments) 转数组的原理">
-<meta property="og:url" content="http://yoursite.com/2018/03/16/prototype-slice/index.html">
+<meta name="description" content="灵活跳跃诈笑看天下 乐似仙">
+<meta property="og:type" content="website">
+<meta property="og:title" content="SZU_SH">
+<meta property="og:url" content="http://yoursite.com/archives/2019/03/index.html">
 <meta property="og:site_name" content="SZU_SH">
-<meta property="og:description" content="12345function test()&amp;#123;    console.log([].slice.call(arguments))&amp;#125;test(1,2,3,4) // [1,2,3,4] 我们经常可以看到一些文档或者比人的源码之中用这种方式把arguments转化为数组,但是为什么可以这样子操作呢，现在我们可以看一下Array.prototype.slice 他的实现原理是怎样的。 s">
+<meta property="og:description" content="灵活跳跃诈笑看天下 乐似仙">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-03T13:56:37.637Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="[].slice.call(arguments) 转数组的原理">
-<meta name="twitter:description" content="12345function test()&amp;#123;    console.log([].slice.call(arguments))&amp;#125;test(1,2,3,4) // [1,2,3,4] 我们经常可以看到一些文档或者比人的源码之中用这种方式把arguments转化为数组,但是为什么可以这样子操作呢，现在我们可以看一下Array.prototype.slice 他的实现原理是怎样的。 s">
+<meta name="twitter:title" content="SZU_SH">
+<meta name="twitter:description" content="灵活跳跃诈笑看天下 乐似仙">
 
 
 
@@ -119,13 +118,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/03/16/prototype-slice/"/>
+  <link rel="canonical" href="http://yoursite.com/archives/2019/03/"/>
 
 
 
 
 
-  <title>[].slice.call(arguments) 转数组的原理 | SZU_SH</title>
+  <title>归档 | SZU_SH</title>
   
 
 
@@ -144,7 +143,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-left page-archive">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -262,188 +261,74 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
+  
+  
+  
+  <div class="post-block archive">
+    <div id="posts" class="posts-collapse">
+      <span class="archive-move-on"></span>
 
-  
+      <span class="archive-page-counter">
+        
+        
+        
+          
+        
+        嗯..! 目前共计 28 篇日志。 继续努力。
+      </span>
 
-  
-  
-  
+      
+
+        
+        
+        
+
+        
+          
+          <div class="collection-title">
+            <h1 class="archive-year" id="archive-year-2019">2019</h1>
+          </div>
+        
+        
+
+        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/sh-article/2018/03/16/prototype-slice/">
+    <header class="post-header">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="$SH">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/17661313?s=460&v=4">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SZU_SH">
-    </span>
-
-    
-      <header class="post-header">
-
+      <h2 class="post-title">
         
+            <a class="post-title-link" href="/sh-article/2019/03/03/https-相关/" itemprop="url">
+              
+                <span itemprop="name">https 基本概念学习</span>
+              
+            </a>
         
-          <h1 class="post-title" itemprop="name headline">[].slice.call(arguments) 转数组的原理</h1>
-        
+      </h2>
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-16T20:20:33+08:00">
-                2018-03-16
-              </time>
-            
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2019-03-03T00:04:53+08:00"
+              content="2019-03-03" >
+          03-03
+        </time>
+      </div>
 
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/sh-article/categories/JS/" itemprop="url" rel="index">
-                    <span itemprop="name">JS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/sh-article/2018/03/16/prototype-slice/" class="leancloud_visitors" data-flag-title="[].slice.call(arguments) 转数组的原理">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log([].slice.call(<span class="built_in">arguments</span>))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>) <span class="comment">// [1,2,3,4]</span></span><br></pre></td></tr></table></figure>
-<p>我们经常可以看到一些文档或者比人的源码之中用这种方式把<code>arguments</code>转化为数组,但是为什么可以这样子操作呢，现在我们可以看一下<code>Array.prototype.slice</code> 他的实现原理是怎样的。</p>
-<h3 id="slice-的原理"><a href="#slice-的原理" class="headerlink" title="slice 的原理"></a>slice 的原理</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">Array</span>.prototype.slice = <span class="function"><span class="keyword">function</span>(<span class="params">begin, end</span>) </span>&#123;</span><br><span class="line">      end = (<span class="keyword">typeof</span> end !== <span class="string">'undefined'</span>) ? end : <span class="keyword">this</span>.length;</span><br><span class="line">    </span><br><span class="line">      <span class="keyword">var</span> i, </span><br><span class="line">        cloned = [],</span><br><span class="line">        size, </span><br><span class="line">        len = <span class="keyword">this</span>.length;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">var</span> start = begin || <span class="number">0</span>;</span><br><span class="line">      start = (start &gt;= <span class="number">0</span>) ? start : <span class="built_in">Math</span>.max(<span class="number">0</span>, len + start);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">var</span> upTo = (<span class="keyword">typeof</span> end == <span class="string">'number'</span>) ? <span class="built_in">Math</span>.min(end, len) : len;</span><br><span class="line">      <span class="keyword">if</span> (end &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        upTo = len + end;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      size = upTo - start;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (size &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        cloned = <span class="keyword">new</span> <span class="built_in">Array</span>(size);</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.charAt) &#123;</span><br><span class="line">          <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; size; i++) &#123;</span><br><span class="line">            cloned[i] = <span class="keyword">this</span>.charAt(start + i);</span><br><span class="line">          &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; size; i++) &#123;</span><br><span class="line">            cloned[i] = <span class="keyword">this</span>[start + i];</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> cloned;</span><br><span class="line">    &#125;;</span><br></pre></td></tr></table></figure>
-<p>我们可以到 <code>slice</code> 其实是在用 <code>this</code> 访问对象的属性，通过<code>call</code>将<code>arguments</code>绑定到<code>this</code>上，以此可以遍历出 <code>arguments</code> 的全部参数。</p>
-<p>通过 <code>slice</code> 的底层原理我们也可以看出，如果我们传一个字符串进去，会把字符串转化为数组</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[].slice.call(&apos;12345&apos;); // [1,2,3,4,5]</span><br></pre></td></tr></table></figure>
-<h3 id="ES6的新方法"><a href="#ES6的新方法" class="headerlink" title="ES6的新方法"></a>ES6的新方法</h3><p>ES6 给 <code>Array</code> 新加了一个方法，我们也可以通过他把 arguments 转化为数组。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">Array</span>.from(&#123;<span class="attr">length</span>:<span class="number">2</span>,<span class="number">0</span>:<span class="number">1</span>,<span class="number">1</span>,<span class="number">2</span>&#125;) <span class="comment">// [1,2]</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">Array</span>.from(<span class="built_in">arguments</span>))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>);<span class="comment">// [1,2,3]</span></span><br></pre></td></tr></table></figure>
-<p>相比于 <code>slice</code>，<code>from</code> 更强大一点，<code>from</code> 还可以将带有遍历器属性<code>[Symbol.iterator]</code>的对象转化为数组</p>
-<p>例如我们可以这样操作</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> test = &#123;&#125;</span><br><span class="line">test[<span class="built_in">Symbol</span>.iterator] = <span class="function"><span class="keyword">function</span> *(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">yield</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">yield</span> <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">yield</span> <span class="number">3</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">Array</span>.from(test);<span class="comment">// [1,2,3]</span></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/sh-article/2018/03/13/快速理解-js-模块规范/" rel="next" title="快速理解 js 模块规范">
-                <i class="fa fa-chevron-left"></i> 快速理解 js 模块规范
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/sh-article/2018/03/19/js-作用域与闭包/" rel="prev" title="js 作用域与闭包">
-                js 作用域与闭包 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
+    </header>
   </article>
 
 
 
-    <div class="post-spread">
       
+
     </div>
   </div>
+  
+  
+  
+
+  
+
 
 
           </div>
@@ -451,15 +336,6 @@
 
 
           
-
-  
-    <div class="comments" id="comments">
-      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTEwMS8xMTYzNg"></div>
-    </div>
-
-  
-
-
 
         </div>
         
@@ -480,17 +356,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -555,22 +422,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#slice-的原理"><span class="nav-number">1.</span> <span class="nav-text">slice 的原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ES6的新方法"><span class="nav-number">2.</span> <span class="nav-text">ES6的新方法</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -718,10 +569,6 @@
 
 
   
-  <script type="text/javascript" src="/sh-article/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/sh-article/js/src/post-details.js?v=5.1.4"></script>
-
-
 
   
 
@@ -750,17 +597,6 @@
 
 
 
-  
-    <script type="text/javascript">
-      (function(d, s) {
-        var j, e = d.getElementsByTagName(s)[0];
-        if (typeof LivereTower === 'function') { return; }
-        j = d.createElement(s);
-        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-        j.async = true;
-        e.parentNode.insertBefore(j, e);
-      })(document, 'script');
-    </script>
   
 
 
