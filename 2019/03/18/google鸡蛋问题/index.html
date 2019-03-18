@@ -79,17 +79,22 @@
 
 
 
-<meta name="description" content="最近正在从 windows 转向 mac，不得不说mac做开发确实省心不少。这里记录下相关环境的搭建与配置。 gitgit 可以有两种方式去安装，可以从 github上下载然后自己编译安装，由于这个过程比较麻烦，所以我还是选择了另一种方式，直接在app store中安装xCode，安装好之后就会自动的帮你安装好git了。 Homebrewmac 下的包管理工具，很多东西可以通过他来进行安装。他的安">
+<meta name="description" content="之前在 leetcode 上看到了一道题 Super Egg Drop, 刚好之前看到过一到很类似的题，就是 google 的一道经典的面试题。这里记录一下自己整个的解题思路。 google 原题给你两个鸡蛋，它们有可能都在某一层楼往下摔就会摔碎，也可能从一百层楼摔下来没事。有座100层的建筑，要你用这两个鸡蛋通过最少的次数确定哪一层是鸡蛋摔碎的临界点。每次实验即使没摔碎也不会对鸡蛋有损耗。 思路">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mac前端开发环境">
-<meta property="og:url" content="http://yoursite.com/2018/06/14/mac前端开发环境/index.html">
+<meta property="og:title" content="google鸡蛋问题">
+<meta property="og:url" content="http://yoursite.com/2019/03/18/google鸡蛋问题/index.html">
 <meta property="og:site_name" content="SZU_SH">
-<meta property="og:description" content="最近正在从 windows 转向 mac，不得不说mac做开发确实省心不少。这里记录下相关环境的搭建与配置。 gitgit 可以有两种方式去安装，可以从 github上下载然后自己编译安装，由于这个过程比较麻烦，所以我还是选择了另一种方式，直接在app store中安装xCode，安装好之后就会自动的帮你安装好git了。 Homebrewmac 下的包管理工具，很多东西可以通过他来进行安装。他的安">
+<meta property="og:description" content="之前在 leetcode 上看到了一道题 Super Egg Drop, 刚好之前看到过一到很类似的题，就是 google 的一道经典的面试题。这里记录一下自己整个的解题思路。 google 原题给你两个鸡蛋，它们有可能都在某一层楼往下摔就会摔碎，也可能从一百层楼摔下来没事。有座100层的建筑，要你用这两个鸡蛋通过最少的次数确定哪一层是鸡蛋摔碎的临界点。每次实验即使没摔碎也不会对鸡蛋有损耗。 思路">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-24T03:32:21.627Z">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2019/2/3/168b26a84805078f?w=465&h=364&f=png&s=26875">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2019/2/3/168b27b749450dd9?w=111&h=40&f=gif&s=509">
+<meta property="og:image" content="https://latex.codecogs.com/gif.latex?%5Cfrac%7B-1+%5Csqrt%7B1+8n%7D%7D%7B2%7D">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2019/2/3/168b2802b2152e10?w=700&h=334&f=png&s=28538">
+<meta property="og:updated_time" content="2019-03-18T12:00:54.153Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mac前端开发环境">
-<meta name="twitter:description" content="最近正在从 windows 转向 mac，不得不说mac做开发确实省心不少。这里记录下相关环境的搭建与配置。 gitgit 可以有两种方式去安装，可以从 github上下载然后自己编译安装，由于这个过程比较麻烦，所以我还是选择了另一种方式，直接在app store中安装xCode，安装好之后就会自动的帮你安装好git了。 Homebrewmac 下的包管理工具，很多东西可以通过他来进行安装。他的安">
+<meta name="twitter:title" content="google鸡蛋问题">
+<meta name="twitter:description" content="之前在 leetcode 上看到了一道题 Super Egg Drop, 刚好之前看到过一到很类似的题，就是 google 的一道经典的面试题。这里记录一下自己整个的解题思路。 google 原题给你两个鸡蛋，它们有可能都在某一层楼往下摔就会摔碎，也可能从一百层楼摔下来没事。有座100层的建筑，要你用这两个鸡蛋通过最少的次数确定哪一层是鸡蛋摔碎的临界点。每次实验即使没摔碎也不会对鸡蛋有损耗。 思路">
+<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2019/2/3/168b26a84805078f?w=465&h=364&f=png&s=26875">
 
 
 
@@ -119,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/06/14/mac前端开发环境/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/03/18/google鸡蛋问题/"/>
 
 
 
 
 
-  <title>mac前端开发环境 | SZU_SH</title>
+  <title>google鸡蛋问题 | SZU_SH</title>
   
 
 
@@ -276,7 +281,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/sh-article/2018/06/14/mac前端开发环境/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/sh-article/2019/03/18/google鸡蛋问题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="$SH">
@@ -293,7 +298,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">mac前端开发环境</h1>
+          <h1 class="post-title" itemprop="name headline">google鸡蛋问题</h1>
         
 
         <div class="post-meta">
@@ -305,8 +310,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-14T23:32:17+08:00">
-                2018-06-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-18T20:00:11+08:00">
+                2019-03-18
               </time>
             
 
@@ -316,6 +321,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/sh-article/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -323,7 +350,7 @@
 
           
           
-             <span id="/sh-article/2018/06/14/mac前端开发环境/" class="leancloud_visitors" data-flag-title="mac前端开发环境">
+             <span id="/sh-article/2019/03/18/google鸡蛋问题/" class="leancloud_visitors" data-flag-title="google鸡蛋问题">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -354,34 +381,40 @@
       
 
       
-        <p>最近正在从 windows 转向 mac，不得不说mac做开发确实省心不少。这里记录下相关环境的搭建与配置。</p>
-<h2 id="git"><a href="#git" class="headerlink" title="git"></a>git</h2><p>git 可以有两种方式去安装，可以从 github上下载然后自己编译安装，由于这个过程比较麻烦，所以我还是选择了另一种方式，直接在app store中安装xCode，安装好之后就会自动的帮你安装好git了。</p>
-<h2 id="Homebrew"><a href="#Homebrew" class="headerlink" title="Homebrew"></a>Homebrew</h2><p>mac 下的包管理工具，很多东西可以通过他来进行安装。他的安装方式也很简单，只需复制一条简单的命令行就可以了。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</span><br></pre></td></tr></table></figure>
-<h2 id="item2"><a href="#item2" class="headerlink" title="item2"></a>item2</h2><p>item是mac上一框非常好用的终端，基本上也是必备的。直接去官网下载就可以了 <a href="https://iterm2.com/" target="_blank" rel="noopener">https://iterm2.com/</a>。<br>具体的一些相关配置可以参考这偏文档 <a href="https://segmentfault.com/a/1190000010518195" target="_blank" rel="noopener">https://segmentfault.com/a/1190000010518195</a></p>
-<h2 id="谷歌浏览器插件"><a href="#谷歌浏览器插件" class="headerlink" title="谷歌浏览器插件"></a>谷歌浏览器插件</h2><ul>
-<li>Rememberry 翻译非常好用，可以帮助你复习巩固单词，看英文文档的时候也更方便快捷</li>
-<li>Tampermonkey 里面有很多有趣的脚本可以用，比如百度云盘可以免安装客户端直接下载</li>
-<li>Vimium 强烈推荐这个，里面有视频教程，基本看一遍就会了，让你可以完全脱离鼠标，用键盘控制浏览器，非常好用</li>
-<li>Insight.io for Github 让你能够方便快捷的看github仓库的目录结构，甚至能够像ide一样搜索残酷，强烈推荐使用</li>
-<li>postman 调接口非常好用的一个插件，不过现在已经脱离谷歌浏览器成为了一个桌面程序了</li>
-<li>JSON-handle 可以非常方便快捷的格式化json数据</li>
-</ul>
-<h2 id="webstorm"><a href="#webstorm" class="headerlink" title="webstorm"></a>webstorm</h2><p>webstorm 是一款非常好用的前端ide，虽然本身的功能已经十分强大了，但是还是有非常多的强大的插件可以用。这里简单列举几个我常用的插件：</p>
+        <p>之前在 leetcode 上看到了一道题 <a href="https://leetcode.com/problems/super-egg-drop/" target="_blank" rel="noopener">Super Egg Drop</a>, 刚好之前看到过一到很类似的题，就是 google 的一道经典的面试题。这里记录一下自己整个的解题思路。</p>
+<h3 id="google-原题"><a href="#google-原题" class="headerlink" title="google 原题"></a>google 原题</h3><p>给你两个鸡蛋，它们有可能都在某一层楼往下摔就会摔碎，也可能从一百层楼摔下来没事。有座100层的建筑，要你用这两个鸡蛋通过最少的次数确定哪一层是鸡蛋摔碎的临界点。每次实验即使没摔碎也不会对鸡蛋有损耗。</p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>这是一道很经典的需要用到动态规划的题目，我们每一次扔鸡蛋的结果都会影响我们后续扔的次数，比方说我们上来就从 90 层扔，如果碎了，我们就得从1楼一层一层往上扔到90层才能试出结果，如果没碎，我们只需要在 90 ~ 100 这 10 层做实验即可。</p>
+<p>要用动态规划的来解这道题，我们首先要列出问题中的状态<br>每次我们扔鸡蛋的时候，可能会出现两种状态</p>
 <ul>
-<li>.ignore    支持 .gitignore 的语法规则，并提供自动将文件加入 .gitignore 的功能</li>
-<li>Key PromoterX  Key Promoter的升级版，使用鼠标点击的时候会提醒你键盘的快捷键是什么，帮助你更好的使用键盘进行工作</li>
-<li>ideaVim 可以让你在 webstorm 中使用vim</li>
-<li>AceJump 帮助你快速跳转代码，和谷歌浏览器中的vimuim功能类似 ,非常好用的一个插件，强力推荐，默认快捷键是 ctrl+; 三个键，由于mac上按+号不是很方便个人建议改成command;</li>
-<li>Material Theme UI     一个很好看的主题</li>
-<li>Rainbow Brackets    更好看的括号颜色</li>
-<li>activate-power-mode 装逼神器，和atom上的敲代码酷炫效果类似，一个比较鸡肋的功能</li>
-<li>CodeGlance 可以在右边看到代码的整体缩略图，也强力推荐使用</li>
-<li>eslint 如果项目中需要用到eslint的话，比较建议装上</li>
+<li>摔碎，这时下一个鸡蛋就要从最底层一个一个往上试才能试出结果</li>
+<li>没碎，则我们需要根据剩余的楼层数来决策出我们下一次丢鸡蛋的楼层数</li>
 </ul>
-<p>以上是比较通用的一些插件，还有vue,react,angular的一些插件，就看个人需求具体的去安装了。</p>
-<h2 id="dash"><a href="#dash" class="headerlink" title="dash"></a>dash</h2><p>一款非常好用的api文档查看工具，不过是收费的。</p>
-<p>以上是我觉得开发当中比较好用的一些东西，仅供参考，如果有更好的工具欢迎分享~</p>
+<p>我们假设第一次我们从 x 层楼往下扔，如果鸡蛋没碎，下一次我们往上走 k 层楼再扔，根据我们的假设我们可以绘制出一个这样的决策树。<br><img src="https://user-gold-cdn.xitu.io/2019/2/3/168b26a84805078f?w=465&amp;h=364&amp;f=png&amp;s=26875" alt="01.png"><br>为了让最坏的情况不太坏，我们必须要保证每一次的决策最后所需要的次数都尽可能的相等。也就是<br>1 + k = x。所以每次鸡蛋没碎，我们都要再上一次上升楼层数的基础减少1。</p>
+<h4 id="如何确认第一次扔的高度"><a href="#如何确认第一次扔的高度" class="headerlink" title="如何确认第一次扔的高度"></a>如何确认第一次扔的高度</h4><p>我们假设我们每次扔鸡蛋都没有碎，第一次从x层开始扔,我们最后一次就必须在100层楼扔了。可以得到式子 x + x - 1 + x - 2 … + 1 &gt;= 100,根据等差数列求和，我们可以得到 <code>x * (x + 1)/2</code> &gt;= 100,<br>得到 x &gt;= 13.45,因为 x 只能取整数，所以第一次我们从14层楼开始扔，得到最坏情况下，我最多需要扔14次可以确认临界点。</p>
+<p>放宽到一般情况，n 层楼 2 个鸡蛋，我们可以得到  x + x - 1 + x - 2 … + 1 &gt;= n<br>最后算出 x &gt;= <img src="https://user-gold-cdn.xitu.io/2019/2/3/168b27b749450dd9?w=111&amp;h=40&amp;f=gif&amp;s=509" alt="02.png"></p>
+<h3 id="Super-Egg-Drop"><a href="#Super-Egg-Drop" class="headerlink" title="Super Egg Drop"></a>Super Egg Drop</h3><p><a href="https://leetcode.com/problems/super-egg-drop/" target="_blank" rel="noopener">Super Egg Drop</a> 这道题是 google 这道题的升级版。这里的是给定 K 个鸡蛋，N层楼让你求出最小的次数是多少。</p>
+<p>我们还是按照动态规划的思路来列出问题中的状态：</p>
+<ul>
+<li>K = 0的时候，我们是试不出来的</li>
+<li>K = 1时，我们只能从1楼一层一层往上试，次数为楼层高度 n</li>
+<li>K = 2时，情况和上面一样</li>
+<li>k &gt; 2时，需要我们单独分析了</li>
+</ul>
+<p>我们设 dp[k][n] 为 k 个鸡蛋，n 层楼时的最优次数。</p>
+<ul>
+<li>k = 0 , dp[k][n] = 0</li>
+<li>k = 1, dp[k][n] = n</li>
+<li>k = 2, dp[k][n] = <img src="https://latex.codecogs.com/gif.latex?%5Cfrac%7B-1&plus;%5Csqrt%7B1&plus;8n%7D%7D%7B2%7D" alt="01"></li>
+</ul>
+<p>当 k &gt; 2时</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/2/3/168b2802b2152e10?w=700&amp;h=334&amp;f=png&amp;s=28538" alt="02"></p>
+<p>假设我们还剩 m 个鸡蛋，还需要实验 n 层楼，此时 1 &lt;= n &lt;= h, 假设我们已经知道了 1 ~ n 层最优解，假设这时候第一次丢的高度为 y ，丢的时候会出现两种情况, 然后可以列出动态方程</p>
+<h4 id="碎了"><a href="#碎了" class="headerlink" title="碎了"></a>碎了</h4><p>则此时的最优解为 dp(m - 1, y - 1) + 1</p>
+<h4 id="没碎"><a href="#没碎" class="headerlink" title="没碎"></a>没碎</h4><p>则此时的最优解为 dp(m, n - y) + 1</p>
+<p>由此我们可以得到 dp(m, n) = min(max(dp(m - 1, y - 1), dp(m, n - y)) + 1), 1&lt;=y&lt; n，由此我们可以递推的得到 dp(K,N)</p>
+<p><a href="https://github.com/SHISME/LeetCode/blob/master/src/887/index.js" target="_blank" rel="noopener">JS 实现源码</a></p>
+<p>这题后面还需要优化，由于复杂度较高，需要一定的基础，暂时没有继续优化下去</p>
+<p>推荐一个人的博客，把这题分析的非常透彻，有兴趣的可以看看<br><a href="https://charlesliuyx.github.io/2018/10/11/%E3%80%90%E7%9B%B4%E8%A7%82%E7%AE%97%E6%B3%95%E3%80%91Egg%20Puzzle%20%E9%B8%A1%E8%9B%8B%E9%9A%BE%E9%A2%98/" target="_blank" rel="noopener">博客地址</a></p>
 
       
     </div>
@@ -406,8 +439,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/sh-article/2018/05/03/hello-world/" rel="next" title="浏览器如何验证证书的">
-                <i class="fa fa-chevron-left"></i> 浏览器如何验证证书的
+              <a href="/sh-article/2019/03/13/react-native组件开发/" rel="next" title="react-native拖动组件开发">
+                <i class="fa fa-chevron-left"></i> react-native拖动组件开发
               </a>
             
           </div>
@@ -415,10 +448,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/sh-article/2018/06/24/深入浅出react笔记/" rel="prev" title="深入浅出react笔记">
-                深入浅出react笔记 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -560,7 +589,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#git"><span class="nav-number">1.</span> <span class="nav-text">git</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Homebrew"><span class="nav-number">2.</span> <span class="nav-text">Homebrew</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#item2"><span class="nav-number">3.</span> <span class="nav-text">item2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#谷歌浏览器插件"><span class="nav-number">4.</span> <span class="nav-text">谷歌浏览器插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#webstorm"><span class="nav-number">5.</span> <span class="nav-text">webstorm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#dash"><span class="nav-number">6.</span> <span class="nav-text">dash</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#google-原题"><span class="nav-number">1.</span> <span class="nav-text">google 原题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思路"><span class="nav-number">2.</span> <span class="nav-text">思路</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#如何确认第一次扔的高度"><span class="nav-number">2.1.</span> <span class="nav-text">如何确认第一次扔的高度</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Super-Egg-Drop"><span class="nav-number">3.</span> <span class="nav-text">Super Egg Drop</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#碎了"><span class="nav-number">3.1.</span> <span class="nav-text">碎了</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#没碎"><span class="nav-number">3.2.</span> <span class="nav-text">没碎</span></a></li></ol></li></ol></div>
             
 
           </div>
