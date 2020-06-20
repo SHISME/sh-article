@@ -276,6 +276,175 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/sh-article/2020/05/18/ts高级用法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="$SH">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/17661313?s=460&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SZU_SH">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/sh-article/2020/05/18/ts高级用法/" itemprop="url">ts高级用法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-18T23:38:37+08:00">
+                2020-05-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/sh-article/categories/ts/" itemprop="url" rel="index">
+                    <span itemprop="name">ts</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/sh-article/2020/05/18/ts高级用法/" class="leancloud_visitors" data-flag-title="ts高级用法">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><code>typescript</code> 的基本使用方式基本已经可以覆盖到我们绝大部门的使用场景，但是我们也任会碰到一些特殊的场景需要我们使用一些高级的ts的用法，下面总结一下我常用的一些用法。</p>
+<h3 id="keyof"><a href="#keyof" class="headerlink" title="keyof"></a>keyof</h3><p><code>keyof</code> 能够帮助我们快速生成 <code>interface</code> 的 key 的类型。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">interface</span> A &#123;</span><br><span class="line">  age: <span class="built_in">number</span>;</span><br><span class="line">  name: <span class="built_in">string</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> AKeys = keyof A; <span class="comment">// age | name</span></span><br></pre></td></tr></table></figure>
+<h3 id="利用-keyof-提取接口"><a href="#利用-keyof-提取接口" class="headerlink" title="利用 keyof 提取接口"></a>利用 keyof 提取接口</h3><p>有时候我们可能会碰到需要提取接口部门结构的需求，这时候我们可以利用 ts 提供的<code>pick</code>类型</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">type</span> pick&lt;T, K <span class="keyword">extends</span> keyof T&gt; = &#123;</span><br><span class="line">  [key <span class="keyword">in</span> K]: T[key]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> A &#123;</span><br><span class="line">  age: <span class="built_in">number</span>;</span><br><span class="line">  name: <span class="built_in">string</span>;</span><br><span class="line">  sex: <span class="built_in">string</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> C = pick&lt;A, <span class="string">'age'</span> | <span class="string">'sex'</span>&gt;; <span class="comment">// &#123; age: number; sex: string; &#125;</span></span><br></pre></td></tr></table></figure>
+<h3 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h3><p>常用的使用场景就是我们可能需要根据传入值的类型来确定返回值的类型</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">interface</span> Create &#123;</span><br><span class="line">  (val: <span class="built_in">number</span>): <span class="built_in">number</span></span><br><span class="line">  (val: <span class="built_in">string</span>): <span class="built_in">string</span></span><br><span class="line">  (val: <span class="built_in">Date</span>): <span class="built_in">Date</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>有个典型的例子就是eventBus，我们可能需要在不同的事件监听不同的类型的数据和广播不同类型的数据</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> EventName &#123;</span><br><span class="line">  sayName,</span><br><span class="line">  run,</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">interface</span> EventBusOn &#123;</span><br><span class="line">  (event: EventName.sayName, cb: <span class="function">(<span class="params">params: &#123;name: <span class="built_in">string</span>&#125;</span>) =&gt;</span> <span class="built_in">void</span>): <span class="built_in">void</span></span><br><span class="line">  (event: EventName.run, cb: <span class="function">(<span class="params">params: &#123;duration: <span class="built_in">number</span>&#125;</span>) =&gt;</span> <span class="built_in">void</span>): <span class="built_in">void</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> EventBusEmit &#123;</span><br><span class="line">  (event: EventName.sayName, params: &#123;name: <span class="built_in">string</span>&#125;): <span class="built_in">void</span></span><br><span class="line">  (event: EventName.run, params: &#123;duration: <span class="built_in">number</span>&#125;): <span class="built_in">void</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">interface</span> EventBus &#123;</span><br><span class="line">  on: EventBusOn;</span><br><span class="line">  emit: EventBusEmit;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> eventBus: EventBus = <span class="keyword">new</span> Vue();</span><br><span class="line">eventBus.on(EventName.sayName, <span class="function">(<span class="params">&#123;name&#125;</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(name);</span><br><span class="line">&#125;);</span><br><span class="line">eventBus.emit(EventName.sayName, &#123;name: <span class="string">'sd'</span>&#125;);</span><br></pre></td></tr></table></figure>
+<p>这样还有个问题，就是我们每次增加一个事件类型，都需要去修改 <code>EventBusOn</code> 和 <code>EventBusEmit</code> 两个接口，但是他们的修改模式基本是固定的，结合前面的两个技巧，我们也可以优化这个接口。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> EventName &#123;</span><br><span class="line">  sayName,</span><br><span class="line">  run,</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">interface</span> EventParams &#123;</span><br><span class="line">  [EventName.sayName]: &#123;</span><br><span class="line">    name: <span class="built_in">string</span>;</span><br><span class="line">  &#125;;</span><br><span class="line">  [EventName.run]: &#123;</span><br><span class="line">    duration: <span class="built_in">number</span>;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">interface</span> EventBusOn &#123;</span><br><span class="line">  &lt;T <span class="keyword">extends</span> EventName&gt;<span class="function">(<span class="params">event: T, cb: (<span class="params">params: EventParams[T]</span>) =&gt; <span class="built_in">void</span></span>): <span class="params">void</span></span></span><br><span class="line"><span class="function">&#125;</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="params">interface</span> <span class="params">EventBusEmit</span> &#123;</span></span><br><span class="line"><span class="function">  &lt;<span class="params">T</span> <span class="params">extends</span> <span class="params">EventName</span>&gt;(<span class="params">event: T, params: EventParams[T]</span>): <span class="params">void</span></span></span><br><span class="line"><span class="function">&#125;</span></span><br><span class="line"><span class="function"><span class="params">interface</span> <span class="params">EventBus</span> &#123;</span></span><br><span class="line"><span class="function">  <span class="params">on</span>: <span class="params">EventBusOn</span>;</span></span><br><span class="line"><span class="function">  <span class="params">emit</span>: <span class="params">EventBusEmit</span>;</span></span><br><span class="line"><span class="function">&#125;</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="params">const</span> <span class="params">eventBus</span>: <span class="params">EventBus</span> = <span class="params">new</span> <span class="params">Vue</span><span class="params">()</span>;</span></span><br><span class="line"><span class="function"><span class="params">eventBus</span>.<span class="params">on</span>(<span class="params">EventName.sayName, (<span class="params">&#123;name&#125;</span>) =&gt; &#123;</span></span></span><br><span class="line"><span class="function"><span class="params">  <span class="built_in">console</span>.log(<span class="params">name</span>);</span></span></span><br><span class="line"><span class="function"><span class="params">&#125;</span>)</span></span><br><span class="line"><span class="function"><span class="params">eventBus</span>.<span class="params">emit</span>(<span class="params">EventName.sayName, &#123;name: 'name'&#125;</span>)</span></span><br></pre></td></tr></table></figure>
+<h3 id="利用-is-帮助类型推断"><a href="#利用-is-帮助类型推断" class="headerlink" title="利用 is 帮助类型推断"></a>利用 is 帮助类型推断</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">interface</span> A &#123;</span><br><span class="line">  <span class="keyword">type</span>: <span class="built_in">string</span>;</span><br><span class="line">  data: &#123;</span><br><span class="line">    name: <span class="built_in">string</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">interface</span> B &#123;</span><br><span class="line">  <span class="keyword">type</span>: <span class="built_in">string</span>;</span><br><span class="line">  data: <span class="built_in">boolean</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isA</span>(<span class="params">params: <span class="built_in">any</span></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> params.type === <span class="string">'A'</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 这里能够帮助推断出类型</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isA2</span>(<span class="params">params: <span class="built_in">any</span></span>): <span class="title">params</span> <span class="title">is</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> params.type === <span class="string">'A'</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params">params: A | B</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (isA(params)) &#123;</span><br><span class="line">    params.data</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> ((isA2(params))) &#123;</span><br><span class="line">    params.data</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="泛型的类型限制"><a href="#泛型的类型限制" class="headerlink" title="泛型的类型限制"></a>泛型的类型限制</h3><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">interface</span> A&lt;T <span class="keyword">extends</span> &#123;length: <span class="built_in">number</span>;&#125;&gt; &#123;</span><br><span class="line">  data:T;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里就会限制了类型A的data属性必须是有length属性，且length类型为number</p>
+<h3 id="infer-关键字"><a href="#infer-关键字" class="headerlink" title="infer 关键字"></a>infer 关键字</h3><p>ts 官方是有提供相关的几个工具类型，也有用到 infer</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Obtain the parameters of a constructor function type in a tuple</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">type</span> ConstructorParameters&lt;T <span class="keyword">extends</span> <span class="keyword">new</span> (...args: <span class="built_in">any</span>) =&gt; <span class="built_in">any</span>&gt; = T <span class="keyword">extends</span> <span class="keyword">new</span> (...args: infer P) =&gt; <span class="built_in">any</span> ? P : never;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Obtain the return type of a function type</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">type</span> ReturnType&lt;T <span class="keyword">extends</span> (...args: <span class="built_in">any</span>) =&gt; <span class="built_in">any</span>&gt; = T <span class="keyword">extends</span> (...args: <span class="built_in">any</span>) =&gt; infer R ? R : <span class="built_in">any</span>;</span><br></pre></td></tr></table></figure>
+<p>这里我们可以通过 infer 关键字做类型推断，意思有点想，比方说 ReturnType 中我们如果传入的函数的返回值类型是R，则我们把R返回，这个关键字目前来看使用场景还比较少</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/sh-article/2019/03/18/google鸡蛋问题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1829,175 +1998,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/sh-article/2018/11/24/call-bind-apply/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="$SH">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/17661313?s=460&v=4">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SZU_SH">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/sh-article/2018/11/24/call-bind-apply/" itemprop="url">call、bind、apply 原理与原生实现</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-24T07:53:05+08:00">
-                2018-11-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/sh-article/categories/JS/" itemprop="url" rel="index">
-                    <span itemprop="name">JS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/sh-article/2018/11/24/call-bind-apply/" class="leancloud_visitors" data-flag-title="call、bind、apply 原理与原生实现">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>call, apply, bind 算是比较面试中比较常问到的几个问题，再我们实际开发中也算是常用到的几个方法，了解清楚他们背后的运行机制和原理对一个前端开发者来说也就十分的必要了。</p>
-<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><p>先来看看他们各自的用法</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> petter = &#123;</span><br><span class="line">    name:<span class="string">'petter'</span>,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">say</span>(<span class="params">text, color</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name + <span class="string">':'</span> + text + <span class="string">','</span> + color);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// call 的用法</span></span><br><span class="line">say.call(petter, <span class="string">'call'</span>, <span class="string">'red'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// apply 的用法</span></span><br><span class="line">say.apply(petter, [<span class="string">'call'</span>, <span class="string">'red'</span>]);</span><br><span class="line"></span><br><span class="line"><span class="comment">// bind 的用法</span></span><br><span class="line"><span class="keyword">var</span> petter_say = say.bind(petter, <span class="string">'call'</span>);</span><br><span class="line">petter_say(<span class="string">'red'</span>);</span><br></pre></td></tr></table></figure>
-<p>call 和 apply的区别只是在第二参数，他们第一个参数都是用于改变函数this的指向，call 后面需要按顺序传入函数所需的多个参数， apply 则需要将函数所需的参数放入数组中传给apply的第二参数。</p>
-<p>bind 和他们又很不一样，bind会返回一个改变了this的新的函数，后面和call一样，你可以把所有参数提前传入，也可以后面再把参数传入。</p>
-<h2 id="原生实现"><a href="#原生实现" class="headerlink" title="原生实现"></a>原生实现</h2><p>了解他们各自的用法之后，我们也可以自己通过原生的代码去实现上面的方法</p>
-<h3 id="call-的实现"><a href="#call-的实现" class="headerlink" title="call 的实现"></a>call 的实现</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">Function</span>.prototype.my_call = <span class="function"><span class="keyword">function</span>(<span class="params">new_this, ...params</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 用来做唯一索引用的，也可以不用symbol，为了安全用symbol能够保证外面绝对无法访问</span></span><br><span class="line">    <span class="comment">// 整个原理是需要把方法挂载到传入的对象上去，然后通过这个对象去调用用这个函数</span></span><br><span class="line">    <span class="keyword">const</span> fn_symbol = <span class="built_in">Symbol</span>(<span class="string">'fn'</span>);</span><br><span class="line">    <span class="keyword">if</span> (new_this === <span class="literal">null</span> || new_this === <span class="literal">undefined</span>) &#123;</span><br><span class="line">        new_this = <span class="built_in">window</span>; <span class="comment">// 传入null或者undefined的时候需要让this指向window</span></span><br><span class="line">    &#125;</span><br><span class="line">    new_this[fn_symbol] = <span class="keyword">this</span>; <span class="comment">// 这里的this指向的是这个方法</span></span><br><span class="line">    new_this[fn_symbol](...params); </span><br><span class="line">    <span class="keyword">delete</span> new_this[fn_symbol];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="apply-的实现"><a href="#apply-的实现" class="headerlink" title="apply 的实现"></a>apply 的实现</h3><p>实现了call之后，apply 的实现也是类似的</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 唯一的区别就是这里的params不需要展开运算符</span></span><br><span class="line"><span class="built_in">Function</span>.prototype.my_apply = <span class="function"><span class="keyword">function</span>(<span class="params">new_this, params</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> fn_symbol = <span class="built_in">Symbol</span>(<span class="string">'fn'</span>);</span><br><span class="line">    <span class="keyword">if</span> (new_this === <span class="literal">null</span> || new_this === <span class="literal">undefined</span>) &#123;</span><br><span class="line">        new_this = <span class="built_in">window</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    new_this[fn_symbol] = <span class="keyword">this</span>;</span><br><span class="line">    new_this[fn_symbol](...params); </span><br><span class="line">    <span class="keyword">delete</span> new_this[fn_symbol];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="bind-的实现"><a href="#bind-的实现" class="headerlink" title="bind 的实现"></a>bind 的实现</h3><p>bind 和 call 有点类似，但又不太一样，bind 会返回一个新的函数，所以我们得保存传入的this然后返回一个新的函数出来</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">Function</span>.prototype.my_bind = <span class="function"><span class="keyword">function</span>(<span class="params">new_this, ...params</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> fn_symbol = <span class="built_in">Symbol</span>(<span class="string">'fn'</span>);</span><br><span class="line">    <span class="keyword">if</span> (new_this === <span class="literal">null</span> || new_this === <span class="literal">undefined</span>) &#123;</span><br><span class="line">        new_this = <span class="built_in">window</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    new_this[fn_symbol] = <span class="keyword">this</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">...new_params</span>) </span>&#123;</span><br><span class="line">        new_this[fn_symbol](...[...params, ...new_params]);</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 或者可以借助call来实现</span></span><br><span class="line"><span class="built_in">Function</span>.prototype.my_bind_c = <span class="function"><span class="keyword">function</span>(<span class="params">new_this, ...params</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> fn = <span class="keyword">this</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params">...new_params</span>) </span>&#123;</span><br><span class="line">        fn.call(new_this, ...params, ...new_params);</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>现在我们可以更好的去理解为什么bind之后的方法无法再去改变他的this了，因为闭包的关系，传入的new_this我们是无法再去改变他的指向的.</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/sh-article/page/2/">2</a><a class="page-number" href="/sh-article/page/3/">3</a><a class="extend next" rel="next" href="/sh-article/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/sh-article/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/sh-article/page/4/">4</a><a class="extend next" rel="next" href="/sh-article/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2047,7 +2052,7 @@
               
                 <a href="/sh-article/archives/">
               
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">31</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2058,7 +2063,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/sh-article/categories/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2107,7 +2112,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
