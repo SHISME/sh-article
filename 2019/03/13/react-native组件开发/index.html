@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/sh-article/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/sh-article/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/sh-article/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/sh-article/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/sh-article/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/sh-article/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/sh-article/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="很多人可能都做过 html 的拖动，但是估计做 react-native 的拖动的人就不是特别多了。这里分享一下之前做的一个组件的设计思路。后面主要写了一些伪代码，主要是提供一个写这个组件的思路，具体的源码可以查看下面这个地址。 源码地址：react-native-draggable-grid 关键 api在讲关键算法之前先说一下需要用的几个关键方法和参数 react-native 提供了一个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="react-native拖动组件开发">
+<meta property="og:url" content="http://yoursite.com/2019/03/13/react-native组件开发/index.html">
+<meta property="og:site_name" content="SZU_SH">
+<meta property="og:description" content="很多人可能都做过 html 的拖动，但是估计做 react-native 的拖动的人就不是特别多了。这里分享一下之前做的一个组件的设计思路。后面主要写了一些伪代码，主要是提供一个写这个组件的思路，具体的源码可以查看下面这个地址。 源码地址：react-native-draggable-grid 关键 api在讲关键算法之前先说一下需要用的几个关键方法和参数 react-native 提供了一个">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2019/3/10/16965d0c1a80aa2a?w=676&h=1114&f=gif&s=1407998">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2019/3/10/169657809aa823ba?w=875&h=534&f=png&s=17865">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2019/3/10/16965b6d86b55bd8?w=872&h=534&f=png&s=16384">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2019/3/10/16965c6832e17933?w=872&h=534&f=png&s=18843">
+<meta property="og:updated_time" content="2021-02-21T16:35:32.731Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="react-native拖动组件开发">
+<meta name="twitter:description" content="很多人可能都做过 html 的拖动，但是估计做 react-native 的拖动的人就不是特别多了。这里分享一下之前做的一个组件的设计思路。后面主要写了一些伪代码，主要是提供一个写这个组件的思路，具体的源码可以查看下面这个地址。 源码地址：react-native-draggable-grid 关键 api在讲关键算法之前先说一下需要用的几个关键方法和参数 react-native 提供了一个">
+<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2019/3/10/16965d0c1a80aa2a?w=676&h=1114&f=gif&s=1407998">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/sh-article/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/03/13/react-native组件开发/"/>
+
+
+
+
+
+  <title>react-native拖动组件开发 | SZU_SH</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/sh-article/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">SZU_SH</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/sh-article/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/sh-article/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/sh-article/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/sh-article/2019/03/13/react-native组件开发/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="$SH">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/17661313?s=460&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SZU_SH">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">react-native拖动组件开发</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-13T00:16:43+08:00">
+                2019-03-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/sh-article/2019/03/13/react-native组件开发/" class="leancloud_visitors" data-flag-title="react-native拖动组件开发">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://user-gold-cdn.xitu.io/2019/3/10/16965d0c1a80aa2a?w=676&amp;h=1114&amp;f=gif&amp;s=1407998" alt=""></p>
+<p>很多人可能都做过 html 的拖动，但是估计做 react-native 的拖动的人就不是特别多了。这里分享一下之前做的一个组件的设计思路。后面主要写了一些伪代码，主要是提供一个写这个组件的思路，具体的源码可以查看下面这个地址。</p>
+<p>源码地址：<br><a href="https://github.com/SHISME/react-native-draggable-grid" target="_blank" rel="noopener">react-native-draggable-grid</a></p>
+<h2 id="关键-api"><a href="#关键-api" class="headerlink" title="关键 api"></a>关键 api</h2><p>在讲关键算法之前先说一下需要用的几个关键方法和参数</p>
+<p>react-native 提供了一个 <code>PanResponder</code> 用于识别手势操作</p>
+<h3 id="onPanResponderMove"><a href="#onPanResponderMove" class="headerlink" title="onPanResponderMove"></a>onPanResponderMove</h3><p><code>onPanResponderMove: (event, gestureState) =&gt; {}</code></p>
+<h4 id="gestureState"><a href="#gestureState" class="headerlink" title="gestureState"></a>gestureState</h4><ul>
+<li><code>x0</code> 当响应器产生时的屏幕横坐标, 响应器一直没释放的话，这个值是一直不变的</li>
+<li><code>y0</code> 当响应器产生时的屏幕纵坐标，响应器一直没释放的话，这个值是一直不变的</li>
+<li><code>moveX</code> 最近一次移动时，手指在屏幕上相对于屏幕的x坐标，屏幕最左上角坐标为0，0</li>
+<li><code>moveY</code> 最近一次移动时，手指在屏幕上相对于屏幕的y坐标，屏幕最左上角坐标为0，0</li>
+</ul>
+<h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><p>我们这个组件有一个需要注意的是，组件会被限制在只能在一定的区域内拖动，不能超过这个区域。</p>
+<h3 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h3><p>首先我们需要在组件构造函数里实例化一个 <code>panResponder</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">this</span>.panResponderCapture = <span class="literal">false</span>;</span><br><span class="line"><span class="keyword">this</span>.panResponder = PanResponder.create(&#123;</span><br><span class="line">      <span class="comment">//否在触摸开始时想成为响应器？</span></span><br><span class="line">      onStartShouldSetPanResponder:<span class="function"><span class="params">()</span> =&gt;</span> <span class="literal">true</span>,</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 这两个用于设置是否成为响应器，当手指在视图上移动的时候回不断的调用者两个方法</span></span><br><span class="line">      onMoveShouldSetPanResponder:<span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">this</span>.panResponderCapture,</span><br><span class="line">      onMoveShouldSetPanResponderCapture:<span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">this</span>.panResponderCapture,</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 返回一个布尔值，决定当前组件是否应该阻止原生组件成为JS响应者</span></span><br><span class="line">      <span class="comment">// 默认返回true。目前暂时只支持android。</span></span><br><span class="line">      onShouldBlockNativeResponder:<span class="function"><span class="params">()</span> =&gt;</span> <span class="literal">false</span>,</span><br><span class="line"></span><br><span class="line">      <span class="comment">//其他组件想成为响应器。这个视图应该释放应答吗？返回 true 就是允许释放</span></span><br><span class="line">      onPanResponderTerminationRequest:<span class="function"><span class="params">()</span> =&gt;</span> <span class="literal">false</span>,</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 手势相应开始时触发的</span></span><br><span class="line">      onPanResponderGrant:<span class="keyword">this</span>.onStartDrag.bind(<span class="keyword">this</span>),</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 手势移动时触发的</span></span><br><span class="line">      onPanResponderMove:<span class="keyword">this</span>.onHandMove.bind(<span class="keyword">this</span>),</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 手指释放时触发</span></span><br><span class="line">      onPanResponderRelease:<span class="keyword">this</span>.onHandRelease.bind(<span class="keyword">this</span>),</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="第二步"><a href="#第二步" class="headerlink" title="第二步"></a>第二步</h3><p>将 <code>GestureResponderHandlers</code> 赋给对应的组件，为了较简单的去定位元素，我们选择了用 <code>absolute</code> 定位。</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;View</span><br><span class="line">  ref=&#123;<span class="string">'test'</span>&#125;</span><br><span class="line">  style=&#123;&#123;<span class="attr">width</span>:<span class="number">100</span>,<span class="attr">height</span>:<span class="number">100</span>,<span class="attr">position</span>:<span class="string">'absolute'</span>,<span class="attr">backgroundColor</span>:<span class="string">'red'</span>&#125;&#125;</span><br><span class="line">  &#123;...this.panResponder.panHandlers&#125;</span><br><span class="line">/&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="第三步"><a href="#第三步" class="headerlink" title="第三步"></a>第三步</h3><p>这一步主要是设置 <code>currentPosition.setOffset({x,y,});</code>, 这个的作用是，以后每次我们调用 setValue 的时候都会调用在其基础上加上x,y,后面会详细讲解为什么要这样设置。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">private onStartDrag(nativeEvent:GestureResponderEvent, <span class="attr">gestureState</span>:PanResponderGestureState) &#123;</span><br><span class="line">   <span class="keyword">const</span> activeItem = <span class="keyword">this</span>.getActiveItem();</span><br><span class="line">   <span class="keyword">if</span> (!activeItem) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">   <span class="keyword">this</span>.props.onDragStart &amp;&amp; <span class="keyword">this</span>.props.onDragStart(activeItem.itemData);</span><br><span class="line">   <span class="keyword">const</span> &#123;x0, y0, moveX, moveY&#125; = gestureState;</span><br><span class="line">   <span class="keyword">const</span> activeOrigin = <span class="keyword">this</span>.blockPositions[<span class="keyword">this</span>.orderMap[activeItem.key].order];</span><br><span class="line">   <span class="keyword">const</span> x = activeOrigin.x - x0;</span><br><span class="line">   <span class="keyword">const</span> y = activeOrigin.y - y0;</span><br><span class="line"></span><br><span class="line">   activeItem.currentPosition.setOffset(&#123;</span><br><span class="line">     x,</span><br><span class="line">     y,</span><br><span class="line">   &#125;);</span><br><span class="line">   <span class="keyword">this</span>.activeBlockOffset = &#123;</span><br><span class="line">     x,</span><br><span class="line">     y</span><br><span class="line">   &#125;;</span><br><span class="line">   activeItem.currentPosition.setValue(&#123;</span><br><span class="line">     x:moveX,</span><br><span class="line">     y:moveY,</span><br><span class="line">   &#125;)</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="第四步"><a href="#第四步" class="headerlink" title="第四步"></a>第四步</h3><p>这一步主要是计算出手指拖动的位置，然后重新设置 view 的left和right，后面详细讲解一下整个的计算思路</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">private onHandMove(nativeEvent:GestureResponderEvent, <span class="attr">gestureState</span>:PanResponderGestureState) &#123;</span><br><span class="line">    <span class="keyword">const</span> activeItem = <span class="keyword">this</span>.getActiveItem();</span><br><span class="line">    <span class="keyword">if</span> (!activeItem) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">const</span> &#123;moveX, moveY&#125; = gestureState;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> yChokeAmount = <span class="built_in">Math</span>.max(<span class="number">0</span>, (<span class="keyword">this</span>.activeBlockOffset.y + moveY) - (<span class="keyword">this</span>.state.gridLayout.height - <span class="keyword">this</span>.state.blockHeight));</span><br><span class="line">    <span class="keyword">const</span> xChokeAmount = <span class="built_in">Math</span>.max(<span class="number">0</span>, (<span class="keyword">this</span>.activeBlockOffset.x + moveX) - (<span class="keyword">this</span>.state.gridLayout.width - <span class="keyword">this</span>.state.blockWidth));</span><br><span class="line">    <span class="keyword">const</span> yMinChokeAmount = <span class="built_in">Math</span>.min(<span class="number">0</span>, <span class="keyword">this</span>.activeBlockOffset.y + moveY);</span><br><span class="line">    <span class="keyword">const</span> xMinChokeAmount = <span class="built_in">Math</span>.min(<span class="number">0</span>, <span class="keyword">this</span>.activeBlockOffset.x + moveX);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> dragPosition = &#123;</span><br><span class="line">      x:moveX - xChokeAmount - xMinChokeAmount,</span><br><span class="line">      y:moveY - yChokeAmount - yMinChokeAmount,</span><br><span class="line">    &#125;;</span><br><span class="line">    activeItem.currentPosition.setValue(dragPosition);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://user-gold-cdn.xitu.io/2019/3/10/169657809aa823ba?w=875&amp;h=534&amp;f=png&amp;s=17865" alt=""></p>
+<p>我们来看一下我们从下面这个位置，移动到上面这个这个位置是如何计算出新的位置的坐标。新的y等于 y - (moveY1 - moveY2) = y -moveY1 + moveY2,我们onStartDrag的setOffset做的其实就是先把y - moveY1 这部分算出来缓存起来。后面我们只需要直接加上最新moveY即为最终结果。</p>
+<h4 id="现在再来看一下如何把组件限制在一定区域内移动："><a href="#现在再来看一下如何把组件限制在一定区域内移动：" class="headerlink" title="现在再来看一下如何把组件限制在一定区域内移动："></a>现在再来看一下如何把组件限制在一定区域内移动：</h4><h5 id="最上边界"><a href="#最上边界" class="headerlink" title="最上边界"></a>最上边界</h5><p>我们先看纵坐标我们能移动到的最上面的位置。y的值最小为0，即要控制offsetY + moveY &gt;= 0</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/3/10/16965b6d86b55bd8?w=872&amp;h=534&amp;f=png&amp;s=16384" alt=""></p>
+<p>如果组件移动超过了限制区域，newY = moveY + offsetY，newY 是个负值，此时我们需要把newY向下偏移到0</p>
+<h5 id="最下边界"><a href="#最下边界" class="headerlink" title="最下边界"></a>最下边界</h5><p>要控制vie移动的最下面区域之上，我们需要控制 offsetY + moveY &lt;= parentHeight - blockHeight</p>
+<p><img src="https://user-gold-cdn.xitu.io/2019/3/10/16965c6832e17933?w=872&amp;h=534&amp;f=png&amp;s=18843" alt=""></p>
+<p>如果区域超出了最下边的底线，超出值等于 (offsetY + moveY - (parentHeight - blockHeight)), 如果超出的话这个值为正值，我们的offsetY + moveY需要减去这个值，不超出的话则是负值</p>
+<h5 id="偏移算法"><a href="#偏移算法" class="headerlink" title="偏移算法"></a>偏移算法</h5><p>上面接触到最上边界和最下边界同时只会发生一个，我们可以通过修正offsetY + moveY来达到把y限制在一定区域内。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 上偏移调整值</span></span><br><span class="line"><span class="keyword">const</span> yMinChokeAmount = <span class="built_in">Math</span>.min(<span class="number">0</span>, <span class="keyword">this</span>.activeBlockOffset.y + moveY);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 下偏移调整值</span></span><br><span class="line"><span class="keyword">const</span> yChokeAmount = <span class="built_in">Math</span>.max(<span class="number">0</span>, (<span class="keyword">this</span>.activeBlockOffset.y + moveY) - (<span class="keyword">this</span>.state.gridLayout.height - <span class="keyword">this</span>.state.blockHeight));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 偏移调整后的y</span></span><br><span class="line"><span class="keyword">const</span> y = moveY - yChokeAmount - yMinChokeAmount;</span><br></pre></td></tr></table></figure>
+<p>x 的偏移调整也是同理。</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>最后就是在手指释放的时候将 <code>panResponderCapture</code> 设置回 <code>false</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">private onHandRelease() &#123;</span><br><span class="line">    <span class="keyword">this</span>.panResponderCapture = <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>组件还有涉及到数据同步，定位，排序等算法，这里就不做细讲了，有兴趣的可以去看源码研究一下。-</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/sh-article/2019/03/03/https-相关/" rel="next" title="https 基本概念学习">
+                <i class="fa fa-chevron-left"></i> https 基本概念学习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/sh-article/2019/03/18/google鸡蛋问题/" rel="prev" title="google鸡蛋问题">
+                google鸡蛋问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTEwMS8xMTYzNg"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://avatars1.githubusercontent.com/u/17661313?s=460&v=4"
+                alt="$SH" />
+            
+              <p class="site-author-name" itemprop="name">$SH</p>
+              <p class="site-description motion-element" itemprop="description">灵活跳跃诈笑看天下 乐似仙</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/sh-article/archives/">
+              
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/sh-article/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/SHISME" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#关键-api"><span class="nav-number">1.</span> <span class="nav-text">关键 api</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#onPanResponderMove"><span class="nav-number">1.1.</span> <span class="nav-text">onPanResponderMove</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#gestureState"><span class="nav-number">1.1.1.</span> <span class="nav-text">gestureState</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开始"><span class="nav-number">2.</span> <span class="nav-text">开始</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一步"><span class="nav-number">2.1.</span> <span class="nav-text">第一步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二步"><span class="nav-number">2.2.</span> <span class="nav-text">第二步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三步"><span class="nav-number">2.3.</span> <span class="nav-text">第三步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第四步"><span class="nav-number">2.4.</span> <span class="nav-text">第四步</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#现在再来看一下如何把组件限制在一定区域内移动："><span class="nav-number">2.4.1.</span> <span class="nav-text">现在再来看一下如何把组件限制在一定区域内移动：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#最上边界"><span class="nav-number">2.4.1.1.</span> <span class="nav-text">最上边界</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#最下边界"><span class="nav-number">2.4.1.2.</span> <span class="nav-text">最下边界</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#偏移算法"><span class="nav-number">2.4.1.3.</span> <span class="nav-text">偏移算法</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#最后"><span class="nav-number">3.</span> <span class="nav-text">最后</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">$SH</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/sh-article/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/sh-article/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/sh-article/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/sh-article/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/sh-article/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/sh-article/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/sh-article/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/sh-article/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/sh-article/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/sh-article/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/sh-article/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/sh-article/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/sh-article/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/sh-article/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/sh-article/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("cGtYos9pRXDCcwpUNGe4HjOb-gzGzoHsz", "iXsV6MLjDlohfOPtNkU4MKhS");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
