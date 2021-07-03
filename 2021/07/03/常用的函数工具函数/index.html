@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="react 的生命周期react 的生命周期，可能经过三个过程：  装载 mount 更新 update 卸载 unmount  装载 mount当组件第一次被装载的时候，react 会依次调用如下函数  constructor getInitialState：一般不会用到，state 一般在constructor 中进行初始化 getDefaultProps componentWillMount">
+<meta name="description" content="函数式是一种很好用的编程方式，使用函数式编程一开始可能还不是很习惯，但在你习惯之后会发现这能帮你编写出简洁且充满表达能力的代码。下面介绍一下，日常开发中运用函数式的一些技巧以及函数式的原理。 compose1compose(...fns) compose基本是大部分函数式都会用到的函数，他的作用是把传入的方法从右往左，把前一个的返回值返回给下一个，redux的中间件就是基于compose实现的。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="深入浅出react笔记">
-<meta property="og:url" content="http://yoursite.com/2018/06/24/深入浅出react笔记/index.html">
+<meta property="og:title" content="常用的函数工具函数">
+<meta property="og:url" content="http://yoursite.com/2021/07/03/常用的函数工具函数/index.html">
 <meta property="og:site_name" content="SZU_SH">
-<meta property="og:description" content="react 的生命周期react 的生命周期，可能经过三个过程：  装载 mount 更新 update 卸载 unmount  装载 mount当组件第一次被装载的时候，react 会依次调用如下函数  constructor getInitialState：一般不会用到，state 一般在constructor 中进行初始化 getDefaultProps componentWillMount">
+<meta property="og:description" content="函数式是一种很好用的编程方式，使用函数式编程一开始可能还不是很习惯，但在你习惯之后会发现这能帮你编写出简洁且充满表达能力的代码。下面介绍一下，日常开发中运用函数式的一些技巧以及函数式的原理。 compose1compose(...fns) compose基本是大部分函数式都会用到的函数，他的作用是把传入的方法从右往左，把前一个的返回值返回给下一个，redux的中间件就是基于compose实现的。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-24T09:50:41.774Z">
+<meta property="og:updated_time" content="2021-07-03T10:43:21.443Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="深入浅出react笔记">
-<meta name="twitter:description" content="react 的生命周期react 的生命周期，可能经过三个过程：  装载 mount 更新 update 卸载 unmount  装载 mount当组件第一次被装载的时候，react 会依次调用如下函数  constructor getInitialState：一般不会用到，state 一般在constructor 中进行初始化 getDefaultProps componentWillMount">
+<meta name="twitter:title" content="常用的函数工具函数">
+<meta name="twitter:description" content="函数式是一种很好用的编程方式，使用函数式编程一开始可能还不是很习惯，但在你习惯之后会发现这能帮你编写出简洁且充满表达能力的代码。下面介绍一下，日常开发中运用函数式的一些技巧以及函数式的原理。 compose1compose(...fns) compose基本是大部分函数式都会用到的函数，他的作用是把传入的方法从右往左，把前一个的返回值返回给下一个，redux的中间件就是基于compose实现的。">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/06/24/深入浅出react笔记/"/>
+  <link rel="canonical" href="http://yoursite.com/2021/07/03/常用的函数工具函数/"/>
 
 
 
 
 
-  <title>深入浅出react笔记 | SZU_SH</title>
+  <title>常用的函数工具函数 | SZU_SH</title>
   
 
 
@@ -276,7 +276,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/sh-article/2018/06/24/深入浅出react笔记/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/sh-article/2021/07/03/常用的函数工具函数/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="$SH">
@@ -293,7 +293,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">深入浅出react笔记</h1>
+          <h1 class="post-title" itemprop="name headline">常用的函数工具函数</h1>
         
 
         <div class="post-meta">
@@ -305,8 +305,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-24T17:19:51+08:00">
-                2018-06-24
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-07-03T10:27:55+08:00">
+                2021-07-03
               </time>
             
 
@@ -316,6 +316,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/sh-article/categories/JS/" itemprop="url" rel="index">
+                    <span itemprop="name">JS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -323,7 +345,7 @@
 
           
           
-             <span id="/sh-article/2018/06/24/深入浅出react笔记/" class="leancloud_visitors" data-flag-title="深入浅出react笔记">
+             <span id="/sh-article/2021/07/03/常用的函数工具函数/" class="leancloud_visitors" data-flag-title="常用的函数工具函数">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -354,49 +376,21 @@
       
 
       
-        <h2 id="react-的生命周期"><a href="#react-的生命周期" class="headerlink" title="react 的生命周期"></a>react 的生命周期</h2><p>react 的生命周期，可能经过三个过程：</p>
-<ul>
-<li>装载 mount</li>
-<li>更新 update</li>
-<li>卸载 unmount</li>
-</ul>
-<h3 id="装载-mount"><a href="#装载-mount" class="headerlink" title="装载 mount"></a>装载 mount</h3><p>当组件第一次被装载的时候，react 会依次调用如下函数</p>
-<ul>
-<li>constructor</li>
-<li>getInitialState：一般不会用到，state 一般在constructor 中进行初始化</li>
-<li>getDefaultProps</li>
-<li>componentWillMount</li>
-<li>render</li>
-<li>componentDidMount</li>
-</ul>
-<h4 id="constructor-NaN"><a href="#constructor-NaN" class="headerlink" title="constructor"></a>constructor</h4><p>constructor 阶段的主要作用是：</p>
-<ul>
-<li>初始化 state</li>
-<li>给类的方法bind this</li>
-</ul>
-<h4 id="getDefaultProps"><a href="#getDefaultProps" class="headerlink" title="getDefaultProps"></a>getDefaultProps</h4><p>在es6 中我们需要这样来给props赋默认值</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Sceen</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">component</span></span>&#123;</span><br><span class="line">    private <span class="keyword">static</span> defaultProps = &#123;&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="render"><a href="#render" class="headerlink" title="render"></a>render</h4><p>在生命周期中只有render是必须实现的函数，它只是返回一个 jsx 描述的结构，最终由react来进行渲染。如果返回null 或者 undefined ，就等于告诉react不用进行渲染</p>
-<h4 id="componentWillMount-和-componentDidMount"><a href="#componentWillMount-和-componentDidMount" class="headerlink" title="componentWillMount 和 componentDidMount"></a>componentWillMount 和 componentDidMount</h4><p>一般来说componentWillMount用的比较少，componentDidMount 用的比较多一点</p>
-<blockquote>
-<p>需要注意的是：componentDidMount 是发生在组件已经挂载到 dom 上触发的</p>
-</blockquote>
-<h3 id="更新-update"><a href="#更新-update" class="headerlink" title="更新 update"></a>更新 update</h3><p>更新的生命周期主要有以下几个：</p>
-<ul>
-<li>componentWillReceiveProps</li>
-<li>shouldUpdateComponent</li>
-<li>componentWillUpdate</li>
-<li>render</li>
-<li>componentDidUpdate</li>
-</ul>
-<h4 id="componentWillReceiveProps"><a href="#componentWillReceiveProps" class="headerlink" title="componentWillReceiveProps"></a>componentWillReceiveProps</h4><p>这里需要注意的几点是：</p>
-<ul>
-<li>当父组件的render 被调用的时候，子组件的 componentWillReceiveProps 也会被触发，不管子组件的props是否发生了更新</li>
-<li>在组件中setState并不会触发这一生命周期</li>
-</ul>
-<h4 id="shouldUpdateComponent"><a href="#shouldUpdateComponent" class="headerlink" title="shouldUpdateComponent"></a>shouldUpdateComponent</h4><p>这是组件中最重要的一个生命周期了，它决定了组件是否需要重新渲染。<br>需要注意的是，setState并不会立即修改组件的state，在这一周期的时候组件的state还是原来的。</p>
-<h4 id="componentWillUpdate-和-componentDidUpdate"><a href="#componentWillUpdate-和-componentDidUpdate" class="headerlink" title="componentWillUpdate 和 componentDidUpdate"></a>componentWillUpdate 和 componentDidUpdate</h4><p>会在render的一前一后进行触发，componentDidUpdate 和 componentDidMount一样也是在dom重新渲染之后触发的。</p>
-<h3 id="卸载-unmount"><a href="#卸载-unmount" class="headerlink" title="卸载 unmount"></a>卸载 unmount</h3><p>在销毁组件之前，会触发，componentWillUnmount，这个钩子适合用来处理一些清除性的工作。</p>
+        <p>函数式是一种很好用的编程方式，使用函数式编程一开始可能还不是很习惯，但在你习惯之后会发现这能帮你编写出简洁且充满表达能力的代码。下面介绍一下，日常开发中运用函数式的一些技巧以及函数式的原理。</p>
+<h2 id="compose"><a href="#compose" class="headerlink" title="compose"></a>compose</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">compose(...fns)</span><br></pre></td></tr></table></figure>
+<p>compose基本是大部分函数式都会用到的函数，他的作用是把传入的方法从右往左，把前一个的返回值返回给下一个，redux的中间件就是基于compose实现的。</p>
+<h3 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h3><p>compose 的源码也比较简单，但是思维方式可能会比较绕。简单来说就是通过reduce让函数一层一层嵌套，传进的函数会嵌套在最里面，所以会最先执行。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">compose</span>(<span class="params">...fns</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (fns.length === <span class="number">0</span>) <span class="keyword">return</span> <span class="function"><span class="params">args</span> =&gt;</span> args;</span><br><span class="line">  <span class="keyword">if</span> (fns.length === <span class="number">1</span>) <span class="keyword">return</span> fns[<span class="number">0</span>];</span><br><span class="line">  <span class="keyword">return</span> fns.reduce(<span class="function">(<span class="params">f,g</span>) =&gt;</span> (...args) =&gt; f(g(...args)))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>常见的用法，除了有reduce这种中间件的用法外，还可以是比方说我们有几个步骤，每个步骤需要把上一个步骤的值传进来，我们就可以利用compose来简化我们的写法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">compose(</span><br><span class="line">  step3,</span><br><span class="line">  step2,</span><br><span class="line">  step1,</span><br><span class="line">)(<span class="string">'begin'</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="cancellable"><a href="#cancellable" class="headerlink" title="cancellable"></a>cancellable</h2><p>开发中可能会碰到这样的需求，需要让一些函数变成可取消的。这部分的逻辑其实是可以复用的。下面看看可以如何去实现这样一个功能。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 首先我们可以实现一个类似axios里的CancelToken</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createCancelToken</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> cancel;</span><br><span class="line">  <span class="keyword">const</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">_, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    cancel = reject;</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    promise,</span><br><span class="line">    cancel</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">cancellable</span>(<span class="params">fn, cancelPromise</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function">(<span class="params">...args</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.race([fn.apply(<span class="literal">null</span>, ...args), cancelPromise]) </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">request</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="keyword">const</span> cancelToken = createCancelToken();</span><br><span class="line"><span class="keyword">const</span> cancellableRequest = cancellable(request, cancelToken.promise);</span><br><span class="line"></span><br><span class="line">cancellableRequest();</span><br><span class="line"><span class="comment">// 调用这个函数即可取消上面的cancellableRequest</span></span><br><span class="line">cancelToken.cancel();</span><br></pre></td></tr></table></figure>
+<h2 id="concurrent"><a href="#concurrent" class="headerlink" title="concurrent"></a>concurrent</h2><p>用来控制函数并发量。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">concurrent</span>(<span class="params">count, fn</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> semaphore = <span class="keyword">new</span> Semaphore(count);</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> (<span class="params">...args</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="keyword">await</span> semaphore.acquire();</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">await</span> fn(...args);</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">      semaphore.release();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">request</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="comment">// 并发量只有1的</span></span><br><span class="line"><span class="keyword">const</span> concurrentRequest = concurrent(<span class="number">1</span>, request);</span><br><span class="line">concurrentRequest().then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;&#125;)</span><br><span class="line"><span class="comment">// 只有等上一个结束了这个函数才会执行</span></span><br><span class="line">concurrentRequest().then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="retryable"><a href="#retryable" class="headerlink" title="retryable"></a>retryable</h2><p>碰到错误就重试</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">retryable</span>(<span class="params">fn, times</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">async</span> (...args) =&gt; &#123;</span><br><span class="line">    <span class="keyword">let</span> retryTimes = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> res = <span class="keyword">await</span> fn(...args);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">      &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">        retryTimes++;</span><br><span class="line">        <span class="keyword">if</span> (retryTimes &gt;= times) &#123;</span><br><span class="line">          <span class="keyword">throw</span> e;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">request</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line"><span class="keyword">const</span> retryableRequest = retryable(request, <span class="number">5</span>);</span><br><span class="line"><span class="comment">// 重试5次后任然失败则会抛出错误</span></span><br><span class="line">retryableRequest()</span><br></pre></td></tr></table></figure>
+<h2 id="结合"><a href="#结合" class="headerlink" title="结合"></a>结合</h2><p>稍微改造一下，我们就可以通过compose来结合上面几个函数最终生成一个功能强大的request</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> cancellable = <span class="function">(<span class="params">cancelPromise</span>) =&gt;</span> (fn) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function">(<span class="params">...args</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.race([fn.apply(<span class="literal">null</span>, ...args), cancelPromise]) </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> concurrent = <span class="function">(<span class="params">count</span>) =&gt;</span> (fn) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> semaphore = <span class="keyword">new</span> Semaphore(count);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> (<span class="params">...args</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="keyword">await</span> semaphore.acquire();</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">await</span> fn(...args);</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">      semaphore.release();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> retryable = <span class="function">(<span class="params">times</span>) =&gt;</span> (fn) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">async</span> (...args) =&gt; &#123;</span><br><span class="line">    <span class="keyword">let</span> retryTimes = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> res = <span class="keyword">await</span> fn(...args);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">      &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">        retryTimes++;</span><br><span class="line">        <span class="keyword">if</span> (retryTimes &gt;= times) &#123;</span><br><span class="line">          <span class="keyword">throw</span> e;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> cancelToken = createCancelToken();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这样我们就可以得到一个同时拥有这三个能力的request函数了</span></span><br><span class="line"><span class="keyword">const</span> strongRequest = compose(</span><br><span class="line">  cancellable(cancelToken.promise),</span><br><span class="line">  concurrent(<span class="number">2</span>),</span><br><span class="line">  retryable(<span class="number">5</span>),</span><br><span class="line">)(request)</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -421,8 +415,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/sh-article/2018/06/14/mac前端开发环境/" rel="next" title="mac前端开发环境">
-                <i class="fa fa-chevron-left"></i> mac前端开发环境
+              <a href="/sh-article/2021/02/21/优雅的控制并发/" rel="next" title="优雅的控制并发">
+                <i class="fa fa-chevron-left"></i> 优雅的控制并发
               </a>
             
           </div>
@@ -430,10 +424,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/sh-article/2018/06/30/RxJs 学习/" rel="prev" title="RxJs 学习">
-                RxJs 学习 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -575,7 +565,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#react-的生命周期"><span class="nav-number">1.</span> <span class="nav-text">react 的生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#装载-mount"><span class="nav-number">1.1.</span> <span class="nav-text">装载 mount</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#constructor-NaN"><span class="nav-number">1.1.1.</span> <span class="nav-text">constructor</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#getDefaultProps"><span class="nav-number">1.1.2.</span> <span class="nav-text">getDefaultProps</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#render"><span class="nav-number">1.1.3.</span> <span class="nav-text">render</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#componentWillMount-和-componentDidMount"><span class="nav-number">1.1.4.</span> <span class="nav-text">componentWillMount 和 componentDidMount</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新-update"><span class="nav-number">1.2.</span> <span class="nav-text">更新 update</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#componentWillReceiveProps"><span class="nav-number">1.2.1.</span> <span class="nav-text">componentWillReceiveProps</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#shouldUpdateComponent"><span class="nav-number">1.2.2.</span> <span class="nav-text">shouldUpdateComponent</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#componentWillUpdate-和-componentDidUpdate"><span class="nav-number">1.2.3.</span> <span class="nav-text">componentWillUpdate 和 componentDidUpdate</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#卸载-unmount"><span class="nav-number">1.3.</span> <span class="nav-text">卸载 unmount</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#compose"><span class="nav-number">1.</span> <span class="nav-text">compose</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#源码"><span class="nav-number">1.1.</span> <span class="nav-text">源码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cancellable"><span class="nav-number">2.</span> <span class="nav-text">cancellable</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#concurrent"><span class="nav-number">3.</span> <span class="nav-text">concurrent</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#retryable"><span class="nav-number">4.</span> <span class="nav-text">retryable</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结合"><span class="nav-number">5.</span> <span class="nav-text">结合</span></a></li></ol></div>
             
 
           </div>

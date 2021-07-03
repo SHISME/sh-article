@@ -276,6 +276,173 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/sh-article/2021/07/03/常用的函数工具函数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="$SH">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/17661313?s=460&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SZU_SH">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/sh-article/2021/07/03/常用的函数工具函数/" itemprop="url">常用的函数工具函数</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-07-03T10:27:55+08:00">
+                2021-07-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/sh-article/categories/JS/" itemprop="url" rel="index">
+                    <span itemprop="name">JS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/sh-article/2021/07/03/常用的函数工具函数/" class="leancloud_visitors" data-flag-title="常用的函数工具函数">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>函数式是一种很好用的编程方式，使用函数式编程一开始可能还不是很习惯，但在你习惯之后会发现这能帮你编写出简洁且充满表达能力的代码。下面介绍一下，日常开发中运用函数式的一些技巧以及函数式的原理。</p>
+<h2 id="compose"><a href="#compose" class="headerlink" title="compose"></a>compose</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">compose(...fns)</span><br></pre></td></tr></table></figure>
+<p>compose基本是大部分函数式都会用到的函数，他的作用是把传入的方法从右往左，把前一个的返回值返回给下一个，redux的中间件就是基于compose实现的。</p>
+<h3 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h3><p>compose 的源码也比较简单，但是思维方式可能会比较绕。简单来说就是通过reduce让函数一层一层嵌套，传进的函数会嵌套在最里面，所以会最先执行。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">compose</span>(<span class="params">...fns</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (fns.length === <span class="number">0</span>) <span class="keyword">return</span> <span class="function"><span class="params">args</span> =&gt;</span> args;</span><br><span class="line">  <span class="keyword">if</span> (fns.length === <span class="number">1</span>) <span class="keyword">return</span> fns[<span class="number">0</span>];</span><br><span class="line">  <span class="keyword">return</span> fns.reduce(<span class="function">(<span class="params">f,g</span>) =&gt;</span> (...args) =&gt; f(g(...args)))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>常见的用法，除了有reduce这种中间件的用法外，还可以是比方说我们有几个步骤，每个步骤需要把上一个步骤的值传进来，我们就可以利用compose来简化我们的写法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">compose(</span><br><span class="line">  step3,</span><br><span class="line">  step2,</span><br><span class="line">  step1,</span><br><span class="line">)(<span class="string">'begin'</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="cancellable"><a href="#cancellable" class="headerlink" title="cancellable"></a>cancellable</h2><p>开发中可能会碰到这样的需求，需要让一些函数变成可取消的。这部分的逻辑其实是可以复用的。下面看看可以如何去实现这样一个功能。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 首先我们可以实现一个类似axios里的CancelToken</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createCancelToken</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> cancel;</span><br><span class="line">  <span class="keyword">const</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">_, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    cancel = reject;</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    promise,</span><br><span class="line">    cancel</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">cancellable</span>(<span class="params">fn, cancelPromise</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function">(<span class="params">...args</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.race([fn.apply(<span class="literal">null</span>, ...args), cancelPromise]) </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">request</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="keyword">const</span> cancelToken = createCancelToken();</span><br><span class="line"><span class="keyword">const</span> cancellableRequest = cancellable(request, cancelToken.promise);</span><br><span class="line"></span><br><span class="line">cancellableRequest();</span><br><span class="line"><span class="comment">// 调用这个函数即可取消上面的cancellableRequest</span></span><br><span class="line">cancelToken.cancel();</span><br></pre></td></tr></table></figure>
+<h2 id="concurrent"><a href="#concurrent" class="headerlink" title="concurrent"></a>concurrent</h2><p>用来控制函数并发量。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">concurrent</span>(<span class="params">count, fn</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> semaphore = <span class="keyword">new</span> Semaphore(count);</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> (<span class="params">...args</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="keyword">await</span> semaphore.acquire();</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">await</span> fn(...args);</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">      semaphore.release();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">request</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="comment">// 并发量只有1的</span></span><br><span class="line"><span class="keyword">const</span> concurrentRequest = concurrent(<span class="number">1</span>, request);</span><br><span class="line">concurrentRequest().then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;&#125;)</span><br><span class="line"><span class="comment">// 只有等上一个结束了这个函数才会执行</span></span><br><span class="line">concurrentRequest().then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="retryable"><a href="#retryable" class="headerlink" title="retryable"></a>retryable</h2><p>碰到错误就重试</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">retryable</span>(<span class="params">fn, times</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">async</span> (...args) =&gt; &#123;</span><br><span class="line">    <span class="keyword">let</span> retryTimes = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> res = <span class="keyword">await</span> fn(...args);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">      &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">        retryTimes++;</span><br><span class="line">        <span class="keyword">if</span> (retryTimes &gt;= times) &#123;</span><br><span class="line">          <span class="keyword">throw</span> e;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">request</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line"><span class="keyword">const</span> retryableRequest = retryable(request, <span class="number">5</span>);</span><br><span class="line"><span class="comment">// 重试5次后任然失败则会抛出错误</span></span><br><span class="line">retryableRequest()</span><br></pre></td></tr></table></figure>
+<h2 id="结合"><a href="#结合" class="headerlink" title="结合"></a>结合</h2><p>稍微改造一下，我们就可以通过compose来结合上面几个函数最终生成一个功能强大的request</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> cancellable = <span class="function">(<span class="params">cancelPromise</span>) =&gt;</span> (fn) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function">(<span class="params">...args</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.race([fn.apply(<span class="literal">null</span>, ...args), cancelPromise]) </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> concurrent = <span class="function">(<span class="params">count</span>) =&gt;</span> (fn) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> semaphore = <span class="keyword">new</span> Semaphore(count);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> (<span class="params">...args</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="keyword">await</span> semaphore.acquire();</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">await</span> fn(...args);</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">      semaphore.release();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> retryable = <span class="function">(<span class="params">times</span>) =&gt;</span> (fn) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">async</span> (...args) =&gt; &#123;</span><br><span class="line">    <span class="keyword">let</span> retryTimes = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">      <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> res = <span class="keyword">await</span> fn(...args);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">      &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">        retryTimes++;</span><br><span class="line">        <span class="keyword">if</span> (retryTimes &gt;= times) &#123;</span><br><span class="line">          <span class="keyword">throw</span> e;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> cancelToken = createCancelToken();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 这样我们就可以得到一个同时拥有这三个能力的request函数了</span></span><br><span class="line"><span class="keyword">const</span> strongRequest = compose(</span><br><span class="line">  cancellable(cancelToken.promise),</span><br><span class="line">  concurrent(<span class="number">2</span>),</span><br><span class="line">  retryable(<span class="number">5</span>),</span><br><span class="line">)(request)</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/sh-article/2021/02/21/优雅的控制并发/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1821,147 +1988,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/sh-article/2018/12/10/cookie丢失问题解决方法/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="$SH">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/17661313?s=460&v=4">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SZU_SH">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/sh-article/2018/12/10/cookie丢失问题解决方法/" itemprop="url">iframe 跨域访问session cookie丢失问题解决方法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-10T21:59:53+08:00">
-                2018-12-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/sh-article/2018/12/10/cookie丢失问题解决方法/" class="leancloud_visitors" data-flag-title="iframe 跨域访问session cookie丢失问题解决方法">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>之前因为工作需要，在一个域名A的页面中，使用iframe包含另一个域名B的页面。在chrome，firefox测试一切正常。<br>当测试到IE7时，发现域名B中的页面session失效，不能写入session。</p>
-<p>网上搜索后了解， 因为IE有安全策略，限制页面不保存第三方cookie(当前访问域名A下的页面为第一方cookie，而域名B下的页面为第三方cookie)。<br>虽然有安全策略限制，但我们可以引入P3P声明允许第三方收集个人信息，使第三方cookie不被拒绝。</p>
-<p>P3P：Platform for Privacy Preferences（隐私偏好平台）是W3C公布的一项隐私保护推荐标准，能够保护在线隐私权。使用Internet者可以选择在浏览网页时，是否被第三方收集并利用自己的个人信息。如果一个站点不遵守P3P标准，它的Cookies将被自动拒绝。</p>
-<p>在iframe的页面头加入以下语句即可解决session失效问题。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">header(&apos;P3P: CP=&quot;CURa ADMa DEVa PSAo PSDo OUR BUS UNI PUR INT DEM STA PRE COM NAV OTC NOI DSP COR&quot;&apos;);</span><br></pre></td></tr></table></figure>
-<p>IE iframe 跨域访问session问题解决了，但测试后发现，即使加入了P3P，safari浏览器依然不能保存iframe页面中的session。</p>
-<p>原来safari的安全策略是，当cookie并未以第一方cookie保存过的（非iframe），将判断为不安全而直接拒绝。因此与IE的P3P有些不同</p>
-<p>首先在iframe的页面中判断某个session值是否存在。如果不存在，使用js修改window.top.location跳到一个本域的setSession.PHP页面。<br>因为是用window.top.location打开，因此并非iframe去访问，且能以第一方cookie保存.<br>然后在setSession.php页面执行完set session后，会跳回A域名的页面。之后就能使用session而不失效了。</p>
-<h5 id="a-com-index-php"><a href="#a-com-index-php" class="headerlink" title="a.com/index.php"></a>a.com/index.php</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot; &quot;http://www.w3.org/TR/html4/loose.dtd&quot;&gt;  </span><br><span class="line">&lt;html&gt;  </span><br><span class="line"> &lt;head&gt;  </span><br><span class="line">  &lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html;charset=utf-8&quot;&gt;  </span><br><span class="line">  &lt;title&gt; domain A page &lt;/title&gt;  </span><br><span class="line"> &lt;/head&gt;  </span><br><span class="line">  </span><br><span class="line"> &lt;body&gt;  </span><br><span class="line">  &lt;p&gt;A Page&lt;/p&gt;  </span><br><span class="line">  &lt;iframe src=&quot;http://b.com/index.php&quot;&gt;&lt;/iframe&gt;  </span><br><span class="line"> &lt;/body&gt;  </span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-<h5 id="b-com-index-php"><a href="#b-com-index-php" class="headerlink" title="b.com/index.php"></a>b.com/index.php</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php  </span><br><span class="line">header(&apos;P3P: CP=&quot;CURa ADMa DEVa PSAo PSDo OUR BUS UNI PUR INT DEM STA PRE COM NAV OTC NOI DSP COR&quot;&apos;);  </span><br><span class="line">session_start();  </span><br><span class="line">  </span><br><span class="line">$ua = $_SERVER[&apos;HTTP_USER_AGENT&apos;];  </span><br><span class="line">// 如果是safari  </span><br><span class="line">if(strstr($ua, &apos;Safari&apos;)!=&apos;&apos; &amp;&amp; strstr($ua, &apos;Chrome&apos;)==&apos;&apos;)&#123;  </span><br><span class="line">    // 如果未设置第一方cookie  </span><br><span class="line">    if(!isset($_SESSION[&apos;safari&apos;]))&#123;  </span><br><span class="line">        echo &apos;&lt;script type=&quot;text/javascript&quot;&gt; window.top.location=&quot;http://b.com/setSession.php&quot;; &lt;/script&gt;&apos;;  </span><br><span class="line">        exit();  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line">  </span><br><span class="line">$_SESSION[&apos;code&apos;] = md5(microtime(true));  </span><br><span class="line">?&gt;  </span><br><span class="line">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot; &quot;http://www.w3.org/TR/html4/loose.dtd&quot;&gt;  </span><br><span class="line">&lt;html&gt;  </span><br><span class="line"> &lt;head&gt;  </span><br><span class="line">  &lt;meta http-equiv=&quot;content-type&quot; content=&quot;text/html;charset=utf-8&quot;&gt;  </span><br><span class="line">  &lt;title&gt; domain B page &lt;/title&gt;  </span><br><span class="line"> &lt;/head&gt;  </span><br><span class="line">  </span><br><span class="line"> &lt;body&gt;  </span><br><span class="line">  &lt;p&gt;B Page&lt;/p&gt;  </span><br><span class="line">  &lt;?php  </span><br><span class="line">  if(isset($_SESSION[&apos;code&apos;]))&#123;  </span><br><span class="line">    echo &apos;code:&apos;.$_SESSION[&apos;code&apos;];  </span><br><span class="line">  &#125;  </span><br><span class="line">  ?&gt;  </span><br><span class="line"> &lt;/body&gt;  </span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-<h5 id="b-com-setSession-php"><a href="#b-com-setSession-php" class="headerlink" title="b.com/setSession.php"></a>b.com/setSession.php</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php  </span><br><span class="line">header(&apos;P3P: CP=&quot;CURa ADMa DEVa PSAo PSDo OUR BUS UNI PUR INT DEM STA PRE COM NAV OTC NOI DSP COR&quot;&apos;);  </span><br><span class="line">session_start();  </span><br><span class="line">$_SESSION[&apos;safari&apos;] = 1;  </span><br><span class="line">header(&apos;location:http://a.com/index.php&apos;);  </span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2016,7 +2042,7 @@
               
                 <a href="/sh-article/archives/">
               
-                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-count">33</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
